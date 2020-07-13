@@ -65,7 +65,7 @@ import s from './login.module.css'
                   Don't have an account? <Link to="/register" className={s.link}>Sing up</Link>
                 </p>
                  <p>
-                  If your password is forgotten click it.<Link to="/forgot_password" className={s.link}>Forgot password</Link>
+                  If your password is forgotten click it.<Link to="/reset_password" className={s.link}>Forgot password</Link>
                 </p>
               </form>
             </div>
