@@ -32,7 +32,7 @@ export const authAPI = {
         return instance.post('auth/token/login', body, config)
     },
     logout: (tokenConfig) => {
-
+        debugger
         return instance.post('auth/token/logout', null, tokenConfig)
     },
     register: (body, config) => {
@@ -53,5 +53,8 @@ export const authAPI = {
             uid: body.uid,
             token: body.token
          })
+    },
+    activate2: (body) => {
+        return instance.post('api/activation/', body)
     }
 }

@@ -15,6 +15,7 @@ import Alerts from './component/layout/Alerts';
 import ResetPasswordConfirmContainer from './component/accounts/resetPasswordConfirm/ResetPasswordConfirmContainer';
 import ResetPasswordContainer from './component/accounts/resetPassword/ResetPasswordContainer';
 import ActivateContainer from './component/accounts/activate/ActivateContainer';
+import HomeContainer from './home/HomeContainer';
 
 
 const options = {
@@ -27,7 +28,8 @@ const options = {
 
 class App extends React.Component {
     componentDidMount() {
-        store.dispatch(loadUser())
+        debugger
+       store.dispatch(loadUser())
     }
 
     render() {return <div className="App">
@@ -41,7 +43,8 @@ class App extends React.Component {
                                 <Route exact path='/reset_password' render={() => <AccountTemplate> <ResetPasswordContainer/></AccountTemplate>}/>
                                 <Route exact path='/activate/:uid/:token' render={() => <AccountTemplate> <ActivateContainer/></AccountTemplate>}/>
                                 <Route exact path='/login' render={() => <AccountTemplate> <Login/></AccountTemplate>}/>
-                                <PrivateRoute exact path='/' component={FAQ_Group}/>
+                                <PrivateRoute exact path='/faq' component={FAQ_Group}/>
+                                <Route exact path='/' component={HomeContainer}/>
                         </Switch>
                         </AlertProvider>
                         </Provider>
