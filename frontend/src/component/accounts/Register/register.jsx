@@ -5,6 +5,7 @@ import {register} from '../../../redux/reducers/AuthReducer'
 import {createMessage} from '../../../redux/reducers/MessageReducer'
 import s from '../Login/login.module.css'
 
+
 class Register extends React.Component {
     state = {
         username: '',
@@ -12,8 +13,10 @@ class Register extends React.Component {
         password: '',
  
     }
+    
 
     onSubmit = e => {
+      debugger
         e.preventDefault();
         console.log('Submit!')
         const {last_name, first_name, email, password} = this.state
@@ -23,7 +26,10 @@ class Register extends React.Component {
           last_name, 
           password,
         }
+        localStorage.setItem('password', NewUser.password)
+        localStorage.setItem('email', NewUser.email)
         this.props.register(NewUser)
+        //this.props.activateCode(NewUser.password)
         //if(password !== password2){
           //this.props.createMessage({passwordsNotMatch: "Passwords don't match "})}
           //else {console.log('Submit!');

@@ -4,7 +4,7 @@ import { Activate } from './Activate'
 import { authAPI } from '../../../api'
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-
+import {login} from '../../../redux/reducers/AuthReducer'
 
 
 
@@ -15,6 +15,7 @@ class ActivateContainer extends React.Component {
             uid:this.props.match.params.uid,
             token: this.props.match.params.token}
         authAPI.activate(body)
+        this.props.login(localStorage.getItem('email'), localStorage.getItem('password'))
     }
     render () {
         return (<div><Activate  /></div>)
@@ -22,7 +23,6 @@ class ActivateContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    
 })
 
-export default compose( withRouter,connect(mapStateToProps, {}))(ActivateContainer)
+export default compose( withRouter,connect(mapStateToProps, {login}))(ActivateContainer)
