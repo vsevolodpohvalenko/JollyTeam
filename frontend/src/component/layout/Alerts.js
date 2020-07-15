@@ -1,7 +1,7 @@
-import React, { Component , Fragment} from 'react';
+import React, { PureComponent , Fragment} from 'react';
 import {withAlert} from 'react-alert';
 import {connect} from 'react-redux'
-class Alerts extends Component {
+class Alerts extends PureComponent {
 
     componentDidUpdate(prevProps){
         const {error, message} = this.props;
@@ -25,9 +25,6 @@ class Alerts extends Component {
             if (message.registred)
                 {this.props.alert.success(`${message.registred}`)}
         }
- 
-            
-        
     }
     render() {
         return <Fragment>

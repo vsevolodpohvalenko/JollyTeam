@@ -38,7 +38,7 @@ class FAQ_Group extends Component {
             return <Fragment>
                 <h3 className="container text-center mt-3 mb-3">FAQ</h3>
                 <p className="middle text-center">In a professional contex it often happens that private or corporate</p>
-                {this.props.groups.map(g => <FAQ_complect Title = {g.Title} id={g.id}/>)}
+        {this.props.groups.map(g => <FAQ_complect Title = {g.Title} id={g.id}/>)}
                   </Fragment>
 }
 }

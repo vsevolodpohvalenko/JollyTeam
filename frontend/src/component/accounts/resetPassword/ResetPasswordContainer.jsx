@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 
 
-class ResetPasswordContainer extends React.Component {
+class ResetPasswordContainer extends React.PureComponent {
     render () {
         return (<div><ResetPassword  /></div>)
     }

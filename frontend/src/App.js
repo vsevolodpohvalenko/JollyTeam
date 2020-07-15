@@ -15,7 +15,15 @@ import Alerts from './component/layout/Alerts';
 import ResetPasswordConfirmContainer from './component/accounts/resetPasswordConfirm/ResetPasswordConfirmContainer';
 import ResetPasswordContainer from './component/accounts/resetPassword/ResetPasswordContainer';
 import ActivateContainer from './component/accounts/activate/ActivateContainer';
-import HomeContainer from './home/HomeContainer';
+import HomeContainer from './component/home/HomeContainer';
+import { MainTemplate } from './component/Templates/main_template';
+import ContentContainer from './component/content/contentContainer'
+import { Contact } from './component/Contact/Contact';
+import ContactContainer from './component/Contact/ContactContainer';
+
+
+
+
 
 
 const options = {
@@ -29,7 +37,7 @@ const options = {
 class App extends React.Component {
     componentDidMount() {
         debugger
-       store.dispatch(loadUser())
+      store.getState().auth.auth_token && store.dispatch(loadUser())
     }
 
     render() {return <div className="App">
@@ -43,8 +51,10 @@ class App extends React.Component {
                                 <Route exact path='/reset_password' render={() => <AccountTemplate> <ResetPasswordContainer/></AccountTemplate>}/>
                                 <Route exact path='/activate/:uid/:token' render={() => <AccountTemplate> <ActivateContainer/></AccountTemplate>}/>
                                 <Route exact path='/login' render={() => <AccountTemplate> <Login/></AccountTemplate>}/>
+                                <Route exact path='/content' render={() => <MainTemplate> <ContentContainer/></MainTemplate>}/>
                                 <PrivateRoute exact path='/faq' component={FAQ_Group}/>
                                 <Route exact path='/' component={HomeContainer}/>
+                                <Route exact path='/contact' render={() => <MainTemplate> <ContactContainer/></MainTemplate>}/>
                         </Switch>
                         </AlertProvider>
                         </Provider>

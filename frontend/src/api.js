@@ -1,5 +1,13 @@
 import * as  axios from 'axios'
 
+const config = {
+    headers: {
+        'Content-Type': 'application/json',
+
+    }
+}
+
+
 const instance = axios.create({
     baseURL: 'http://127.0.0.1:8000/',
 
@@ -33,7 +41,7 @@ export const authAPI = {
     },
     logout: (tokenConfig) => {
         debugger
-        return instance.post('auth/token/logout', null, tokenConfig)
+        return instance.post('auth/token/logout', "" , tokenConfig)
     },
     register: (body, config) => {
 
@@ -56,5 +64,19 @@ export const authAPI = {
     },
     activate2: (body) => {
         return instance.post('api/activation/', body)
+    }
+}
+
+export const contentAPI = {
+    content: () => {
+        debugger
+        return instance.get('api/ContentPage/')
+    }
+}
+
+export const contactAPI = {
+    PutContact: (body) => {
+        debugger
+        return instance.post('api/Contact/', body, config)
     }
 }

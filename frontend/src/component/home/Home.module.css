@@ -1,7 +1,7 @@
 .homebody{
 
   height: 100%;
-  background: url(../media/home.jpg);
+  background: url(../../media/home.jpg);
   min-height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -109,7 +109,7 @@ nav ul{
 nav ul li{
     list-style: none;
 }
-nav ul li a{
+nav.homenav ul li a{
     display: block;
     margin: 10px 0;
     padding: 10px 20px;

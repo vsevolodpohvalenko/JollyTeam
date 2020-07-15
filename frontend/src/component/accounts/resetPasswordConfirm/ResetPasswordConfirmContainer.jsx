@@ -7,7 +7,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 
 
 
-class ResetPasswordConfirmContainer extends React.Component {
+class ResetPasswordConfirmContainer extends React.PureComponent {
     render () {
         return (<div><ResetPasswordConfirm uid = {this.props.match.params.uid} token = {this.props.match.params.token}/></div>)
     }

@@ -4,12 +4,14 @@ import thunkMiddleware from 'redux-thunk'
 import {createStore, combineReducers, applyMiddleware, compose} from "redux"
 import {MessagesReducer} from './reducers/MessageReducer'
 import {ErrorsReducer} from './reducers/ErrorsReducer'
+import {ContentReducer} from './reducers/ContentReducer'
 
 let reducers = combineReducers({
     FAQ: FAQReducer,
     auth: AuthReducer,
     message: MessagesReducer,
-    error: ErrorsReducer
+    error: ErrorsReducer,
+    content: ContentReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -13,7 +13,7 @@ let initialState = {
     auth_token: localStorage.getItem('auth_token'),
     isAuthenticated: null,
     isLoading: false,
-    user: null,
+    user: localStorage.getItem('user'),
 
 }
 
@@ -23,6 +23,7 @@ export const AuthReducer = (state = initialState, action) => {
         case USER_LOADING :
             return {...state, isLoading: true}
         case USER_LOADED:
+            localStorage.setItem('user', action.payload)
             return {...state, isAuthenticated: true, isLoading: false, user: action.payload}
         case LOGIN_SUCCESS:
             localStorage.setItem('auth_token', action.payload.auth_token)
@@ -36,6 +37,7 @@ export const AuthReducer = (state = initialState, action) => {
             debugger
             localStorage.removeItem('auth_token');
             localStorage.removeItem('token');
+            localStorage.removeItem('user');
             return {...state, auth_token: null, user: null, isAuthenticated: false, isLoading: false}
         default:
             return state
@@ -58,18 +60,11 @@ export const loadUser = () => async (dispatch, getState) => {
     dispatch(getUserSuccess(response.data));
 }
 
-export const logout = () =>(dispatch, getState) => {
-    try {  authAPI.logout(tokenConfig(getState)).then(
-    dispatch(logoutSuccess))}catch (err) {
-        const errors = {
-            msg: err.response.data,
-            status: err.response.status
-        }
-        dispatch({
-            type: GET_ERRORS,
-            payload: errors
-        })}
-}
+export const Logout = () =>  (dispatch, getState) => {
+    
+    authAPI.logout(tokenConfig(getState)).then(res =>console.log(res.status) ,dispatch(logoutSuccess()))
+    }
+
 
 export const login = (email, password) => async (dispatch, getState) => {
 debugger

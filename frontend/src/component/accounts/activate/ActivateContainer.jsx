@@ -8,7 +8,7 @@ import {login} from '../../../redux/reducers/AuthReducer'
 
 
 
-class ActivateContainer extends React.Component {
+class ActivateContainer extends React.PureComponent {
     componentDidMount(){
         debugger
         const body = {

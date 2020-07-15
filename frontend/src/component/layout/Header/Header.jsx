@@ -22,9 +22,9 @@ export const Header =(props) => {
 
   const authLinks = ( <ul >
     <li><a href=""> Manufactures</a></li>
-    <li><a href="" className={s.active}>FAQ</a></li>
+    <li><a href="/faq" >FAQ</a></li>
     <li><a href="">Contact</a></li>
-    <li><a onClick={props.logout} href="">Logout</a></li>    
+    <li><a onClick={props.Logout} href="">Logout</a></li>    
   </ul>)
 
 
@@ -34,7 +34,7 @@ export const Header =(props) => {
 
     return <Fragment>
         <header className={s.header}>
-          <a href="#" className={s.logo}> Textile<span className="text-danger">S</span>pot<span className="text-danger">.</span></a>
+          <a href="/" className={s.logo}> Textile<span className="text-danger">S</span>pot<span className="text-danger">.</span></a>
           <div onClick={() => setActive(!active)} className={cn({ [s.active] : active === true},s.menu_toogle)}></div>
           <nav className={cn({ [s.active] : active === true},s.nav)}>
             .{isAuthenticated ? authLinks : guestLinks}

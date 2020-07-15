@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import s from './Home.module.css'
 import cn from "classnames";
-import {Link, NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 export const Home = (props) => {
     const {isAuthenticated} = props
 
@@ -27,7 +27,7 @@ export const Home = (props) => {
         <header className={s.header}>
           <a href="#" className={s.logo}> Textile<span className="text-danger">S</span>pot<span className="text-danger">.</span></a>
           <div onClick={() => setActive(!active)} className={cn({ [s.active] : active === true},s.menu_toogle)}></div>
-          <nav className={cn({ [s.active] : active === true},s.nav)}>
+          <nav className={cn({ [s.active] : active === true},s.homenav)}>
             <ul>
           <li><NavLink to="/"> Manufactures</NavLink></li>
           <li><NavLink to="/faq" >FAQ</NavLink></li>
