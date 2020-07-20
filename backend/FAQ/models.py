@@ -1,6 +1,7 @@
 from django.db import models
 from phone_field import PhoneField
-
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
 
 class FAQ_Group(models.Model):
     Title = models.CharField('faq_Category_title', max_length=75, unique=True)
@@ -27,13 +28,15 @@ class FAQ_item(models.Model):
         verbose_name_plural = 'FAQS'
 
 class manufacturerProfilePage(models.Model):
+    owner = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
+    CompanyProfilePicture = models.ImageField(default= 'defaultComProfPic.jpg')
     CompanyName = models.CharField(max_length=60, blank= True)
-    HeaderImage = models.ImageField()
-    Icon = models.ImageField()
+    CompanyDescription = models.TextField(default="Company Descriptions")
     Country = models.CharField(max_length=200, blank= True)
-    Introduction = models.TextField(blank= True, max_length=400)
-    Section = models.CharField(max_length=100)
-    Documents = models.FileField()
+    CompanyLogo = models.ImageField(default= 'defaultComLogo.jpg')
+
+
+
 
 
 class Document(models.Model):
@@ -41,10 +44,9 @@ class Document(models.Model):
     Thumbnail = models.ImageField()
     Download = models.FileField()
 
-
 class Section(models.Model):
     Title = models.CharField(max_length= 75)
-    Icon = models.ImageField()
+    Icon = models.CharField(max_length= 75)
     Text = models.TextField(max_length=500)
 
 class Category(models.Model):
@@ -63,20 +65,22 @@ class MenuItem(models.Model):
     Name = models.CharField(max_length=100)
 
 class ContentPage(models.Model):
+
     Title = models.CharField(max_length=75)
     BrowserTitle = models.CharField(max_length=75)
-    MetaDescription=models.TextField(max_length=500)
+    MetaDescription=models.TextField()
     UrlSlug = models.CharField(max_length=75)
-    Content = models.TextField(max_length=500)
+    Content = models.TextField()
 
 
 class Contact(models.Model):
-    Name=models.CharField(max_length=75)
-    CompanyName = models.CharField(max_length=100)
-    Email = models.EmailField(unique=True)
-    Phone = PhoneField(blank=True, help_text='Contact phone number')
-    Subject = models.CharField(max_length=100)
-    Message = models.TextField(max_length=500)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    name=models.CharField(max_length=75)
+    companyName = models.CharField(max_length=100)
+    emailAddress = models.EmailField(unique=True)
+    phoneNumber = PhoneField(blank=True, help_text='Contact phone number')
+    subject = models.CharField(max_length=100)
+    message = models.TextField(max_length=500)
 
 class RequestForQuotation(models.Model):
     Keywords = models.CharField(max_length=100)
@@ -89,4 +93,10 @@ class RequestForQuotation(models.Model):
     PaymentMethod = models.TextField()
     iAgree=models.CharField(max_length=10)
 
+class activation(models.Model):
+    email = models.EmailField()
+    password = models.CharField("password", max_length=75, unique=True)
 
+
+    def __str__(self):
+        return self.email

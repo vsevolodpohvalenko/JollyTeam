@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import FAQ_Group, FAQ_item, manufacturerProfilePage, Document, Section, Category, Home_Page, MenuItem, ContentPage, Contact, RequestForQuotation
+from .models import FAQ_Group, FAQ_item,activation , manufacturerProfilePage, Document, Section, Category, Home_Page, MenuItem, ContentPage, Contact, RequestForQuotation
 
 
 class FAQGroupSerializer(serializers.ModelSerializer):
@@ -7,6 +7,10 @@ class FAQGroupSerializer(serializers.ModelSerializer):
         model = FAQ_Group
         fields = '__all__'
 
+class ActivationSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = activation
+        fields = '__all__'
 
 class FAQItemSerializer(serializers.ModelSerializer):
     class Meta:

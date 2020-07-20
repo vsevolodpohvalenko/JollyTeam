@@ -1,6 +1,6 @@
 
 from rest_framework import routers
-from .api import FAQ_itemViewSet, FAQ_GroupViewSet, manufacturerProfilePageViewSet, DocumentViewSet, SectionViewSet, CategoryViewSet, Home_PageViewSet, MenuItemViewSet, ContentPageViewSet, ContactViewSet, RequestForQuotationViewSet
+from .api import FAQ_itemViewSet, ActivationViewSet, FAQ_GroupViewSet, manufacturerProfilePageViewSet, DocumentViewSet, SectionViewSet, CategoryViewSet, Home_PageViewSet, MenuItemViewSet, ContentPageViewSet, ContactViewSet, RequestForQuotationViewSet
 
 router = routers.DefaultRouter()
 router.register('api/faq_group', FAQ_GroupViewSet, 'faq_group')
@@ -14,6 +14,7 @@ router.register('api/MenuItem', MenuItemViewSet, 'MenuItem')
 router.register('api/ContentPage', ContentPageViewSet, 'ContentPage')
 router.register('api/Contact', ContactViewSet, 'Contact')
 router.register('api/RequestForQuotation', RequestForQuotationViewSet, 'RequestForQuotation')
+router.register('api/activation', ActivationViewSet, 'activation')
 
 
 
