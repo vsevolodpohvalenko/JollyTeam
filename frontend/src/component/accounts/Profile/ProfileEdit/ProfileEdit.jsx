@@ -5,24 +5,6 @@ import defaultImage from '../../../../media/default.jpg'
 import {profileAPI} from "../../../../api";
 import Select from 'react-select'
 
-const thumb = {
-  display: 'inline-flex',
-  borderRadius: 2,
-  border: '1px solid #eaeaea',
-  marginBottom: 8,
-  marginRight: 8,
-  width: 100,
-  height: 100,
-  padding: 4,
-  boxSizing: 'border-box'
-};
-
-const img = {
-  display: 'block',
-  width: 'auto',
-  height: '100%'
-};
-
 let InputText = (props) => {
     return (<div><label>{props.element}</label>
             <input className='form-control' type="text" placeholder={props.element} id={props.element}
@@ -30,6 +12,24 @@ let InputText = (props) => {
         </div>
     )
 }
+const thumb = {
+    display: 'inline-flex',
+    borderRadius: 2,
+    border: '1px solid #eaeaea',
+    marginBottom: 8,
+    marginRight: 8,
+    width: 100,
+    height: 100,
+    padding: 4,
+    boxSizing: 'border-box'
+};
+
+
+const img = {
+    display: 'block',
+    width: 'auto',
+    height: '100%'
+};
 
 export const ProfileEdit = (props) => {
 
@@ -42,8 +42,7 @@ export const ProfileEdit = (props) => {
     const [Country, setCountry] = useState('')
     const [CompanyDescription, setCompanyDescription] = useState('')
     const [Section, setSection] = useState([{Title: "", Icon: "", Text: ""}]);
-    const [Documents, setDocument] = useState([{Title: "", Icon: "", Text: ""}]);
-
+    const [Documents, setDocument] = useState([{Title: "", Thumbnail: "", Download: ""}]);
 
 
     const options = props.countries.map(c => {
@@ -69,7 +68,6 @@ export const ProfileEdit = (props) => {
     }
 
 
-
     const handleDrop = acceptedFiles => {
         setCompanyProfilePicture(acceptedFiles.map(file => Object.assign(file, {
             preview: URL.createObjectURL(file)
@@ -77,7 +75,20 @@ export const ProfileEdit = (props) => {
         setBackground(acceptedFiles.map(file => URL.createObjectURL(file)))
     }
 
-
+    const Thumbs2 = () => {
+        const file = Documents[0].Thumbnail
+            return (
+            <div style={thumb} key={file.name}>
+                <div className={s.thumbInner}>
+                    <img
+                        alt="thumbnail"
+                        src={file.name}
+                        style={img}
+                    />
+                </div>
+            </div>
+            )
+    }
 
 
     const handleDrop4 = acceptedFiles => {
@@ -92,7 +103,7 @@ export const ProfileEdit = (props) => {
                 <label>{props.label}</label>
                 <section className={s.thumb}>
 
-                    <Dropzone onDrop={props.onDrop}>
+                    <Dropzone name={props.name} onDrop={props.onDrop}>
                         {({getRootProps, getInputProps}) => (
                             <div {...getRootProps({className: "dropzone"})}>
 
@@ -126,13 +137,19 @@ export const ProfileEdit = (props) => {
         setDocument(list);
     };
 
-    const DocumenthandleInputFileChange = (e, index) => {
+    const Change = (e, index) => {
         const {name, value} = e.target.files[0];
         const list = [...Documents];
         list[index][name] = value;
         setDocument(list);
     };
 
+    const DocumenthandleInputFileChange = (acceptedFiles, index) => {
+        const {name, path} = acceptedFiles[0];
+        const list = [...Documents];
+        list[index][name] = path;
+        setDocument(list);
+    }
 
 
     const handleRemoveClick = index => {
@@ -194,15 +211,18 @@ export const ProfileEdit = (props) => {
                     <div>
                         <h2>Section</h2>
                         <label>Title</label>
-                        <input className='form-control' placeholder="Title" name="Title" value={x.Title} onChange={e => SectionhandleInputChange(e, i)}/>
+                        <input className='form-control' placeholder="Title" name="Title" value={x.Title}
+                               onChange={e => SectionhandleInputChange(e, i)}/>
                         <label>Icon</label>
-                        <input className='form-control' placeholder="Icon" name="Icon" value={x.Icon} onChange={e => SectionhandleInputChange(e, i)}/>
+                        <input className='form-control' placeholder="Icon" name="Icon" value={x.Icon}
+                               onChange={e => SectionhandleInputChange(e, i)}/>
                         <label>Text</label>
-                        <input className='form-control' placeholder="Text" name="Text" value={x.Text} onChange={e => SectionhandleInputChange(e, i)}/>
+                        <input className='form-control' placeholder="Text" name="Text" value={x.Text}
+                               onChange={e => SectionhandleInputChange(e, i)}/>
                         <div>
                             {Section.length !== 1 &&
                             <div className="text-danger" onClick={() => handleRemoveClick(i)}>Remove</div>}
-                            {Section.length - 1  === i && <div className="text-danger" onClick={() => {
+                            {Section.length - 1 === i && <div className="text-danger" onClick={() => {
                                 handleAddClick()
                             }}>Add 1 Section</div>}
                         </div>
@@ -211,19 +231,26 @@ export const ProfileEdit = (props) => {
             })}
 
 
-
             {Documents.map((y, i) => {
                 return (
                     <div>
                         <h2>Document</h2>
                         <label>Title</label>
-                        <input className='form-control' placeholder="Title" name="Title" value={y.Title} onChange={e => DocumenhandleInputChange(e, i)}/>
-                        <CustomDropZone label = "Thunbnail" AllowButton={0} onDrop = {e => DocumenthandleInputFileChange(e, i)} p="Drag&Drop Your attachments here"/>
-                        <CustomDropZone label = "Download" AllowButton={1} onDrop = {e => DocumenthandleInputFileChange(e, i)} p="Drag&Drop Your attachments here"/>
+                        <input className='form-control' placeholder="Title" name="Title" value={y.Title}
+                               onChange={e => DocumenhandleInputChange(e, i)}/>
+
+                            <Thumbs2/>
+
+                        <CustomDropZone name="Thumbnail" label="Thumbnail" AllowButton={0}
+                                        onDrop={acceptedFiles => DocumenthandleInputFileChange(acceptedFiles, i)}
+                                        p="Drag&Drop Your attachments here"/>
+                        <CustomDropZone name="Thumbnail" label="Download" AllowButton={1}
+                                        onDrop={acceptedFiles => DocumenthandleInputFileChange(acceptedFiles, i)}
+                                        p="Drag&Drop Your attachments here"/>
                         <div>
-                            {Section.length !== 1 &&
+                            {Documents.length !== 1 &&
                             <div className="text-danger" onClick={() => handleRemoveClick2(i)}>Remove</div>}
-                            {Section.length - 1  === i && <div className="text-danger" onClick={() => {
+                            {Documents.length - 1 === i && <div className="text-danger" onClick={() => {
                                 handleAddClick2()
                             }}>Add 1 Section</div>}
                         </div>

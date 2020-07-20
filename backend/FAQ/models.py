@@ -35,6 +35,7 @@ class manufacturerProfilePage(models.Model):
     Country = models.CharField(max_length=200, blank= True)
     CompanyLogo = models.ImageField(default= 'defaultComLogo.jpg')
     Sections = models.TextField(default= 'Welcome to the sections')
+    Documents = models.TextField(default='Welcome to the documents')
 
 
 
