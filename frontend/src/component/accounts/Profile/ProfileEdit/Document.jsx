@@ -104,7 +104,7 @@ export const Document = () => {
 
     <CustomDropZone label = "Thunbnail" AllowButton={0} onDrop = {handleDrop2} p="Drag&Drop Your attachments here"/>
     <CustomDropZone label = "Download" AllowButton={1} onDrop = {handleDrop3} p="Drag&Drop Your attachments here"/>
-    <button className={s.button} >Lets go</button>
+    <button id="test" className={s.button} >Lets go</button>
     </form>
   )
 }

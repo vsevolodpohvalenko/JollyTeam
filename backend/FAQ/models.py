@@ -15,7 +15,7 @@ class FAQ_Group(models.Model):
 
 
 class FAQ_item(models.Model):
-    Group = models.ForeignKey(FAQ_Group, on_delete=models.CASCADE)
+    Group = models.ForeignKey(FAQ_Group, on_delete=models.CASCADE, default=1)
     Title = models.CharField('faq_title', max_length=75, unique=True)
     Answer = models.TextField('content', unique=True, max_length=400)
     Active = models.BooleanField('', default=False)
@@ -28,12 +28,13 @@ class FAQ_item(models.Model):
         verbose_name_plural = 'FAQS'
 
 class manufacturerProfilePage(models.Model):
-    owner = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     CompanyProfilePicture = models.ImageField(default= 'defaultComProfPic.jpg')
     CompanyName = models.CharField(max_length=60, blank= True)
     CompanyDescription = models.TextField(default="Company Descriptions")
     Country = models.CharField(max_length=200, blank= True)
     CompanyLogo = models.ImageField(default= 'defaultComLogo.jpg')
+    Sections = models.TextField(default= 'Welcome to the sections')
 
 
 
@@ -45,9 +46,8 @@ class Document(models.Model):
     Download = models.FileField()
 
 class Section(models.Model):
-    Title = models.CharField(max_length= 75)
-    Icon = models.CharField(max_length= 75)
-    Text = models.TextField(max_length=500)
+    Section = models.TextField(default="This is section")
+
 
 class Category(models.Model):
     Name = models.CharField(max_length= 75)
@@ -74,7 +74,7 @@ class ContentPage(models.Model):
 
 
 class Contact(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, default=1 ,on_delete=models.CASCADE )
     name=models.CharField(max_length=75)
     companyName = models.CharField(max_length=100)
     emailAddress = models.EmailField(unique=True)
