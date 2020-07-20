@@ -17,7 +17,7 @@ export const Home = (props) => {
     const authLinks = ( 
       <div className={s.auth}>
     <ul >
-      <li><NavLink onClick={props.logout} to="/login">Logout</NavLink></li>    
+      <li><a onClick={props.logout} href="/login">Logout</a></li>    
     </ul></div>)
   
   
@@ -31,7 +31,7 @@ export const Home = (props) => {
             <ul>
           <li><NavLink to="/"> Manufactures</NavLink></li>
           <li><NavLink to="/faq" >FAQ</NavLink></li>
-          <li><NavLink to="/">Contact</NavLink></li></ul>
+          <li><NavLink to="/contact">Contact</NavLink></li></ul>
             {isAuthenticated ? authLinks : guestLinks}
             
 

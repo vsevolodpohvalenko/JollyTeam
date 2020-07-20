@@ -5,13 +5,15 @@ import {createStore, combineReducers, applyMiddleware, compose} from "redux"
 import {MessagesReducer} from './reducers/MessageReducer'
 import {ErrorsReducer} from './reducers/ErrorsReducer'
 import {ContentReducer} from './reducers/ContentReducer'
+import {ProfileReducer} from './reducers/ProfileReducer'
 
 let reducers = combineReducers({
     FAQ: FAQReducer,
     auth: AuthReducer,
     message: MessagesReducer,
     error: ErrorsReducer,
-    content: ContentReducer
+    content: ContentReducer,
+    profile: ProfileReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -18,8 +18,9 @@ import ActivateContainer from './component/accounts/activate/ActivateContainer';
 import HomeContainer from './component/home/HomeContainer';
 import { MainTemplate } from './component/Templates/main_template';
 import ContentContainer from './component/content/contentContainer'
-import { Contact } from './component/Contact/Contact';
 import ContactContainer from './component/Contact/ContactContainer';
+import ProfileEditContainer from './component/accounts/Profile/ProfileEdit/ProfileEditContainer';
+
 
 
 
@@ -54,7 +55,8 @@ class App extends React.Component {
                                 <Route exact path='/content' render={() => <MainTemplate> <ContentContainer/></MainTemplate>}/>
                                 <PrivateRoute exact path='/faq' component={FAQ_Group}/>
                                 <Route exact path='/' component={HomeContainer}/>
-                                <Route exact path='/contact' render={() => <MainTemplate> <ContactContainer/></MainTemplate>}/>
+                                <PrivateRoute exact path='/contact' component= {ContactContainer}/>
+                                <Route exact path='/profileEdit' render={() => <MainTemplate><ProfileEditContainer/></MainTemplate>}/>
                         </Switch>
                         </AlertProvider>
                         </Provider>

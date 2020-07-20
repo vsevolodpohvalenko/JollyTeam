@@ -6,6 +6,7 @@ const config = {
 
     }
 }
+const config2 = { headers: { 'Content-Type': 'multipart/form-data' } };
 
 
 const instance = axios.create({
@@ -32,18 +33,18 @@ export const faqAPI = {
 }
 export const authAPI = {
     getUser: (tokenConfig) => {
-        debugger
+
         return instance.get('auth/users/me/', tokenConfig)
     },
-    login: (body, config) => {
+    login: (body) => {
 
         return instance.post('auth/token/login', body, config)
     },
     logout: (tokenConfig) => {
-        debugger
+
         return instance.post('auth/token/logout', "" , tokenConfig)
     },
-    register: (body, config) => {
+    register: (body) => {
 
         return instance.post('auth/users/', body, config)
     },
@@ -52,11 +53,11 @@ export const authAPI = {
         return instance.post('auth/users/reset_password/', body)
     },
     reset_password: (body) => {
-        debugger
+
         return instance.post('auth/users/reset_password_confirm/', body)
     },
     activate: (body) => {
-        debugger
+
         return instance.post('auth/users/activation/', { 
             uid: body.uid,
             token: body.token
@@ -69,14 +70,31 @@ export const authAPI = {
 
 export const contentAPI = {
     content: () => {
-        debugger
+
         return instance.get('api/ContentPage/')
     }
 }
 
 export const contactAPI = {
     PutContact: (body) => {
-        debugger
+
         return instance.post('api/Contact/', body, config)
+    }
+}
+
+export const profileAPI = {
+    PostProfile : (form_data) => {
+
+        return instance.post('api/manufacturerProfilePage/', form_data, config2 )
+    },
+    PostDocument: (form_data) => {
+        return instance.post('api/Document/', form_data, config2)
+    },
+    PostSection: (form_data) => {
+        return instance.post('api/Section/', form_data, config2)
+    },
+    getCountries : () => {
+        debugger
+        return axios.get('http://restcountries.eu/rest/v2/all')
     }
 }
