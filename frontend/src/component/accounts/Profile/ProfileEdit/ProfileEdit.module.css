@@ -1,6 +1,5 @@
 
-
-.button{
+.button {
     width: 100%;
     background-color: #824fc4;
     border-radius: 5px;
@@ -11,88 +10,92 @@
     margin-bottom: 20px;
     margin-top: 15px;
     font-weight: 500;
-  }
+}
 
-.thumb{
-  
-  text-align: -webkit-center;
-  border: solid 1px #c1bfc3 ;
-  color: #c1bfc3;
+.thumb {
 
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 45%;
+    text-align: -webkit-center;
+    border: solid 1px #c1bfc3;
+    color: #c1bfc3;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 45%;
 
 }
 
 
-.pic{
-  
-  text-align: -webkit-center;
-  color: white;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 45%;
-  padding-top: 50px;
-  padding-bottom: 40px;
+.pic {
+
+    text-align: -webkit-center;
+    color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 45%;
+    padding-top: 50px;
+    padding-bottom: 40px;
 }
-.thumb button{
-  border: none;
-  background: none;
-  color: #69c;
-  text-underline-position: below;
+
+.thumb button {
+    border: none;
+    background: none;
+    color: #69c;
+    text-underline-position: below;
 }
-.pic button{
-  border: none;
-  background: none;
-  color: #69c;
-  text-underline-position: below;
+
+.pic button {
+    border: none;
+    background: none;
+    color: #69c;
+    text-underline-position: below;
 }
+
 .pic p {
-  font-weight: 100;
+    font-weight: 100;
 }
-.compamyPictureform{
-  text-align: center;
-  width: 40%;
-  height: 10%;
-  border: solid white 1px;  
+
+.compamyPictureform {
+    text-align: center;
+    width: 40%;
+    height: 10%;
+    border: solid white 1px;
 
 }
 
 .pic li {
-  list-style: none;
+    list-style: none;
 }
 
-.clip{
-  font-size: 3em;
-  cursor: pointer;
-  
-  display: inline-block;
-}
-.clip:before{
-  content: '\f0c6';
-  font-family: fontAwesome;
-  line-height: 20px;
+.clip {
+    font-size: 3em;
+    cursor: pointer;
+
+    display: inline-block;
 }
 
-.thumbsContainer{
-  display: 'flex';
-  flex-direction: 'row';
-  flex-wrap: 'wrap';
-  margin-top: 16;
-};
+.clip:before {
+    content: '\f0c6';
+    font-family: fontAwesome;
+    line-height: 20px;
+}
+
+.thumbsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
 
 
+.thumbInner {
+    display: flex;
+    min-width: 0;
+    overflow: hidden;
+}
 
-.thumbInner{
-  display: 'flex';
-  min-width: 0;
-  overflow: 'hidden'
-};
-
-img{
-  display: 'block';
-  width: 'auto';
-  height: '100%'
-};
+img {
+    display: block;
+    width: auto;
+    height: 100%;
+}

@@ -14,7 +14,7 @@ let InputText = (props) => {
 }
 const thumb = {
     display: 'inline-flex',
-    borderRadius: 2,
+    borderRadius: 10,
     border: '1px solid #eaeaea',
     marginBottom: 8,
     marginRight: 8,
@@ -29,6 +29,7 @@ const img = {
     display: 'block',
     width: 'auto',
     height: '100%'
+
 };
 
 export const ProfileEdit = (props) => {
@@ -54,17 +55,15 @@ export const ProfileEdit = (props) => {
         e.preventDefault()
         debugger
         let form_data = new FormData();
-        let form_data_section = new FormData()
         form_data.append('CompanyProfilePicture', CompanyProfilePicture[0], CompanyProfilePicture[0].name);
         form_data.append('CompanyLogo', CompanyLogo[0], CompanyLogo[0].name);
-        form_data.append("Sections", Section)
-        form_data.append("Documents", Documents)
+        form_data.append("Sections", JSON.stringify(Section))
+        form_data.append("Documents", JSON.stringify(Documents))
         form_data.append('CompanyName', CompanyName);
         form_data.append('CompanyDescription', CompanyDescription);
         form_data.append('Country', Country.value);
         form_data.append('owner', String(props.userID));
         profileAPI.PostProfile(form_data)
-        profileAPI.PostSection(form_data_section)
     }
 
 
@@ -75,19 +74,20 @@ export const ProfileEdit = (props) => {
         setBackground(acceptedFiles.map(file => URL.createObjectURL(file)))
     }
 
-    const Thumbs2 = () => {
-        const file = Documents[0].Thumbnail
+    const Thumbs = (props) => {
+        debugger
+        const index = props.index
+        const file = Documents[index]
             return (
-            <div style={thumb} key={file.name}>
-                <div className={s.thumbInner}>
-                    <img
-                        alt="thumbnail"
-                        src={file.name}
-                        style={img}
-                    />
-                </div>
+        <div style={thumb} key={file.name}>
+            <div className={s.thumbInner}>
+                <img
+                    alt="thumbnail"
+                    src={file.preview}
+                    style={img}
+                />
             </div>
-            )
+        </div>)
     }
 
 
@@ -137,17 +137,22 @@ export const ProfileEdit = (props) => {
         setDocument(list);
     };
 
-    const Change = (e, index) => {
-        const {name, value} = e.target.files[0];
-        const list = [...Documents];
-        list[index][name] = value;
-        setDocument(list);
-    };
 
-    const DocumenthandleInputFileChange = (acceptedFiles, index) => {
-        const {name, path} = acceptedFiles[0];
+    const DocumenthandleInputFileThumbnail = (acceptedFiles, index) => {
+        const {name, preview} = Object.assign(acceptedFiles[0], {preview: URL.createObjectURL(acceptedFiles[0])});
         const list = [...Documents];
-        list[index][name] = path;
+        list[index]['name'] = name;
+        list[index]['preview'] = preview;
+
+        setDocument(list);
+    }
+
+    const DocumenthandleInputDownload = (acceptedFiles, index) => {
+        const {name} = acceptedFiles[0]
+        const list = [...Documents];
+        list[index]['Download'] = name;
+
+
         setDocument(list);
     }
 
@@ -239,13 +244,13 @@ export const ProfileEdit = (props) => {
                         <input className='form-control' placeholder="Title" name="Title" value={y.Title}
                                onChange={e => DocumenhandleInputChange(e, i)}/>
 
-                            <Thumbs2/>
+                        {Documents[i].name && (<Thumbs index = {i}/>)}
 
                         <CustomDropZone name="Thumbnail" label="Thumbnail" AllowButton={0}
-                                        onDrop={acceptedFiles => DocumenthandleInputFileChange(acceptedFiles, i)}
+                                        onDrop={acceptedFiles => DocumenthandleInputFileThumbnail(acceptedFiles, i)}
                                         p="Drag&Drop Your attachments here"/>
-                        <CustomDropZone name="Thumbnail" label="Download" AllowButton={1}
-                                        onDrop={acceptedFiles => DocumenthandleInputFileChange(acceptedFiles, i)}
+                        <CustomDropZone name="Download" label="Download" AllowButton={1}
+                                        onDrop={acceptedFiles => DocumenthandleInputDownload(acceptedFiles, i)}
                                         p="Drag&Drop Your attachments here"/>
                         <div>
                             {Documents.length !== 1 &&

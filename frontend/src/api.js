@@ -87,14 +87,10 @@ export const profileAPI = {
 
         return instance.post('api/manufacturerProfilePage/', form_data, config2 )
     },
-    PostDocument: (form_data) => {
-        return instance.post('api/Document/', form_data, config2)
-    },
-    PostSection: (form_data) => {
-        return instance.post('api/Section/', form_data, config2)
-    },
     getCountries : () => {
-        debugger
         return axios.get('http://restcountries.eu/rest/v2/all')
+    },
+    getProfile: () => {
+        return instance.get('api/manufacturerProfilePage/')
     }
 }

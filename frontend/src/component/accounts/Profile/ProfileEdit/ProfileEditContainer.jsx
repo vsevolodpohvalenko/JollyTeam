@@ -1,11 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { ProfileEdit } from './ProfileEdit' 
-import { GetCountries } from '../../../../redux/reducers/ProfileReducer'
+import { GetCountries, GetProfiles} from '../../../../redux/reducers/ProfileReducer'
 class ProfileEditContainer extends React.PureComponent {
     componentDidMount(){
         debugger
         this.props.GetCountries()
+        this.props.GetProfiles()
+
     }
     
     render() {
@@ -21,4 +23,4 @@ let mapStateToProps = (state) =>{
         
     }
    }
-export default connect(mapStateToProps, {GetCountries})(ProfileEditContainer)
+export default connect(mapStateToProps, {GetCountries, GetProfiles})(ProfileEditContainer)
