@@ -19,7 +19,7 @@ label{
 .main{
   margin-left: 50px;
 }
-form{
+.main form{
   border-right: solid lightgrey 1px;
   padding-right: 80px;
 }

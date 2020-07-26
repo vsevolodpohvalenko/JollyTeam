@@ -6,7 +6,6 @@ import cn from "classnames";
 import {getFaqGroups, getFaqItems, ActiveId} from '../../redux/reducers/FAQReducer'
 class FAQ_Group extends Component {
     componentDidMount() {
-
         this.props.getFaqGroups()
         this.props.getFaqItems()
         }

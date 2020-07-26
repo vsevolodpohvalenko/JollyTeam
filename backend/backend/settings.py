@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
 
+
 ]
 
 MIDDLEWARE = [
@@ -199,5 +200,7 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 

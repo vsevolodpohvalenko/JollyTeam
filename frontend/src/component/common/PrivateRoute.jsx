@@ -13,7 +13,7 @@ const PrivateRoute = ({component: Component, auth, ...rest}) => (
         }
         else{return (
         <MainTemplate>
-        <Component {...props} />;
+        <Component {...props} />
         </MainTemplate>)}
     }}/>
 )

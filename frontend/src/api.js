@@ -83,14 +83,35 @@ export const contactAPI = {
 }
 
 export const profileAPI = {
-    PostProfile : (form_data) => {
-
+    
+    PostProfile : (id) => {
+        debugger
+        let form_data = new FormData();
+        form_data.append('owner', String(id));
         return instance.post('api/manufacturerProfilePage/', form_data, config2 )
+    },
+
+    PutProfile : (form_data, id) => {
+        debugger
+        return instance.put(`api/manufacturerProfilePage/${id}/`, form_data, config2 )
+    },
+    PostDocuments : (form_data) => {
+        return instance.post('api/Document/', form_data, config2)
     },
     getCountries : () => {
         return axios.get('http://restcountries.eu/rest/v2/all')
     },
     getProfile: () => {
-        return instance.get('api/manufacturerProfilePage/')
+        return instance.get('api/manufacturerProfilePage')
+    },
+    getDocuments: () => {
+        return instance.get('api/Document/')
+    },
+    getCategory: () => {
+        return instance.get('api/Category/')
+    },
+    getSearcheddData: (search) => {
+        debugger
+        return instance(`manufacturerProfilePage?search=${search}`)
     }
 }

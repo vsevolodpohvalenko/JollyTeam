@@ -1,9 +1,10 @@
 from .models import FAQ_Group, FAQ_item, manufacturerProfilePage, Document, Section, Category, Home_Page, MenuItem, \
     ContentPage, Contact, RequestForQuotation, activation
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, generics
 from .serializers import FAQGroupSerializer, FAQItemSerializer, manufacturerProfilePageSerializer, DocumentSerializer, \
     SectionSerializer, CategorySerializer, HomePageSerializer, MenuItemSerializer, ContactSerializer, \
     ContentPageSerializer, RequestForQuotationSerializer, ActivationSerializer
+
 
 
 class FAQ_GroupViewSet(viewsets.ModelViewSet):
@@ -27,21 +28,6 @@ class FAQ_itemViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = FAQItemSerializer
 
-
-class manufacturerProfilePageViewSet(viewsets.ModelViewSet):
-    queryset = manufacturerProfilePage.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = manufacturerProfilePageSerializer
-
-    # def get_queryset(self):
-    #     return self.request.user.FAQ.all()
-
-    # def perform_create(self, serializer):
-    #     serializer.save(owner=self.request.user)
-
-
 class DocumentViewSet(viewsets.ModelViewSet):
     queryset = Document.objects.all()
     permission_classes = [
@@ -56,6 +42,12 @@ class SectionViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = SectionSerializer
+class manufacturerProfilePageViewSet(viewsets.ModelViewSet):
+    queryset = manufacturerProfilePage.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = manufacturerProfilePageSerializer
 
 
 class CategoryViewSet(viewsets.ModelViewSet):

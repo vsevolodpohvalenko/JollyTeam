@@ -29,7 +29,7 @@ export const Home = (props) => {
           <div onClick={() => setActive(!active)} className={cn({ [s.active] : active === true},s.menu_toogle)}></div>
           <nav className={cn({ [s.active] : active === true},s.homenav)}>
             <ul>
-          <li><NavLink to="/"> Manufactures</NavLink></li>
+          <li><NavLink to="/manufacturers"> Manufactures</NavLink></li>
           <li><NavLink to="/faq" >FAQ</NavLink></li>
           <li><NavLink to="/contact">Contact</NavLink></li></ul>
             {isAuthenticated ? authLinks : guestLinks}

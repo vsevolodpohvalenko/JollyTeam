@@ -16,15 +16,13 @@ import ResetPasswordConfirmContainer from './component/accounts/resetPasswordCon
 import ResetPasswordContainer from './component/accounts/resetPassword/ResetPasswordContainer';
 import ActivateContainer from './component/accounts/activate/ActivateContainer';
 import HomeContainer from './component/home/HomeContainer';
-import { MainTemplate } from './component/Templates/main_template';
+import {MainTemplate} from './component/Templates/main_template';
 import ContentContainer from './component/content/contentContainer'
 import ContactContainer from './component/Contact/ContactContainer';
 import ProfileEditContainer from './component/accounts/Profile/ProfileEdit/ProfileEditContainer';
-
-
-
-
-
+import ProfileViewContainer from "./component/accounts/Profile/ProfileView/ProfileViewContainer";
+import RequestForQuotationContainer from "./component/requestForQuotation/requestForQuotationContainer";
+import ManufacturersContainer from "./component/Manufacturers/manufacturersContainer";
 
 
 const options = {
@@ -38,29 +36,43 @@ const options = {
 class App extends React.Component {
     componentDidMount() {
         debugger
-      store.getState().auth.auth_token && store.dispatch(loadUser())
+      store.dispatch(loadUser())
     }
 
-    render() {return <div className="App">
+    render() {
+        return <div className="App">
             <BrowserRouter>
                 <Provider store={store}>
                     <AlertProvider template={AlertTemplate}{...options}>
                         <Alerts/>
-                        <Switch >
-                        <Route exact path='/register' render={() => <AccountTemplate> <Register/></AccountTemplate>}/>
-                                <Route exact path='/password/reset/confirm/:uid/:token' render={() => <AccountTemplate><ResetPasswordConfirmContainer/></AccountTemplate>}/>
-                                <Route exact path='/reset_password' render={() => <AccountTemplate> <ResetPasswordContainer/></AccountTemplate>}/>
-                                <Route exact path='/activate/:uid/:token' render={() => <AccountTemplate> <ActivateContainer/></AccountTemplate>}/>
-                                <Route exact path='/login' render={() => <AccountTemplate> <Login/></AccountTemplate>}/>
-                                <Route exact path='/content' render={() => <MainTemplate> <ContentContainer/></MainTemplate>}/>
-                                <PrivateRoute exact path='/faq' component={FAQ_Group}/>
-                                <Route exact path='/' component={HomeContainer}/>
-                                <PrivateRoute exact path='/contact' component= {ContactContainer}/>
-                                <Route exact path='/profileEdit' render={() => <MainTemplate><ProfileEditContainer/></MainTemplate>}/>
+                        <Switch>
+                            <Route exact path='/register'
+                                   render={() => <AccountTemplate> <Register/></AccountTemplate>}/>
+                            <Route exact path='/password/reset/confirm/:uid/:token'
+                                   render={() => <AccountTemplate><ResetPasswordConfirmContainer/></AccountTemplate>}/>
+                            <Route exact path='/reset_password'
+                                   render={() => <AccountTemplate> <ResetPasswordContainer/></AccountTemplate>}/>
+                            <Route exact path='/activate/:uid/:token'
+                                   render={() => <AccountTemplate> <ActivateContainer/></AccountTemplate>}/>
+                            <Route exact path='/login' render={() => <AccountTemplate> <Login/></AccountTemplate>}/>
+                            <Route exact path='/content'
+                                   render={() => <MainTemplate> <ContentContainer/></MainTemplate>}/>
+                            <PrivateRoute exact path='/faq' component={FAQ_Group}/>
+                            <Route exact path='/' component={HomeContainer}/>
+                            <PrivateRoute exact path='/contact' component={ContactContainer}/>
+                            <Route exact path='/profileEdit'
+                                   render={() => <MainTemplate><ProfileEditContainer/></MainTemplate>}/>
+                            <Route exact path='/profileView'
+                                   render={() => <MainTemplate><ProfileViewContainer/></MainTemplate>}/>
+                            <Route exact path='/request/for/quotation'
+                                   render={() => <MainTemplate><RequestForQuotationContainer/></MainTemplate>}/>
+                            <PrivateRoute exact path='/manufacturers' component={ManufacturersContainer}/>
                         </Switch>
-                        </AlertProvider>
-                        </Provider>
-                        </BrowserRouter>
-                        </div>}
-                                }
+                    </AlertProvider>
+                </Provider>
+            </BrowserRouter>
+        </div>
+    }
+}
+
 export default App;

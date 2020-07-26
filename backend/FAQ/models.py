@@ -3,6 +3,9 @@ from phone_field import PhoneField
 from django.conf import settings
 User = settings.AUTH_USER_MODEL
 
+def upload_path(instance, filename):
+    return  '/'.join(['manufacturerProfilePage', str(instance.companyName), filename])
+
 class FAQ_Group(models.Model):
     Title = models.CharField('faq_Category_title', max_length=75, unique=True)
 
@@ -29,26 +32,25 @@ class FAQ_item(models.Model):
 
 class manufacturerProfilePage(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    CompanyProfilePicture = models.ImageField(default= 'defaultComProfPic.jpg')
-    CompanyName = models.CharField(max_length=60, blank= True)
-    CompanyDescription = models.TextField(default="Company Descriptions")
-    Country = models.CharField(max_length=200, blank= True)
-    CompanyLogo = models.ImageField(default= 'defaultComLogo.jpg')
-    Sections = models.TextField(default= 'Welcome to the sections')
-    Documents = models.TextField(default='Welcome to the documents')
+    companyProfilePicture = models.ImageField(default= 'defaultComProfPic.jpg', upload_to=upload_path)
+    companyName = models.CharField(max_length=60, blank= True, default="Company")
+    companyDescription = models.TextField(default="Company Descriptions")
+    country = models.CharField(max_length=200, blank= True, default="USA")
+    companyLogo = models.ImageField(default= 'defaultComLogo.jpeg', upload_to=upload_path)
+    sections = models.TextField(default= "[{""}]")
 
 
 
 
 
 class Document(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     Title = models.CharField(max_length=75)
     Thumbnail = models.ImageField()
     Download = models.FileField()
 
 class Section(models.Model):
-    Section = models.TextField(default="This is section")
-
+    Title = models.CharField(max_length=75, default="Section" )
 
 class Category(models.Model):
     Name = models.CharField(max_length= 75)

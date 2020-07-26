@@ -1,0 +1,109 @@
+.back{
+    color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 45vh;
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
+body{
+    font-family: 'Mulish', sans-serif;
+}
+.section{
+    width: 50%;
+
+}
+
+.section div{
+    display: flex;
+    align-items: center;
+}
+
+.section div h3{
+    margin-left: 15px;
+}
+.icon{
+    width: 50px;
+    height: 50px;
+}
+
+.main p{
+    color: #7F8177;
+    font-size: 18px;
+    font-style: italic;
+}
+.edit{
+    position: absolute;
+    bottom: 0;
+    left: 70%;
+}
+a,
+a:hover{
+    color: white;
+    text-decoration: none;
+}
+.name_country{
+    position: absolute;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-left: 10%;
+    margin-bottom: 20px;
+    bottom: 0;
+    left: 0;
+
+}
+.box_size{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.box_size img{
+    width: 100px;
+    height: 100px;
+}
+.logo{
+    border-radius: 50%;
+    width: 70px;
+    margin-right: 20px;
+    height: 70px;
+}
+
+.edit_button  {
+    width: 15%;
+    text-align: center;
+    background-color: #824fc4;
+    border-radius: 5px;
+    border: none;
+    padding: 9px;
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+.button  {
+    width: 100%;
+    text-align: center;
+    background-color: #824fc4;
+    border-radius: 5px;
+    border: none;
+    padding: 9px;
+    color: white;
+    font-size: 24px;
+    display: none;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+@media (max-width:786px){
+    .edit{
+        display: none;
+    }
+    .button{
+        display: block;
+    }
+}

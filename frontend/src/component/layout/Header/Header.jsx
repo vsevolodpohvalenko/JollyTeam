@@ -10,7 +10,7 @@ export const Header =(props) => {
 
   const guestLinks = (
     <ul >
-    <li><NavLink to=""> Manufactures</NavLink></li>
+    <li><NavLink to="/manufacturers"> Manufactures</NavLink></li>
     <li><NavLink to="/faq" className={s.active}>FAQ</NavLink></li>
     <li><NavLink to="/contact">Contact</NavLink></li> 
     <span>
@@ -21,7 +21,7 @@ export const Header =(props) => {
 
 
   const authLinks = ( <ul >
-    <li><NavLink to=""> Manufactures</NavLink></li>
+    <li><NavLink to="/manufacturers"> Manufactures</NavLink></li>
     <li><NavLink to="/faq" >FAQ</NavLink></li>
     <li><NavLink to="/contact">Contact</NavLink></li>
     <li><a onClick={props.Logout} href="">Logout</a></li>    

@@ -1,6 +1,6 @@
 import {GET_ERRORS} from './ErrorsReducer'
 import {createMessage} from './MessageReducer'
-import {authAPI} from "../../api"
+import {authAPI, profileAPI} from "../../api"
 
 const USER_LOADING = 'USER_LOADING'
 const USER_LOADED = 'USER_LOADED'
@@ -31,8 +31,7 @@ export const AuthReducer = (state = initialState, action) => {
                 ...state, ...action.payload, isAuthenticated: true, isLoading: false
             }
         case REGISTER_SUCCESS:
-            
-            return {...state, auth_token:null, user:action.payload}
+            return {...state, auth_token:null, user:action.payload, isLoading: false}
         case LOGOUT_SUCCESS:
             debugger
             localStorage.removeItem('auth_token');
@@ -61,7 +60,7 @@ export const loadUser = () => async (dispatch, getState) => {
 }
 
 export const Logout = () =>  (dispatch, getState) => {
-    
+
     authAPI.logout(tokenConfig(getState)).then(res =>console.log(res.status) ,dispatch(logoutSuccess()))
     }
 
@@ -71,17 +70,18 @@ debugger
     const config = {
         headers: {
             'Content-Type': 'application/json',
-
         }
     }
 
     const body = JSON.stringify({email, password})
     try {
+        dispatch(loadUserSuccess());
         let response = await authAPI.login(body, config)
         dispatch(loginSuccess(response.data))
         dispatch(createMessage({logined: "Loggined successful"}))
         const res = await authAPI.getUser(tokenConfig(getState))
         dispatch(getUserSuccess(res.data));
+
         
     } catch (err) {
         const errors = {
@@ -106,10 +106,12 @@ export const register = ({email, first_name, last_name, password}) => async (dis
     }
     const body = JSON.stringify({first_name, last_name, password, email})
     try {
+        dispatch(loadUserSuccess());
         const response = await authAPI.register(body, config)
         dispatch(registerSuccess(response.data))
         dispatch(
             createMessage({registred: "Check your email!"}))
+        await profileAPI.PostProfile(response.data.id)
     } catch (err) {
         const error = {
             msg: err.response.data,

@@ -6,13 +6,12 @@ class ProfileEditContainer extends React.PureComponent {
     componentDidMount(){
         debugger
         this.props.GetCountries()
-        this.props.GetProfiles()
 
     }
     
     render() {
         
-        return <ProfileEdit userID = {this.props.userID} countries = {this.props.countries} />
+        return <ProfileEdit userID = {this.props.userID}  countries = {this.props.countries} />
     }
 }
 let mapStateToProps = (state) =>{
@@ -20,7 +19,7 @@ let mapStateToProps = (state) =>{
     return {
         countries: state.profile.countries,
         userID: state.auth.user.id,
-        
+
     }
    }
 export default connect(mapStateToProps, {GetCountries, GetProfiles})(ProfileEditContainer)

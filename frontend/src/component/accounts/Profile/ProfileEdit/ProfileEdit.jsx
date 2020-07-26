@@ -8,7 +8,7 @@ import Select from 'react-select'
 let InputText = (props) => {
     return (<div><label>{props.element}</label>
             <input className='form-control' type="text" placeholder={props.element} id={props.element}
-                   value={props.value} onChange={props.onChange} required/>
+                   value={props.value} onChange={props.onChange} />
         </div>
     )
 }
@@ -35,14 +35,14 @@ const img = {
 export const ProfileEdit = (props) => {
 
 
-    const [CompanyProfilePicture, setCompanyProfilePicture] = useState([]);
+    const [companyProfilePicture, setCompanyProfilePicture] = useState([]);
 
-    const [CompanyLogo, setCompanyLogo] = useState([]);
+    const [companyLogo, setCompanyLogo] = useState([]);
     const [background, setBackground] = useState('')
-    const [CompanyName, setCompanyName] = useState('')
-    const [Country, setCountry] = useState('')
-    const [CompanyDescription, setCompanyDescription] = useState('')
-    const [Section, setSection] = useState([{Title: "", Icon: "", Text: ""}]);
+    const [companyName, setCompanyName] = useState('')
+    const [country, setCountry] = useState('')
+    const [companyDescription, setCompanyDescription] = useState('')
+    const [section, setSection] = useState([{Title: "", Icon: "", Text: ""}]);
     const [Documents, setDocument] = useState([{Title: "", Thumbnail: "", Download: ""}]);
 
 
@@ -55,23 +55,32 @@ export const ProfileEdit = (props) => {
         e.preventDefault()
         debugger
         let form_data = new FormData();
-        form_data.append('CompanyProfilePicture', CompanyProfilePicture[0], CompanyProfilePicture[0].name);
-        form_data.append('CompanyLogo', CompanyLogo[0], CompanyLogo[0].name);
-        form_data.append("Sections", JSON.stringify(Section))
-        form_data.append("Documents", JSON.stringify(Documents))
-        form_data.append('CompanyName', CompanyName);
-        form_data.append('CompanyDescription', CompanyDescription);
-        form_data.append('Country', Country.value);
-        form_data.append('owner', String(props.userID));
-        profileAPI.PostProfile(form_data)
+        form_data.append('companyProfilePicture', companyProfilePicture[0], companyProfilePicture[0].name);
+        form_data.append('companyLogo', companyLogo[0], companyLogo[0].name);
+        form_data.append("sections", JSON.stringify(section))
+        form_data.append('companyName', companyName);
+        form_data.append('companyDescription', companyDescription);
+        form_data.append('country', country.value);
+        form_data.append('owner', props.userID);
+        const id = props.userID
+        profileAPI.PutProfile(form_data, id)
+
+        Documents.forEach( e => {
+            let form_doc_data = new FormData();
+            form_doc_data.append('Title', e.Title);
+            form_doc_data.append('Thumbnail', e.Thumbnail);
+            form_doc_data.append("Download", e.Download)
+            form_doc_data.append('owner', props.userID);
+            profileAPI.PostDocuments(form_doc_data)
+        })
     }
 
 
-    const handleDrop = acceptedFiles => {
-        setCompanyProfilePicture(acceptedFiles.map(file => Object.assign(file, {
+    const handleDrop = aceptedFiles => {
+        setCompanyProfilePicture(aceptedFiles.map(file => Object.assign(file, {
             preview: URL.createObjectURL(file)
         })));
-        setBackground(acceptedFiles.map(file => URL.createObjectURL(file)))
+        setBackground(aceptedFiles.map(file => URL.createObjectURL(file)))
     }
 
     const Thumbs = (props) => {
@@ -91,8 +100,9 @@ export const ProfileEdit = (props) => {
     }
 
 
-    const handleDrop4 = acceptedFiles => {
-        setCompanyLogo(acceptedFiles.map(file => Object.assign(file, {
+    const handleDrop4 = aceptedFiles => {
+        debugger
+        setCompanyLogo(aceptedFiles.map(file => Object.assign(file, {
             preview: URL.createObjectURL(file)
         })));
     }
@@ -125,7 +135,7 @@ export const ProfileEdit = (props) => {
 
     const SectionhandleInputChange = (e, index) => {
         const {name, value} = e.target;
-        const list = [...Section];
+        const list = [...section];
         list[index][name] = value;
         setSection(list);
     };
@@ -138,19 +148,18 @@ export const ProfileEdit = (props) => {
     };
 
 
-    const DocumenthandleInputFileThumbnail = (acceptedFiles, index) => {
-        const {name, preview} = Object.assign(acceptedFiles[0], {preview: URL.createObjectURL(acceptedFiles[0])});
+    const DocumenthandleInputFileThumbnail = (aceptedFiles, index) => {
+        const {preview} = Object.assign(aceptedFiles[0], {preview: URL.createObjectURL(aceptedFiles[0])});
         const list = [...Documents];
-        list[index]['name'] = name;
+        list[index]['Thumbnail'] = aceptedFiles[0];
         list[index]['preview'] = preview;
 
         setDocument(list);
     }
 
-    const DocumenthandleInputDownload = (acceptedFiles, index) => {
-        const {name} = acceptedFiles[0]
+    const DocumenthandleInputDownload = (aceptedFiles, index) => {
         const list = [...Documents];
-        list[index]['Download'] = name;
+        list[index]['Download'] = aceptedFiles[0];
 
 
         setDocument(list);
@@ -158,7 +167,7 @@ export const ProfileEdit = (props) => {
 
 
     const handleRemoveClick = index => {
-        const list = [...Section];
+        const list = [...section];
         list.splice(index, 1);
         setSection(list);
     };
@@ -170,18 +179,18 @@ export const ProfileEdit = (props) => {
     };
 
     const handleAddClick = () => {
-        setSection([...Section, {Title: "", Icon: "", Text: ""}]);
+        setSection([...section, {Title: "", Icon: "", Text: ""}]);
     };
 
     const handleAddClick2 = () => {
-        setDocument([...Documents, {Title: "", Icon: "", Text: ""}]);
+        setDocument([...Documents, {Title: "", Thumbnail: "", Download: ""}]);
     };
 
 
     useEffect(() => () => {
         // Make sure to revoke the data uris to avoid memory leaks
-        CompanyProfilePicture.forEach(file => URL.revokeObjectURL(file.preview));
-    }, [CompanyProfilePicture]);
+        companyProfilePicture.forEach(file => URL.revokeObjectURL(file.preview));
+    }, [companyProfilePicture]);
     return (
         <form className="form-group" onSubmit={handleSubmit}>
             <section style={
@@ -204,14 +213,14 @@ export const ProfileEdit = (props) => {
                     )}
                 </Dropzone>
             </section>
-            <InputText element="CompanyName" onChange={e => setCompanyName(e.target.value)} required/>
-            <Select options={options} value={Country} onChange={(e) => setCountry(e)}/>
-            <InputText element="CompanyDescription" value={CompanyDescription}
-                       onChange={e => setCompanyDescription(e.target.value)} required/>
+            <InputText element="companyName" onChange={e => setCompanyName(e.target.value)} />
+            <Select options={options} value={country} onChange={(e) => setCountry(e)}/>
+            <InputText element="companyDescription" value={companyDescription}
+                       onChange={e => setCompanyDescription(e.target.value)} />
             <CustomDropZone label="Company Logo" AllowButton={1} onDrop={handleDrop4}
                             p="Drag&Drop Your attachments here"/>
 
-            {Section.map((x, i) => {
+            {section.map((x, i) => {
                 return (
                     <div>
                         <h2>Section</h2>
@@ -225,9 +234,9 @@ export const ProfileEdit = (props) => {
                         <input className='form-control' placeholder="Text" name="Text" value={x.Text}
                                onChange={e => SectionhandleInputChange(e, i)}/>
                         <div>
-                            {Section.length !== 1 &&
+                            {section.length !== 1 &&
                             <div className="text-danger" onClick={() => handleRemoveClick(i)}>Remove</div>}
-                            {Section.length - 1 === i && <div className="text-danger" onClick={() => {
+                            {section.length - 1 === i && <div className="text-danger" onClick={() => {
                                 handleAddClick()
                             }}>Add 1 Section</div>}
                         </div>
@@ -244,13 +253,13 @@ export const ProfileEdit = (props) => {
                         <input className='form-control' placeholder="Title" name="Title" value={y.Title}
                                onChange={e => DocumenhandleInputChange(e, i)}/>
 
-                        {Documents[i].name && (<Thumbs index = {i}/>)}
+                        {Documents[i].Thumbnail && (<Thumbs index = {i}/>)}
 
                         <CustomDropZone name="Thumbnail" label="Thumbnail" AllowButton={0}
-                                        onDrop={acceptedFiles => DocumenthandleInputFileThumbnail(acceptedFiles, i)}
+                                        onDrop={aceptedFiles => DocumenthandleInputFileThumbnail(aceptedFiles, i)}
                                         p="Drag&Drop Your attachments here"/>
                         <CustomDropZone name="Download" label="Download" AllowButton={1}
-                                        onDrop={acceptedFiles => DocumenthandleInputDownload(acceptedFiles, i)}
+                                        onDrop={aceptedFiles => DocumenthandleInputDownload(aceptedFiles, i)}
                                         p="Drag&Drop Your attachments here"/>
                         <div>
                             {Documents.length !== 1 &&

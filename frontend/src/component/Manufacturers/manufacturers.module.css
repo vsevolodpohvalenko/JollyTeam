@@ -1,0 +1,89 @@
+.main{
+    display: grid;
+    grid-template-columns: 7% 16% 7% 70%;
+    grid-template-areas:
+        ". filter . profiles"
+}
+
+.select h6:hover{
+    color: #f1105b;
+}
+.profiles{
+    grid-area: profiles;
+
+}
+
+.filter{
+    grid-area: filter;
+
+}
+.select.active{
+    display: flex;
+    align-items: center;
+}
+.select{
+    display: none;
+    color: #acacac;
+    border-top: solid 1px #acacac;
+    padding: 10px 0;
+}
+
+
+.title{
+    display: flex;
+}
+.skip{
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+.skip:before{
+    content: '\f067';
+    font-family: fontAwesome;
+    line-height: 20px;
+}
+.input{
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #505050;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s
+}
+
+.input::placeholder{
+    color: #acacac;
+}
+.skip.active:before{
+    content: '\f068';
+}
+
+.manufacturer img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.checkbox[type=checkbox] {
+    width: 20px;
+    height: 20px;
+}
+
+.checkIt{
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
+

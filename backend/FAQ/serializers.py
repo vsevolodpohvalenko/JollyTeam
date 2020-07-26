@@ -25,6 +25,8 @@ class manufacturerProfilePageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
+
 class DocumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Document
