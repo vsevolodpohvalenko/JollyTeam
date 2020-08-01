@@ -10,8 +10,8 @@ import {Link} from "react-router-dom";
 export const ProfileView = (props) => {
     debugger
     return <div className={s.main}>
-        {props.profiles.map(p => (
-            <div>
+        {props.profiles.map((p, index) => (
+            <div key={index}>
                 <div className={s.back} style={
                     {backgroundImage: ` linear-gradient( rgba(56, 56, 56, 0.596), rgba(56, 56, 56, 0.596), rgba(56, 56, 56, 0.596), rgba(255, 255, 255, 0.56) ),  url(${( p.companyProfilePicture || defaultImage)})`}}>
                     <div className={s.name_country}>
@@ -29,8 +29,8 @@ export const ProfileView = (props) => {
                     <p>{p.companyDescription}</p>
                     <div className={s.Sections}>
                     <p>{p.section}</p>
-                    {props.profiles[0] && JSON.parse(p.sections).map(e => (
-                            <div className={s.section}>
+                    {props.profiles[0] && JSON.parse(p.sections).map((e, index) => (
+                            <div key={index} className={s.section}>
                                 <div>
                                     {e.Icon === "Clothes For Couples" && (<img alt={"icon"} className={s.icon} src={clothesForCouples}/>)}
                                     {e.Icon === "Men's clothing" && (<img alt={"icon"}  className={s.icon} src={mensClothing}/>)}
@@ -49,7 +49,7 @@ export const ProfileView = (props) => {
             </div>
         ))}
         <div className={[s.Documents].join(' ')} >
-        {props.my_documents.map(d => (<div >
+        {props.my_documents.map(d => (<div key={d.id}>
                 <a href={d.Download} download><img alt={"thumbnail"} src={d.Thumbnail}/></a>
                 <p>{d.Title}</p>
                 <a href={d.Download} download>Download</a>

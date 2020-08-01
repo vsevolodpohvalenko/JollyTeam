@@ -5,7 +5,6 @@ import mansClothes  from '../../media/suit.svg'
 import SportsWear from '../../media/boots.svg'
 import womansClothes from '../../media/dress.svg'
 import s from './Profile.module.css'
-import {Link} from "react-router-dom";
 
 export const Profile = (props) => {
     debugger

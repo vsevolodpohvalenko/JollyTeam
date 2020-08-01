@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {register} from '../../../redux/reducers/AuthReducer'
 import {createMessage} from '../../../redux/reducers/MessageReducer'
 import s from '../Login/login.module.css'
-import Preloader from "../../Preloader/preloader";
+
 
 
 class Register extends React.Component {

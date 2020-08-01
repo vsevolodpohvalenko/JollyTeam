@@ -2,7 +2,7 @@ import React from 'react'
 import {ResetPasswordConfirm } from './ResetPasswordConfirm'
 import {connect} from 'react-redux'
 import {compose} from 'redux'
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 
 
 

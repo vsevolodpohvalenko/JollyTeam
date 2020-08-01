@@ -1,4 +1,4 @@
-import React, {useState, useHistory} from "react";
+import React, {useState} from "react";
 import s from './manufacturers.module.css'
 import cn from "classnames";
 

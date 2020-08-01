@@ -1,7 +1,7 @@
 import React from 'react'
 import { ResetPassword } from './ResetPassword'
 import {connect} from 'react-redux'
-import { Redirect } from 'react-router-dom'
+
 
 
 

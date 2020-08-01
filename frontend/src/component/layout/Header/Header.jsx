@@ -1,11 +1,11 @@
 import React, {Fragment, useState} from 'react'
 import s from './Header.module.css'
 import cn from "classnames";
-import {Link, NavLink} from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 
  
 export const Header =(props) => {
-  const {isAuthenticated, user} = props
+  const {isAuthenticated} = props
 
 
   const guestLinks = (

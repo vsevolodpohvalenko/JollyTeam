@@ -24,7 +24,7 @@ import ProfileViewContainer from "./component/accounts/Profile/ProfileView/Profi
 import RequestForQuotationContainer from "./component/requestForQuotation/requestForQuotationContainer";
 import ManufacturersContainer from "./component/Manufacturers/manufacturersContainer";
 import ProfileContainer from "./component/User/ProfileContainer";
-import loading from './media/loading_animation.gif'
+
 import Preloader from "./component/Preloader/preloader";
 import {PageNotFound} from "./component/layout/PageNotFound";
 

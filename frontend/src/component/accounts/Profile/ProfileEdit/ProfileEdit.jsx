@@ -239,7 +239,7 @@ export const ProfileEdit = (props) => {
 
             {section.map((x, i) => {
                 return (
-                    <div >
+                    <div key={i}>
                         <h2>Section</h2>
                         <div className={s.double}>
                         <div id={s.doubleInput}>
@@ -272,7 +272,7 @@ export const ProfileEdit = (props) => {
 
             {Documents.map((y, i) => {
                 return (
-                    <div>
+                    <div key={i}>
                         <h2>Document</h2>
                         <label>Title</label>
                         <input className='form-control' placeholder="Title" name="Title" value={y.Title}
