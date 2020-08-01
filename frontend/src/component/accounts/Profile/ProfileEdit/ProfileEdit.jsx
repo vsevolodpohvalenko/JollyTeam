@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Dropzone from "react-dropzone";
 import s from './ProfileEdit.module.css'
 import defaultImage from '../../../../media/default.jpg'
+import defaultThumbnail from '../../../../media/thumbnail.jpg'
 import {profileAPI} from "../../../../api";
 import Select from 'react-select'
 
@@ -97,7 +98,7 @@ export const ProfileEdit = (props) => {
             <div className={s.thumbInner}>
                 <img
                     alt="thumbnail"
-                    src={file.Thumbnail.preview ? file.Thumbnail.preview : file.Thumbnail}
+                    src={(file.Thumbnail.preview ? file.Thumbnail.preview : file.Thumbnail) || defaultThumbnail}
                     style={img}
                 />
             </div>
