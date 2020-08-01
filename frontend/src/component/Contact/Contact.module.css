@@ -12,16 +12,29 @@
   }
 
 .line{
-  display: flex;
-  margin: 10px;
-  
+    display: flex;
+    justify-content: space-between;
+}
+.line div{
+    height: 38px;
+    width: 100%;
 }
 .form{
-  margin: 10px;
+    margin:20px 0;
+    margin-right: 10px;
 }
 
 .main{
   justify-content: center;
-  margin-left: 30%;
-  margin-right: 30%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+@media (max-width:786px){
+    .line{
+    display: block;
+    }
+    .form{
+    margin: 40px 0;
+    margin-right: 10px;
+    }
 }

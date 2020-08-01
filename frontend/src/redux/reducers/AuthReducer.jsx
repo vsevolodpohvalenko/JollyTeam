@@ -7,23 +7,27 @@ const USER_LOADED = 'USER_LOADED'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
+const ACTIVATE_USER = 'ACTIVATE_USER'
 
 
 let initialState = {
     auth_token: localStorage.getItem('auth_token'),
     isAuthenticated: null,
     isLoading: false,
-    user: localStorage.getItem('user'),
+    activated: 0,
+    user: JSON.parse(localStorage.getItem('user')),
 
 }
 
 export const AuthReducer = (state = initialState, action) => {
 
     switch (action.type) {
+        case ACTIVATE_USER:
+            return {...state, activated: action.payload}
         case USER_LOADING :
-            return {...state, isLoading: true}
+            return {...state, isLoading: !state.isLoading}
         case USER_LOADED:
-            localStorage.setItem('user', action.payload)
+            localStorage.setItem('user', JSON.stringify(action.payload))
             return {...state, isAuthenticated: true, isLoading: false, user: action.payload}
         case LOGIN_SUCCESS:
             localStorage.setItem('auth_token', action.payload.auth_token)
@@ -48,7 +52,7 @@ const loginSuccess = (payload) => ({type: LOGIN_SUCCESS, payload})
 const getUserSuccess = (payload) => ({type: USER_LOADED, payload})
 const logoutSuccess = () => ({type: LOGOUT_SUCCESS})
 const registerSuccess = (user) => ({type: REGISTER_SUCCESS, payload: user})
-
+const activatedSuccessful = (payload) => ({type: ACTIVATE_USER, payload})
 
 
 export const loadUser = () => async (dispatch, getState) => {
@@ -60,13 +64,14 @@ export const loadUser = () => async (dispatch, getState) => {
 }
 
 export const Logout = () =>  (dispatch, getState) => {
-
+    dispatch(loadUserSuccess)
     authAPI.logout(tokenConfig(getState)).then(res =>console.log(res.status) ,dispatch(logoutSuccess()))
+    dispatch(loadUserSuccess)
     }
 
 
 export const login = (email, password) => async (dispatch, getState) => {
-debugger
+
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -95,6 +100,7 @@ debugger
 
 
     }
+    dispatch(loadUserSuccess)
 }
 
 export const register = ({email, first_name, last_name, password}) => async (dispatch) => {
@@ -106,12 +112,15 @@ export const register = ({email, first_name, last_name, password}) => async (dis
     }
     const body = JSON.stringify({first_name, last_name, password, email})
     try {
+
         dispatch(loadUserSuccess());
         const response = await authAPI.register(body, config)
         dispatch(registerSuccess(response.data))
         dispatch(
             createMessage({registred: "Check your email!"}))
         await profileAPI.PostProfile(response.data.id)
+        await profileAPI.PostDocuments(response.data.id)
+        dispatch(loadUserSuccess)
     } catch (err) {
         const error = {
             msg: err.response.data,
@@ -121,10 +130,48 @@ export const register = ({email, first_name, last_name, password}) => async (dis
             payload: error,
             type: GET_ERRORS
         })
+    }
+    dispatch(loadUserSuccess)
+}
+export const ActivateUser = (body) => async (dispatch, getState) => {
+    debugger
+
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+
+    const body1 = {
+        email: localStorage.getItem('email'),
+        password: localStorage.getItem('password')}
+    try {
+        const  response1 = await authAPI.activate(body)
+        dispatch(activatedSuccessful(response1.data))
+        dispatch(loadUserSuccess());
+        debugger
+        let response = await authAPI.login(body1, config)
+        debugger
+        dispatch(loginSuccess(response.data))
+        dispatch(createMessage({logined: "Loggined successful"}))
+        const res = await authAPI.getUser(tokenConfig(getState))
+        dispatch(getUserSuccess(res.data));
+
+
+    } catch (err) {
+        const errors = {
+            msg: err.response.data,
+            status: err.response.status
+        }
+        dispatch({
+            type: GET_ERRORS,
+            payload: errors
+        })
+
 
     }
 }
-
 
 export const tokenConfig = getState => {
     debugger

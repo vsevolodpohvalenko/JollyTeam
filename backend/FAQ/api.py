@@ -1,10 +1,9 @@
 from .models import FAQ_Group, FAQ_item, manufacturerProfilePage, Document, Section, Category, Home_Page, MenuItem, \
-    ContentPage, Contact, RequestForQuotation, activation
-from rest_framework import viewsets, permissions, generics
+    ContentPage, Contact, RequestForQuotation, Links
+from rest_framework import viewsets, permissions
 from .serializers import FAQGroupSerializer, FAQItemSerializer, manufacturerProfilePageSerializer, DocumentSerializer, \
     SectionSerializer, CategorySerializer, HomePageSerializer, MenuItemSerializer, ContactSerializer, \
-    ContentPageSerializer, RequestForQuotationSerializer, ActivationSerializer
-
+    ContentPageSerializer, RequestForQuotationSerializer, LinksSerializer
 
 
 class FAQ_GroupViewSet(viewsets.ModelViewSet):
@@ -14,12 +13,7 @@ class FAQ_GroupViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = FAQGroupSerializer
 
-class ActivationViewSet(viewsets.ModelViewSet):
-    queryset = activation.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = ActivationSerializer
+
 
 class FAQ_itemViewSet(viewsets.ModelViewSet):
     queryset = FAQ_item.objects.all()
@@ -30,18 +24,20 @@ class FAQ_itemViewSet(viewsets.ModelViewSet):
 
 class DocumentViewSet(viewsets.ModelViewSet):
     queryset = Document.objects.all()
-    permission_classes = [
+    permission_classes = {
         permissions.AllowAny
-    ]
+    }
     serializer_class = DocumentSerializer
 
 
 class SectionViewSet(viewsets.ModelViewSet):
     queryset = Section.objects.all()
-    permission_classes = [
+    permission_classes = {
         permissions.AllowAny
-    ]
+    }
     serializer_class = SectionSerializer
+
+
 class manufacturerProfilePageViewSet(viewsets.ModelViewSet):
     queryset = manufacturerProfilePage.objects.all()
     permission_classes = [
@@ -60,9 +56,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 class Home_PageViewSet(viewsets.ModelViewSet):
     queryset = Home_Page.objects.all()
-    permission_classes = [
+    permission_classes = {
         permissions.AllowAny
-    ]
+    }
     serializer_class = HomePageSerializer
 
 
@@ -89,10 +85,17 @@ class ContactViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ContactSerializer
 
-
 class RequestForQuotationViewSet(viewsets.ModelViewSet):
     queryset = RequestForQuotation.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
     serializer_class = RequestForQuotationSerializer
+
+
+class LinkViewSet(viewsets.ModelViewSet):
+    queryset = Links.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = LinksSerializer

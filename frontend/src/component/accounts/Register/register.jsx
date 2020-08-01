@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {register} from '../../../redux/reducers/AuthReducer'
 import {createMessage} from '../../../redux/reducers/MessageReducer'
 import s from '../Login/login.module.css'
+import Preloader from "../../Preloader/preloader";
 
 
 class Register extends React.Component {
@@ -29,13 +30,6 @@ class Register extends React.Component {
         localStorage.setItem('password', NewUser.password)
         localStorage.setItem('email', NewUser.email)
         this.props.register(NewUser)
-        //this.props.activateCode(NewUser.password)
-        //if(password !== password2){
-          //this.props.createMessage({passwordsNotMatch: "Passwords don't match "})}
-          //else {console.log('Submit!');
-          //}
-        
-          
     }
 
     onChange = e => this.setState({ [e.target.name]: e.target.value })
@@ -43,6 +37,7 @@ class Register extends React.Component {
       if(this.props.isAuthenticated){
         return <Redirect to="/"/>
       }
+
         const { first_name ,last_name, email, password} = this.state
 
         return (
@@ -106,7 +101,8 @@ class Register extends React.Component {
     }
 }
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    isLoading: state.auth.isLoading
 })
 
 export default connect(mapStateToProps, {register, createMessage})(Register)

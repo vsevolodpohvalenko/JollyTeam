@@ -2,7 +2,7 @@
 .main{
     display: grid;
     grid-template-columns: 20% 30% 50%;
-    height: 670px;
+    min-height: 100vh;
     grid-template-areas: 
       "photo auth brand"
 
@@ -47,6 +47,7 @@
     font-family: fontAwesome;
     line-height: 20px;
 }
+.link:hover,
 .link{
     text-decoration: none;
     color: #848484;

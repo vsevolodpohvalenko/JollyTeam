@@ -1,11 +1,10 @@
 import { profileAPI } from "../../api"
+import {createMessage} from './MessageReducer'
 const GET_COUNTRIES = "GET_COUNTRIES"
 const GET_PROFILES = "GET-PROFILES"
 const GET_DOCUMENTS = "GET-DOCUMENTS"
 const GET_CATEGORY = "GET-CATEGORY"
 const GET_SEARCHED_PROFILES = "GET_SEARCHED_PROFILES"
-
-
 
 let initialState = {
     profiles: [],
@@ -46,8 +45,25 @@ export const GetProfiles = () => async(dispatch) => {
     const response = await profileAPI.getProfile()
     dispatch(getProfilesSuccessful(response.data))
 }
+export const updateManufacturer = (data, id) => async (dispatch) => {
+    profileAPI.PutProfile(data, id)
+    dispatch(
+            createMessage({registred: "Your Profile was Submitted!"}))
+}
+export const updateDocument = (data, id) => async (dispatch) => {
+    profileAPI.PatchDocuments(data, id)
+    dispatch(createMessage({registred: "Documents for your Profile were Submitted!"}))
 
+}
+export const postDocument = (id) => async (dispatch) => {
+    await profileAPI.PostDocuments(id)
+    const response = await profileAPI.getDocuments()
+    dispatch(getDocumentsSuccessful(response.data))
+    dispatch(createMessage({registred: "One more document was added"}))
+
+}
 export const GetDocuments = () => async(dispatch) => {
+    debugger
     const response = await profileAPI.getDocuments()
     dispatch(getDocumentsSuccessful(response.data))
 }

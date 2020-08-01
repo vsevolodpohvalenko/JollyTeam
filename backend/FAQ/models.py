@@ -1,10 +1,13 @@
 from django.db import models
 from phone_field import PhoneField
 from django.conf import settings
+
 User = settings.AUTH_USER_MODEL
 
+
 def upload_path(instance, filename):
-    return  '/'.join(['manufacturerProfilePage', str(instance.companyName), filename])
+    return '/'.join(['manufacturerProfilePage', str(instance.companyName), filename])
+
 
 class FAQ_Group(models.Model):
     Title = models.CharField('faq_Category_title', max_length=75, unique=True)
@@ -20,7 +23,7 @@ class FAQ_Group(models.Model):
 class FAQ_item(models.Model):
     Group = models.ForeignKey(FAQ_Group, on_delete=models.CASCADE, default=1)
     Title = models.CharField('faq_title', max_length=75, unique=True)
-    Answer = models.TextField('content', unique=True, max_length=400)
+    Answer = models.CharField('content', unique=True, max_length=255)
     Active = models.BooleanField('', default=False)
 
     def __str__(self):
@@ -30,76 +33,75 @@ class FAQ_item(models.Model):
         verbose_name = 'FAQ'
         verbose_name_plural = 'FAQS'
 
+
 class manufacturerProfilePage(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    companyProfilePicture = models.ImageField(default= 'defaultComProfPic.jpg', upload_to=upload_path)
-    companyName = models.CharField(max_length=60, blank= True, default="Company")
+    companyProfilePicture = models.ImageField(default='defaultComProfPic.jpg', upload_to=upload_path)
+    companyName = models.CharField(max_length=60, blank=True, default="Company")
     companyDescription = models.TextField(default="Company Descriptions")
-    country = models.CharField(max_length=200, blank= True, default="USA")
-    companyLogo = models.ImageField(default= 'defaultComLogo.jpeg', upload_to=upload_path)
-    sections = models.TextField(default= "[{""}]")
-
-
-
+    country = models.CharField(max_length=200, blank=True, default="USA")
+    companyLogo = models.ImageField(default='defaultComLogo.jpeg', upload_to=upload_path)
+    sections = models.TextField(default="[{""}]")
 
 
 class Document(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    Title = models.CharField(max_length=75)
-    Thumbnail = models.ImageField()
-    Download = models.FileField()
+    Title = models.CharField(max_length=75, default= "")
+    Thumbnail = models.ImageField(default='/images/thumbnail.jpg')
+    Download = models.FileField(default='/images/thumbnail.jpg')
+
 
 class Section(models.Model):
-    Title = models.CharField(max_length=75, default="Section" )
+    Title = models.CharField(max_length=75, default="Section")
+
 
 class Category(models.Model):
-    Name = models.CharField(max_length= 75)
+    Name = models.CharField(max_length=75)
+
 
 class Home_Page(models.Model):
-    Title=models.CharField(max_length=75)
-    BrowserTitle=models.CharField(max_length=75)
-    MetaDescription=models.TextField(max_length=500)
-    UrlSlug=models.TextField(max_length=500)
-    SubTitle=models.TextField(max_length=500)
+    Title = models.CharField(max_length=75)
+    BrowserTitle = models.CharField(max_length=75)
+    MetaDescription = models.TextField(max_length=500)
+    UrlSlug = models.TextField(max_length=500)
+    SubTitle = models.TextField(max_length=500)
     SearchPlaceholder = models.TextField(max_length=500)
 
 
 class MenuItem(models.Model):
     Name = models.CharField(max_length=100)
 
-class ContentPage(models.Model):
 
+class ContentPage(models.Model):
     Title = models.CharField(max_length=75)
     BrowserTitle = models.CharField(max_length=75)
-    MetaDescription=models.TextField()
+    MetaDescription = models.TextField()
     UrlSlug = models.CharField(max_length=75)
     Content = models.TextField()
 
 
 class Contact(models.Model):
-    owner = models.ForeignKey(User, default=1 ,on_delete=models.CASCADE )
-    name=models.CharField(max_length=75)
+    owner = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
+    name = models.CharField(max_length=75)
     companyName = models.CharField(max_length=100)
     emailAddress = models.EmailField(unique=True)
     phoneNumber = PhoneField(blank=True, help_text='Contact phone number')
     subject = models.CharField(max_length=100)
     message = models.TextField(max_length=500)
 
+
 class RequestForQuotation(models.Model):
-    Keywords = models.CharField(max_length=100)
-    Category = models.CharField(max_length=100)
-    Descriptions=models.TextField(max_length=500)
-    Attachments = models.FileField()
-    PreferredCurrency=models.CharField(max_length=100)
-    PreferredUntilPrice = models.CharField(max_length=100)
-    PreferredShippingAgreement = models.CharField(max_length=100)
-    PaymentMethod = models.TextField()
-    iAgree=models.CharField(max_length=10)
-
-class activation(models.Model):
-    email = models.EmailField()
-    password = models.CharField("password", max_length=75, unique=True)
+    keywords = models.CharField(max_length=100)
+    category = models.CharField(max_length=100)
+    descriptions = models.TextField(max_length=500)
+    attachments = models.FileField()
+    preferredCurrency = models.CharField(max_length=100)
+    preferredUntilPrice = models.CharField(max_length=100)
+    preferredShippingAgreement = models.CharField(max_length=100)
+    paymentMethod = models.TextField()
+    iAgree = models.CharField(max_length=10)
 
 
-    def __str__(self):
-        return self.email
+class Links(models.Model):
+    find = models.CharField(max_length=30)
+

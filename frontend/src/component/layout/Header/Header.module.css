@@ -69,6 +69,10 @@ nav ul li a:hover{
 
 }
 
+.auth{
+  float: right;
+}
+
 @media (max-width:1200px){
     .header{
         margin: 20px;
@@ -106,5 +110,8 @@ nav ul li a:hover{
     nav.active ul li a{
         margin: 0;
 
+    }
+    .auth{
+      float: left;
     }
 }

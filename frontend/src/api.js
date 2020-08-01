@@ -6,7 +6,7 @@ const config = {
 
     }
 }
-const config2 = { headers: { 'Content-Type': 'multipart/form-data' } };
+const config2 = {headers: {'Content-Type': 'multipart/form-data'}};
 
 
 const instance = axios.create({
@@ -42,7 +42,7 @@ export const authAPI = {
     },
     logout: (tokenConfig) => {
 
-        return instance.post('auth/token/logout', "" , tokenConfig)
+        return instance.post('auth/token/logout', "", tokenConfig)
     },
     register: (body) => {
 
@@ -57,15 +57,12 @@ export const authAPI = {
         return instance.post('auth/users/reset_password_confirm/', body)
     },
     activate: (body) => {
-
-        return instance.post('auth/users/activation/', { 
+        debugger
+        return instance.post('auth/users/activation/', {
             uid: body.uid,
             token: body.token
-         })
+        })
     },
-    activate2: (body) => {
-        return instance.post('api/activation/', body)
-    }
 }
 
 export const contentAPI = {
@@ -83,35 +80,52 @@ export const contactAPI = {
 }
 
 export const profileAPI = {
-    
-    PostProfile : (id) => {
+
+    PostProfile: (id) => {
         debugger
         let form_data = new FormData();
         form_data.append('owner', String(id));
-        return instance.post('api/manufacturerProfilePage/', form_data, config2 )
+        return instance.post('api/manufacturerProfilePage/', form_data, config2)
     },
 
-    PutProfile : (form_data, id) => {
+    PutProfile: (form_data, id) => {
         debugger
-        return instance.put(`api/manufacturerProfilePage/${id}/`, form_data, config2 )
+        return instance.patch(`api/manufacturerProfilePage/${id}/`, form_data, config2)
     },
-    PostDocuments : (form_data) => {
-        return instance.post('api/Document/', form_data, config2)
+    PatchDocuments: (form_data, id) => {
+        return instance.patch(`api/Document/${id+1}/`, form_data, config2)
     },
-    getCountries : () => {
+    PostDocuments: (id) => {
+        let form_data = new FormData();
+        form_data.append('owner', String(id));
+        return instance.post(`api/Document/`, form_data, config2)
+    },
+    DeleteDocuments: (id) => {
+        return instance.delete(`api/Document/${id+1}`)
+    },
+    getCountries: () => {
         return axios.get('http://restcountries.eu/rest/v2/all')
     },
     getProfile: () => {
         return instance.get('api/manufacturerProfilePage')
     },
     getDocuments: () => {
+        debugger
         return instance.get('api/Document/')
     },
     getCategory: () => {
-        return instance.get('api/Category/')
+        return instance.get("api/Category/")
     },
     getSearcheddData: (search) => {
         debugger
         return instance(`manufacturerProfilePage?search=${search}`)
+    }
+}
+
+
+export const findPageAPI = {
+    findPage: (search) => {
+        debugger
+        return instance.get(`links?search=${search}`)
     }
 }

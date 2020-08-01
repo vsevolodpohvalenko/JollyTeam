@@ -1,3 +1,4 @@
+
 .homebody{
 
   height: 100%;
@@ -16,6 +17,7 @@
   border: white solid 1px;
   border-radius: 5px;
   margin-left: 3px;
+
 }
 .inputwrapper{
   display: flex;
@@ -125,7 +127,7 @@ nav ul li a:hover{
     color: white;
     transition: 0.5s;
 }
-
+.button:hover,
 .button{
   background-color: #ff585d;
   border-radius: 5px;

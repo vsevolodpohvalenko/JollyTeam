@@ -17,12 +17,14 @@ from django.urls import path, include, re_path
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from FAQ.views import ManufacturerProfilePageViewSet
+
+from FAQ.views import ManufacturerProfilePageViewSet, LinksViewSet
 
 urlpatterns = [
     path('', include('FAQ.urls')),
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls.authtoken')),
     path('auth/', include('djoser.urls')),
+    path('links', LinksViewSet.as_view(), name="Links"),
     path('manufacturerProfilePage', ManufacturerProfilePageViewSet.as_view(), name="manufacturerProfilePage"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

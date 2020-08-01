@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import {Formik, Form, Field} from 'formik'
 import { contactAPI } from '../../api'
 import s from './Contact.module.css'

@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Dropzone from "react-dropzone";
 import s from './ProfileEdit.module.css'
 import defaultImage from '../../../../media/default.jpg'
 import {profileAPI} from "../../../../api";
 import Select from 'react-select'
 
+
 let InputText = (props) => {
-    return (<div><label>{props.element}</label>
-            <input className='form-control' type="text" placeholder={props.element} id={props.element}
+    return (<div id={s.doubleInput}><label>{props.element}</label>
+            <input className='form-control'  type="text" placeholder={props.element} id={props.element}
                    value={props.value} onChange={props.onChange} />
         </div>
     )
@@ -33,46 +34,51 @@ const img = {
 };
 
 export const ProfileEdit = (props) => {
-
-
-    const [companyProfilePicture, setCompanyProfilePicture] = useState([]);
-
-    const [companyLogo, setCompanyLogo] = useState([]);
-    const [background, setBackground] = useState('')
-    const [companyName, setCompanyName] = useState('')
-    const [country, setCountry] = useState('')
-    const [companyDescription, setCompanyDescription] = useState('')
-    const [section, setSection] = useState([{Title: "", Icon: "", Text: ""}]);
-    const [Documents, setDocument] = useState([{Title: "", Thumbnail: "", Download: ""}]);
-
-
     const options = props.countries.map(c => {
         return {value: c.name, label: c.name}
     })
+    const categoryOptions = props.category.map(c => {
+        return {value: c.Name, label: c.Name}
+    })
+
+    const [companyProfilePicture, setCompanyProfilePicture] = useState();
+
+    const [companyLogo, setCompanyLogo] = useState();
+    const [background, setBackground] = useState(props.previousProfile[(props.userID)-1].companyProfilePicture)
+    const [companyName, setCompanyName] = useState( props.previousProfile[(props.userID)-1].companyName )
+    const [country, setCountry] = useState(props.previousProfile[(props.userID)-1].country)
+    const [companyDescription, setCompanyDescription] = useState(props.previousProfile[(props.userID)-1].companyDescription)
+    const [section, setSection] = useState(JSON.parse(props.previousProfile[(props.userID)-1].sections));
+    const [Documents, setDocument] = useState( props.documents);
+
+
+
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
         debugger
         let form_data = new FormData();
-        form_data.append('companyProfilePicture', companyProfilePicture[0], companyProfilePicture[0].name);
-        form_data.append('companyLogo', companyLogo[0], companyLogo[0].name);
+        companyProfilePicture !== undefined && (form_data.append('companyProfilePicture', companyProfilePicture[0], companyProfilePicture[0].name))
+        companyLogo !== undefined && (form_data.append('companyLogo',  companyLogo[0], companyLogo[0].name));
         form_data.append("sections", JSON.stringify(section))
         form_data.append('companyName', companyName);
         form_data.append('companyDescription', companyDescription);
-        form_data.append('country', country.value);
+        form_data.append('country', country.value || country);
         form_data.append('owner', props.userID);
         const id = props.userID
-        profileAPI.PutProfile(form_data, id)
+        props.updateManufacturer(form_data, id)
 
-        Documents.forEach( e => {
+        Documents.forEach( (e, index)=> {
             let form_doc_data = new FormData();
             form_doc_data.append('Title', e.Title);
-            form_doc_data.append('Thumbnail', e.Thumbnail);
-            form_doc_data.append("Download", e.Download)
+            Documents[index].Thumbnail.name  &&   form_doc_data.append('Thumbnail', e.Thumbnail);
+            Documents[index].Download.name && form_doc_data.append("Download", e.Download)
             form_doc_data.append('owner', props.userID);
-            profileAPI.PostDocuments(form_doc_data)
+            props.updateDocument(form_doc_data, (props.documents[index].id)-1)
         })
+
+
     }
 
 
@@ -84,7 +90,6 @@ export const ProfileEdit = (props) => {
     }
 
     const Thumbs = (props) => {
-        debugger
         const index = props.index
         const file = Documents[index]
             return (
@@ -92,7 +97,7 @@ export const ProfileEdit = (props) => {
             <div className={s.thumbInner}>
                 <img
                     alt="thumbnail"
-                    src={file.preview}
+                    src={file.Thumbnail.preview ? file.Thumbnail.preview : file.Thumbnail}
                     style={img}
                 />
             </div>
@@ -108,7 +113,7 @@ export const ProfileEdit = (props) => {
     }
     const CustomDropZone = (props) => {
 
-        return (
+        return  (
             <div>
                 <label>{props.label}</label>
                 <section className={s.thumb}>
@@ -134,11 +139,14 @@ export const ProfileEdit = (props) => {
     }
 
     const SectionhandleInputChange = (e, index) => {
-        const {name, value} = e.target;
+        debugger
+        const {name, value} = e;
         const list = [...section];
         list[index][name] = value;
         setSection(list);
     };
+
+
 
     const DocumenhandleInputChange = (e, index) => {
         const {name, value} = e.target;
@@ -158,6 +166,7 @@ export const ProfileEdit = (props) => {
     }
 
     const DocumenthandleInputDownload = (aceptedFiles, index) => {
+        debugger
         const list = [...Documents];
         list[index]['Download'] = aceptedFiles[0];
 
@@ -173,6 +182,7 @@ export const ProfileEdit = (props) => {
     };
 
     const handleRemoveClick2 = index => {
+        profileAPI.DeleteDocuments((Documents[index].id)-1)
         const list = [...Documents];
         list.splice(index, 1);
         setDocument(list);
@@ -183,16 +193,16 @@ export const ProfileEdit = (props) => {
     };
 
     const handleAddClick2 = () => {
-        setDocument([...Documents, {Title: "", Thumbnail: "", Download: ""}]);
+        props.postDocument(props.userID)
+        setDocument([...Documents, {Title: "", Thumbnail: "", Download: ""}])
+
+
     };
 
 
-    useEffect(() => () => {
-        // Make sure to revoke the data uris to avoid memory leaks
-        companyProfilePicture.forEach(file => URL.revokeObjectURL(file.preview));
-    }, [companyProfilePicture]);
-    return (
-        <form className="form-group" onSubmit={handleSubmit}>
+
+    return  (
+        <form  className="form-group" onSubmit={handleSubmit}>
             <section style={
                 {backgroundImage: `linear-gradient( rgba(56, 56, 56, 0.596), rgba(56, 56, 56, 0.596) ), url(${background || defaultImage})`}}
                      className={s.pic}>
@@ -213,8 +223,14 @@ export const ProfileEdit = (props) => {
                     )}
                 </Dropzone>
             </section>
-            <InputText element="companyName" onChange={e => setCompanyName(e.target.value)} />
-            <Select options={options} value={country} onChange={(e) => setCountry(e)}/>
+            <div id={s.main}>
+            <div className={s.double}>
+            <InputText element="companyName" value={companyName} onChange={e => setCompanyName(e.target.value)} />
+            <div className={s.select}>
+            <label>Country</label>
+            <Select options={options} defaultValue={{ label: country, value: country }} placeholder={"Choose your country"} onChange={(e) => setCountry(e)}/>
+            </div>
+            </div>
             <InputText element="companyDescription" value={companyDescription}
                        onChange={e => setCompanyDescription(e.target.value)} />
             <CustomDropZone label="Company Logo" AllowButton={1} onDrop={handleDrop4}
@@ -222,17 +238,25 @@ export const ProfileEdit = (props) => {
 
             {section.map((x, i) => {
                 return (
-                    <div>
+                    <div >
                         <h2>Section</h2>
+                        <div className={s.double}>
+                        <div id={s.doubleInput}>
                         <label>Title</label>
                         <input className='form-control' placeholder="Title" name="Title" value={x.Title}
-                               onChange={e => SectionhandleInputChange(e, i)}/>
+                               onChange={e => SectionhandleInputChange(e.target, i)}/>
+                        </div>
+                        <div id={s.doubleInput}>
                         <label>Icon</label>
-                        <input className='form-control' placeholder="Icon" name="Icon" value={x.Icon}
-                               onChange={e => SectionhandleInputChange(e, i)}/>
+                        <Select options={categoryOptions} defaultValue={{ label: x.Icon, value: x.Icon }}    placeholder="Icon"  onChange={e => SectionhandleInputChange({
+                            name: "Icon",
+                            value: e.value
+                        }, i)}/>
+                        </div>
+                        </div>
                         <label>Text</label>
                         <input className='form-control' placeholder="Text" name="Text" value={x.Text}
-                               onChange={e => SectionhandleInputChange(e, i)}/>
+                               onChange={e => SectionhandleInputChange(e.target, i)}/>
                         <div>
                             {section.length !== 1 &&
                             <div className="text-danger" onClick={() => handleRemoveClick(i)}>Remove</div>}
@@ -253,7 +277,7 @@ export const ProfileEdit = (props) => {
                         <input className='form-control' placeholder="Title" name="Title" value={y.Title}
                                onChange={e => DocumenhandleInputChange(e, i)}/>
 
-                        {Documents[i].Thumbnail && (<Thumbs index = {i}/>)}
+                        <Thumbs documents = {props.documents} userID = {props.userID} index = {i}/>
 
                         <CustomDropZone name="Thumbnail" label="Thumbnail" AllowButton={0}
                                         onDrop={aceptedFiles => DocumenthandleInputFileThumbnail(aceptedFiles, i)}
@@ -266,14 +290,15 @@ export const ProfileEdit = (props) => {
                             <div className="text-danger" onClick={() => handleRemoveClick2(i)}>Remove</div>}
                             {Documents.length - 1 === i && <div className="text-danger" onClick={() => {
                                 handleAddClick2()
-                            }}>Add 1 Section</div>}
+                            }}>Add 1 Document</div>}
                         </div>
                     </div>
                 )
             })}
             <button className={s.button} type={"submit"}>Send Form</button>
+            </div>
         </form>
-    );
+    )
 }
 
 

@@ -7,7 +7,7 @@ export const Footer =() => {
 <nav className="navbar  navbar-expand-md  ">
   <a className="navbar-brand navl text-white" href="#">Textile<span className="text-danger">S</span>pot<span className="text-danger">.</span></a>
   
-  <div className="collapse navbar-collapse justify-content-end navr" id="navbar">
+  <div className="collapse navbar-collapse justify-content-end nav" id="navbar">
     <ul className="navbar-nav d-flex ">
       <li className="nav-item ">
         <a className="nav-link text-white" href="#">Manufacture </a>

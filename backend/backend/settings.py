@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'django_inlinecss'
 
 
 ]
@@ -88,8 +89,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'textile_spot',
+        'USER': 'textileSpot',
+        'PASSWORD': 'SevaGoogle05#$',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
@@ -183,7 +188,7 @@ EMAIL_HOST_USER = 'sevapohvalenko@gmail.com'
 EMAIL_HOST_PASSWORD = 'etfawmtulrtcsvmd'
 EMAIL_PORT=587
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
+ADMINS = [('Vsevolod', 'vsevolod.pohvalenko@gmail.com'), ('Velimir', 'velemir.pohvalenko@gmail.com')]
 
 SITE_ID = 1
 

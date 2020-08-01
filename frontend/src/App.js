@@ -23,7 +23,10 @@ import ProfileEditContainer from './component/accounts/Profile/ProfileEdit/Profi
 import ProfileViewContainer from "./component/accounts/Profile/ProfileView/ProfileViewContainer";
 import RequestForQuotationContainer from "./component/requestForQuotation/requestForQuotationContainer";
 import ManufacturersContainer from "./component/Manufacturers/manufacturersContainer";
-
+import ProfileContainer from "./component/User/ProfileContainer";
+import loading from './media/loading_animation.gif'
+import Preloader from "./component/Preloader/preloader";
+import {PageNotFound} from "./component/layout/PageNotFound";
 
 const options = {
     // you can also just use 'bottom center'
@@ -36,11 +39,11 @@ const options = {
 class App extends React.Component {
     componentDidMount() {
         debugger
-      store.dispatch(loadUser())
+     store.getState().auth.auth_token && store.dispatch(loadUser())
     }
 
     render() {
-        return <div className="App">
+       return store.getState().auth.isLoading ? <Preloader/> :  <div className="App">
             <BrowserRouter>
                 <Provider store={store}>
                     <AlertProvider template={AlertTemplate}{...options}>
@@ -60,13 +63,12 @@ class App extends React.Component {
                             <PrivateRoute exact path='/faq' component={FAQ_Group}/>
                             <Route exact path='/' component={HomeContainer}/>
                             <PrivateRoute exact path='/contact' component={ContactContainer}/>
-                            <Route exact path='/profileEdit'
-                                   render={() => <MainTemplate><ProfileEditContainer/></MainTemplate>}/>
-                            <Route exact path='/profileView'
-                                   render={() => <MainTemplate><ProfileViewContainer/></MainTemplate>}/>
-                            <Route exact path='/request/for/quotation'
-                                   render={() => <MainTemplate><RequestForQuotationContainer/></MainTemplate>}/>
+                            <PrivateRoute exact path='/profileEdit' component={ProfileEditContainer}/>
+                            <PrivateRoute exact path='/profileView' component={ProfileViewContainer}/>
+                            <PrivateRoute exact path='/request_for_quotation' component={RequestForQuotationContainer}/>
                             <PrivateRoute exact path='/manufacturers' component={ManufacturersContainer}/>
+                            <PrivateRoute exact path='/profile/:id' component={ProfileContainer}/>
+                            <Route component={() => <PageNotFound/>} />
                         </Switch>
                     </AlertProvider>
                 </Provider>

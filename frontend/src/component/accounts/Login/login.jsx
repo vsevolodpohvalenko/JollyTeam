@@ -3,6 +3,8 @@ import { Link, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
 import {login} from '../../../redux/reducers/AuthReducer'
 import s from './login.module.css'
+import {compose} from "redux";
+import {withRouter} from "react-router";
 
 
 
@@ -79,4 +81,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps, {login})(Login)
+export default compose(withRouter,connect(mapStateToProps, {login}))(Login)

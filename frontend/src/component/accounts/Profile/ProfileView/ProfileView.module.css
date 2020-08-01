@@ -31,7 +31,7 @@ body{
 
 .main p{
     color: #7F8177;
-    font-size: 18px;
+    font-size: 14px;
     font-style: italic;
 }
 .edit{
@@ -39,8 +39,8 @@ body{
     bottom: 0;
     left: 70%;
 }
-a,
-a:hover{
+.main a,
+.main a:hover{
     color: white;
     text-decoration: none;
 }
@@ -56,12 +56,27 @@ a:hover{
 
 }
 .box_size{
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: 0 10%;
+}
+.Documents{
+    display: flex;
+    margin: 0 10%;
+}
+.Sections{
+    display: flex;
+    margin-right: 3%;
+}
+.Documents div{
+    text-align: center;
+    margin-right: 1%;
+}
+.Documents img{
+    width: 150px;
+    height: 150px;
 }
 .box_size img{
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
 }
 .logo{
     border-radius: 50%;

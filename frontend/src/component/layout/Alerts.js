@@ -19,7 +19,6 @@ class Alerts extends PureComponent {
             if (error.msg.password1)
                 {this.props.alert.error(`Password ${error.msg.password1.join()}`)}}
         if (message !== prevProps.message){
-            debugger
             if (message.logined)
                 {this.props.alert.success(`${message.logined}`)}
             if (message.registred)
@@ -34,7 +33,6 @@ class Alerts extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-    debugger
     return{
 
     error: state.error,

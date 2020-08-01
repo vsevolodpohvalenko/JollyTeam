@@ -22,7 +22,7 @@ class FAQ_Group extends Component {
             }
             const FAQ_complect = ({Title, id}) => {
                 const items = this.props.items.filter(i => i.Group === id)
-                return <div>
+                return <div >
                     
                     <div className="row border-bottom ml-3 mb-3"> <h5 className={s.group}>{Title}</h5></div>
             {items.map(item=> <div>
@@ -34,11 +34,11 @@ class FAQ_Group extends Component {
             </div>)}
             </div>
             }
-            return <Fragment>
+            return <div className={s.main}>
                 <h3 className="container text-center mt-3 mb-3">FAQ</h3>
                 <p className="middle text-center">In a professional contex it often happens that private or corporate</p>
         {this.props.groups.map(g => <FAQ_complect Title = {g.Title} id={g.id}/>)}
-                  </Fragment>
+                  </div>
 }
 }
  const mapStateToProps= (state) => {
