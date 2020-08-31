@@ -18,6 +18,7 @@ class FAQ_Group(models.Model):
     class Meta:
         verbose_name = 'FAQ_Category',
         verbose_name_plural = 'FAQ_Categories'
+        ordering = ('Title',)
 
 
 class FAQ_item(models.Model):
@@ -32,6 +33,7 @@ class FAQ_item(models.Model):
     class Meta:
         verbose_name = 'FAQ'
         verbose_name_plural = 'FAQS'
+        ordering = ('Title',)
 
 
 class manufacturerProfilePage(models.Model):
@@ -98,6 +100,7 @@ class RequestForQuotation(models.Model):
     preferredCurrency = models.CharField(max_length=100)
     preferredUntilPrice = models.CharField(max_length=100)
     preferredShippingAgreement = models.CharField(max_length=100)
+    destinationPort = models.CharField(max_length=255, default="Virginia")
     paymentMethod = models.TextField()
     iAgree = models.CharField(max_length=10)
 

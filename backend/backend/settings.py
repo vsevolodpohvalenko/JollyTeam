@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    'django_inlinecss'
+    'django_inlinecss',
+    'graphene_django',
 
 
 ]
@@ -91,7 +92,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'textile_spot',
-        'USER': 'textileSpot',
+        'USER': 'seva',
         'PASSWORD': 'SevaGoogle05#$',
         'HOST': '127.0.0.1',
         'PORT': '3306',
@@ -205,6 +206,12 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
+
+GRAPHENE = {
+    'SCHEMA': 'FAQ.schema.schema',
+    'SCHEMA2': 'FAQ.schema.schema2'
+}
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 

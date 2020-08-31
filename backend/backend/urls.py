@@ -17,8 +17,9 @@ from django.urls import path, include, re_path
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.views.decorators.csrf import csrf_exempt
 from FAQ.views import ManufacturerProfilePageViewSet, LinksViewSet
+from graphene_django.views import GraphQLView
 
 urlpatterns = [
     path('', include('FAQ.urls')),
@@ -27,4 +28,5 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('links', LinksViewSet.as_view(), name="Links"),
     path('manufacturerProfilePage', ManufacturerProfilePageViewSet.as_view(), name="manufacturerProfilePage"),
+    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -19,10 +19,11 @@ class Alerts extends PureComponent {
             if (error.msg.password1)
                 {this.props.alert.error(`Password ${error.msg.password1.join()}`)}}
         if (message !== prevProps.message){
-            if (message.logined)
-                {this.props.alert.success(`${message.logined}`)}
-            if (message.registred)
-                {this.props.alert.success(`${message.registred}`)}
+            debugger
+            if (message.log_in_ed)
+                {this.props.alert.success(`${message.log_in_ed}`)}
+            if (message.registered)
+                {this.props.alert.success(`${message.registered}`)}
         }
     }
     render() {

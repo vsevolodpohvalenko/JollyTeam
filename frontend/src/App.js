@@ -17,16 +17,22 @@ import ResetPasswordContainer from './component/accounts/resetPassword/ResetPass
 import ActivateContainer from './component/accounts/activate/ActivateContainer';
 import HomeContainer from './component/home/HomeContainer';
 import {MainTemplate} from './component/Templates/main_template';
-import ContentContainer from './component/content/contentContainer'
 import ContactContainer from './component/Contact/ContactContainer';
 import ProfileEditContainer from './component/accounts/Profile/ProfileEdit/ProfileEditContainer';
 import ProfileViewContainer from "./component/accounts/Profile/ProfileView/ProfileViewContainer";
 import RequestForQuotationContainer from "./component/requestForQuotation/requestForQuotationContainer";
 import ManufacturersContainer from "./component/Manufacturers/manufacturersContainer";
 import ProfileContainer from "./component/User/ProfileContainer";
-
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
 import Preloader from "./component/Preloader/preloader";
 import {PageNotFound} from "./component/layout/PageNotFound";
+import {FrequentlyAskedQuestions} from "./component/FAQ";
+
+const client = new ApolloClient({
+  uri: 'http://localhost:8000/graphql/', // your GraphQL Server
+});
+
 
 const options = {
     // you can also just use 'bottom center'
@@ -44,6 +50,7 @@ class App extends React.Component {
 
     render() {
        return store.getState().auth.isLoading ? <Preloader/> :  <div className="App">
+           <ApolloProvider client={client}>
             <BrowserRouter>
                 <Provider store={store}>
                     <AlertProvider template={AlertTemplate}{...options}>
@@ -57,10 +64,10 @@ class App extends React.Component {
                                    render={() => <AccountTemplate> <ResetPasswordContainer/></AccountTemplate>}/>
                             <Route exact path='/activate/:uid/:token'
                                    render={() => <AccountTemplate> <ActivateContainer/></AccountTemplate>}/>
+                            <Route exact path='/faq_group'
+                                   render={() => <AccountTemplate> <FrequentlyAskedQuestions/></AccountTemplate>}/>
                             <Route exact path='/login' render={() => <AccountTemplate> <Login/></AccountTemplate>}/>
-                            <Route exact path='/content'
-                                   render={() => <MainTemplate> <ContentContainer/></MainTemplate>}/>
-                            <PrivateRoute exact path='/faq' component={FAQ_Group}/>
+                            <PrivateRoute exact path='/faq' component={FrequentlyAskedQuestions}/>
                             <Route exact path='/' component={HomeContainer}/>
                             <PrivateRoute exact path='/contact' component={ContactContainer}/>
                             <PrivateRoute exact path='/profileEdit' component={ProfileEditContainer}/>
@@ -73,6 +80,7 @@ class App extends React.Component {
                     </AlertProvider>
                 </Provider>
             </BrowserRouter>
+           </ApolloProvider>
         </div>
     }
 }

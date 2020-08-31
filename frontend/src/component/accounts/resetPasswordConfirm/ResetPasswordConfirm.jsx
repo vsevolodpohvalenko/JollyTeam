@@ -1,8 +1,8 @@
 import React from 'react'
 import {Formik, Form, Field} from 'formik'
-import {authAPI} from '../../../api'
 import s from '../Login/login.module.css'
 import { Link } from 'react-router-dom'
+import {authAPI} from "../../../api/AuthApi";
 const initialValues = {
     reset_password: ''
 }

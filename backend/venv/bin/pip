@@ -1,4 +1,4 @@
-#!/home/vsevolod/Desktop/Test-Django/backend/venv/bin/python3
+#!/home/seva/Desktop/textilespot-master/backend/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
