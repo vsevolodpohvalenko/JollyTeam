@@ -1,24 +1,49 @@
 import graphene
 from graphene_django import DjangoObjectType
 from .filters import ItemFilter
-from .models import FAQ_Group
-from .models import FAQ_item
+from .models import FAQ_Group, FAQ_item, Contact
 from .mutations import ItemCreate, ItemDelete
 from .types import ItemType
 from graphene_django.filter import DjangoFilterConnectionField
+from accounts.models import UserAccount
+
 
 
 class FAQGroupType(DjangoObjectType):
     class Meta:
         model = FAQ_Group
 
+
+class ContactType(DjangoObjectType):
+    class Meta:
+        model = Contact
+        only_fields = (
+            'owner',
+            'phoneNumber',
+            'emailAddress',
+            'name',
+            'subject'
+        )
+
+
 class FAQItemType(DjangoObjectType):
     class Meta:
         model = FAQ_item
 
+
 class GroupInput(graphene.InputObjectType):
     id = graphene.ID()
     Title = graphene.String()
+
+
+class ContactInput(graphene.InputObjectType):
+    owner = graphene.ID()
+    name = graphene.String()
+    companyName = graphene.String()
+    emailAddress = graphene.String()
+    phoneNumber = graphene.String()
+    subject = graphene.String()
+    message = graphene.String()
 
 
 class ItemInput(graphene.InputObjectType):
@@ -109,6 +134,32 @@ class CreateGroup(graphene.Mutation):
         return CreateGroup(ok=ok, group=group_instance)
 
 
+class CreateContact(graphene.Mutation):
+    class Arguments:
+        phoneNumber_ = graphene.String()
+        subject_ = graphene.String()
+        message_ = graphene.String()
+        emailAddress_ = graphene.String()
+        companyName_ = graphene.String()
+        name_ = graphene.String()
+        owner_ = graphene.Int()
+
+    ok = graphene.Boolean()
+    contact = graphene.Field(ContactType)
+
+    @staticmethod
+    def mutate(self, info, owner_, phoneNumber_, subject_, message_, emailAddress_, companyName_, name_):
+        ok = True
+        test_owner = UserAccount.objects.get(pk=owner_)
+        contact_instance = Contact(message=message_, subject=subject_, name=name_,
+                                   companyName=companyName_, owner=test_owner, emailAddress=emailAddress_,
+                                   phoneNumber=phoneNumber_)
+        contact_instance.save()
+        # item_instance.Group.set(group)
+        Contact.create_email(phoneNumber_=phoneNumber_, subject_=subject_, companyName_=companyName_, emailAddress_=emailAddress_, name_=name_, message_=message_, instance=contact_instance)
+        return CreateContact(ok=ok, contact=contact_instance)
+
+
 class CreateItem(graphene.Mutation):
     class Arguments:
         input = ItemInput(required=True)
@@ -159,6 +210,7 @@ class Mutation(graphene.ObjectType):
     update_group = UpdateGroup.Field()
     create_item = CreateItem.Field()
     update_item = UpdateItem.Field()
+    create_contact = CreateContact.Field()
 
 
 schema = graphene.Schema(

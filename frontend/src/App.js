@@ -4,7 +4,6 @@ import {Provider} from 'react-redux'
 import {AccountTemplate} from './component/Templates/account_template/account_template'
 import Login from './component/accounts/Login/login'
 import store from './redux/redux_store'
-import FAQ_Group from './component/FAQ/FAQ_Group';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Register from './component/accounts/Register/register';
 import PrivateRoute from './component/common/PrivateRoute';
@@ -16,18 +15,17 @@ import ResetPasswordConfirmContainer from './component/accounts/resetPasswordCon
 import ResetPasswordContainer from './component/accounts/resetPassword/ResetPasswordContainer';
 import ActivateContainer from './component/accounts/activate/ActivateContainer';
 import HomeContainer from './component/home/HomeContainer';
-import {MainTemplate} from './component/Templates/main_template';
 import ContactContainer from './component/Contact/ContactContainer';
-import ProfileEditContainer from './component/accounts/Profile/ProfileEdit/ProfileEditContainer';
 import ProfileViewContainer from "./component/accounts/Profile/ProfileView/ProfileViewContainer";
-import RequestForQuotationContainer from "./component/requestForQuotation/requestForQuotationContainer";
 import ManufacturersContainer from "./component/Manufacturers/manufacturersContainer";
-import ProfileContainer from "./component/User/ProfileContainer";
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import Preloader from "./component/Preloader/preloader";
 import {PageNotFound} from "./component/layout/PageNotFound";
-import {FrequentlyAskedQuestions} from "./component/FAQ";
+import {FrequentlyAskedQuestions} from "./component/FAQ/FAQ";
+import {Profile} from "./component/User/Profile";
+import {RequestForQuotation} from "./component/requestForQuotation/requestForQuotation";
+import {ProfileEdit} from "./component/accounts/Profile/ProfileEdit/ProfileEdit";
 
 const client = new ApolloClient({
   uri: 'http://localhost:8000/graphql/', // your GraphQL Server
@@ -70,11 +68,11 @@ class App extends React.Component {
                             <PrivateRoute exact path='/faq' component={FrequentlyAskedQuestions}/>
                             <Route exact path='/' component={HomeContainer}/>
                             <PrivateRoute exact path='/contact' component={ContactContainer}/>
-                            <PrivateRoute exact path='/profileEdit' component={ProfileEditContainer}/>
+                            <PrivateRoute exact path='/profileEdit' component={ProfileEdit}/>
                             <PrivateRoute exact path='/profileView' component={ProfileViewContainer}/>
-                            <PrivateRoute exact path='/request_for_quotation' component={RequestForQuotationContainer}/>
+                            <PrivateRoute exact path='/request_for_quotation' component={RequestForQuotation}/>
                             <PrivateRoute exact path='/manufacturers' component={ManufacturersContainer}/>
-                            <PrivateRoute exact path='/profile/:id' component={ProfileContainer}/>
+                            <PrivateRoute exact path='/profile/:id' component={Profile}/>
                             <Route component={() => <PageNotFound/>} />
                         </Switch>
                     </AlertProvider>

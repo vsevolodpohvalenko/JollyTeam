@@ -1,7 +1,8 @@
 from django.db import models
 from phone_field import PhoneField
 from django.conf import settings
-
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
 User = settings.AUTH_USER_MODEL
 
 
@@ -90,6 +91,22 @@ class Contact(models.Model):
     phoneNumber = PhoneField(blank=True, help_text='Contact phone number')
     subject = models.CharField(max_length=100)
     message = models.TextField(max_length=500)
+
+    @staticmethod
+    def create_email(phoneNumber_, subject_, message_, emailAddress_, companyName_, name_, instance):
+
+        html_content = render_to_string('contact.html', {"phoneNumber": phoneNumber_, "subject": subject_, "message": message_, "emailAddress": emailAddress_, "companyName": companyName_, "name": name_})
+        # Then we create an "EmailMessage" object as usual.
+        msg = EmailMultiAlternatives(
+            subject_,
+            message_,
+            settings.EMAIL_HOST_USER,
+            settings.ADMINS,
+        )
+        msg.attach_alternative(html_content, "text/html")
+        # Then we send message.
+        msg.send()
+        return instance
 
 
 class RequestForQuotation(models.Model):

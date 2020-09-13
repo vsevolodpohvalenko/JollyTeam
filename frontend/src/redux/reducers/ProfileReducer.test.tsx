@@ -188,16 +188,16 @@ beforeEach(() => {
 test("Found right profile", () => {
 
     const NewState = ProfileReducer(state, actions.getSearchedProfiles([
-            {
-                id: 1,
-                companyProfilePicture: "http://127.0.0.1:8000/media/manufacturerProfilePage/Hoolli/viber_image_2020-08-22_07-05-19.jpg",
-                companyName: "Hoolli",
-                companyDescription: "Company Descriptions",
-                country: "Aruba",
-                companyLogo: "http://127.0.0.1:8000/media/manufacturerProfilePage/Hoolli/viber_image_2020-08-26_07-55-12.jpg",
-                sections: "Some String"
-            }
-        ]))
-        expect(NewState.profiles[0].companyDescription).toBe("Company Descriptions")
-        expect(NewState.profiles[1]).toBe(undefined)
+        {
+            id: 1,
+            companyProfilePicture: "http://127.0.0.1:8000/media/manufacturerProfilePage/Hoolli/viber_image_2020-08-22_07-05-19.jpg",
+            companyName: "Hoolli",
+            companyDescription: "Company Descriptions",
+            country: "Aruba",
+            companyLogo: "http://127.0.0.1:8000/media/manufacturerProfilePage/Hoolli/viber_image_2020-08-26_07-55-12.jpg",
+            sections: "Some String"
+        }
+    ]))
+    expect(NewState.profiles[0].companyDescription).toBe("Company Descriptions")
+    expect(NewState.profiles[1]).toBe(undefined)
 })

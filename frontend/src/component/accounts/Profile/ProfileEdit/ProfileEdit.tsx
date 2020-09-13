@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FormEvent, useState} from "react";
+import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import Dropzone from "react-dropzone";
 import s from './ProfileEdit.module.css'
 import defaultImage from '../../../../media/default.jpg'
@@ -6,6 +6,20 @@ import defaultThumbnail from '../../../../media/thumbnail.jpg'
 import Select from 'react-select'
 import {CustomDropZoneType} from "./Document";
 import {profileAPI} from "../../../../api/profileApi";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    GetCategory,
+    GetDocuments,
+    GetProfiles,
+    postDocument, updateDocument,
+    updateManufacturer
+} from "../../../../redux/reducers/ProfileReducer";
+import {
+    GetCategorySelector,
+    GetCountriesSelector, GetDocumentsSelector,
+    GetSuitableProfile,
+    GetUserIDSelector
+} from "../../../../redux/reducers/Profile-selectors";
 
 type InputProps = {
     element: string,
@@ -28,14 +42,11 @@ const img = {
 
 };
 
-type RootPropsType = {
-    countries: Array<any>
-    category: Array<{
-        id: number,
-        Name: string
-    }>,
-    postDocument: (userID: number) => void
-    previousProfile: Array<{
+
+export const ProfileEdit = () => {
+    const countries: Array<any> = useSelector(GetCountriesSelector)
+    const userID: number = useSelector(GetUserIDSelector)
+    const previousProfile: Array<{
         id: number,
         companyProfilePicture: string,
         companyName: string,
@@ -44,36 +55,39 @@ type RootPropsType = {
         companyLogo: string,
         sections: string,
         owner: number
-    }>,
-    userID: number,
-    documents: Array<{
+    }> = useSelector(GetSuitableProfile)
+    const documents = useSelector(GetDocumentsSelector)
+    const category: Array<{
         id: number,
-        Title: string,
-        Thumbnail: string,
-        Download: string,
-        owner: number
-    }>,
-    updateManufacturer: (form_data: any, id: number) => void,
-    updateDocument: (form_doc_data: any, id: number) => void
+        Name: string
+    }> = useSelector(GetCategorySelector)
 
-}
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(GetProfiles())
+        dispatch(GetCategory())
+        dispatch(GetDocuments())
+        dispatch(GetCategory())
+    }, [])
 
-export const ProfileEdit = (props: RootPropsType) => {
-    const options = props.countries.map(c => {
+    const updateMan = (form_data: any, id: number) => dispatch(updateManufacturer(form_data, id))
+    const postDoc = (id: number) => dispatch(postDocument(id))
+    const updateDoc = (data: any, id: number) => dispatch(updateDocument(data, id))
+    const options = countries.map(c => {
         return {value: c.name, label: c.name}
     })
-    const categoryOptions = props.category.map(c => {
+    const categoryOptions = category.map(c => {
         return {value: c.Name, label: c.Name}
     })
 
     const [companyProfilePicture, setCompanyProfilePicture] = useState<any>();
     const [companyLogo, setCompanyLogo] = useState<Array<any>>();
-    const [background, setBackground] = useState<string| Array<any>>(props.previousProfile[(props.userID) - 1].companyProfilePicture)
-    const [companyName, setCompanyName] = useState<string>(props.previousProfile[(props.userID) - 1].companyName)
-    const [country, setCountry] = useState<string | {value: string, label: string}>(props.previousProfile[(props.userID) - 1].country)
-    const [companyDescription, setCompanyDescription] = useState<string>(props.previousProfile[(props.userID) - 1].companyDescription)
-    const [section, setSection] = useState<any>(JSON.parse(props.previousProfile[(props.userID) - 1].sections));
-    const [Documents, setDocument] = useState<any>(props.documents);
+    const [background, setBackground] = useState<string | Array<any>>(previousProfile[(userID) - 1].companyProfilePicture)
+    const [companyName, setCompanyName] = useState<string>(previousProfile[(userID) - 1].companyName)
+    const [country, setCountry] = useState<string | { value: string, label: string }>(previousProfile[(userID) - 1].country)
+    const [companyDescription, setCompanyDescription] = useState<string>(previousProfile[(userID) - 1].companyDescription)
+    const [section, setSection] = useState<any>(JSON.parse(previousProfile[(userID) - 1].sections));
+    const [Documents, setDocument] = useState<any>(documents);
 
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -87,26 +101,26 @@ export const ProfileEdit = (props: RootPropsType) => {
         form_data.append('companyDescription', companyDescription);
         if (typeof country !== "string") {
             form_data.append('country', country.value);
-        }else {
+        } else {
             form_data.append('country', country);
         }
-        form_data.append('owner', String(props.userID));
-        const id = props.userID
-        props.updateManufacturer(form_data, id)
+        form_data.append('owner', String(userID));
+        const id = userID
+        updateMan(form_data, id)
 
         Documents.forEach((e: {
-        id: number,
-        Title: string,
-        Thumbnail: string,
-        Download: string,
-        owner: number
-    }, index: number) => {
+            id: number,
+            Title: string,
+            Thumbnail: string,
+            Download: string,
+            owner: number
+        }, index: number) => {
             let form_doc_data = new FormData();
             form_doc_data.append('Title', e.Title);
             Documents[index].Thumbnail.name && form_doc_data.append('Thumbnail', e.Thumbnail);
             Documents[index].Download.name && form_doc_data.append("Download", e.Download)
-            form_doc_data.append('owner', String(props.userID));
-            props.updateDocument(form_doc_data, (props.documents[index].id) - 1)
+            form_doc_data.append('owner', String(userID));
+            updateDoc(form_doc_data, (documents[index].id) - 1)
         })
 
 
@@ -155,7 +169,7 @@ export const ProfileEdit = (props: RootPropsType) => {
                 <label>{props.label}</label>
                 <section className={s.thumb}>
 
-                    <Dropzone  onDrop={props.onDrop}>
+                    <Dropzone onDrop={props.onDrop}>
                         {({getRootProps, getInputProps}) => (
                             <div  {...getRootProps({className: "dropzone"})}>
 
@@ -175,7 +189,7 @@ export const ProfileEdit = (props: RootPropsType) => {
         )
     }
 
-    const SectionhandleInputChange = (e: {name: string, value: string}, index: number) => {
+    const SectionhandleInputChange = (e: { name: string, value: string }, index: number) => {
         debugger
         const {name, value} = e;
         const list = [...section];
@@ -184,7 +198,7 @@ export const ProfileEdit = (props: RootPropsType) => {
     };
 
 
-    const DocumentedInputChange = (e: {target: {name: string, value: string}}, index: number) => {
+    const DocumentedInputChange = (e: { target: { name: string, value: string } }, index: number) => {
         const {name, value} = e.target;
         const list = [...Documents];
         list[index][name] = value;
@@ -192,7 +206,7 @@ export const ProfileEdit = (props: RootPropsType) => {
     };
 
 
-    const DocumenthandleInputFileThumbnail = (aceptedFiles: Array<any>, index:number) => {
+    const DocumenthandleInputFileThumbnail = (aceptedFiles: Array<any>, index: number) => {
         const {preview} = Object.assign(aceptedFiles[0], {preview: URL.createObjectURL(aceptedFiles[0])});
         const list = [...Documents];
         list[index]['Thumbnail'] = aceptedFiles[0];
@@ -201,7 +215,7 @@ export const ProfileEdit = (props: RootPropsType) => {
         setDocument(list);
     }
 
-    const DocumenthandleInputDownload = (acceptedFiles: Array<any>, index:any) => {
+    const DocumenthandleInputDownload = (acceptedFiles: Array<any>, index: any) => {
         debugger
         const list = [...Documents];
         list[index]['Download'] = acceptedFiles[0];
@@ -229,7 +243,7 @@ export const ProfileEdit = (props: RootPropsType) => {
     };
 
     const handleAddClick2 = () => {
-        props.postDocument(props.userID)
+        postDoc(userID)
         setDocument([...Documents, {Title: "", Thumbnail: "", Download: ""}])
 
 
@@ -273,7 +287,7 @@ export const ProfileEdit = (props: RootPropsType) => {
                 <CustomDropZone label="Company Logo" AllowButton={1} onDrop={handleDrop4}
                                 p="Drag&Drop Your attachments here"/>
 
-                {section.map((x: {Icon: any, Title: string, Text: string}, i: number) => {
+                {section.map((x: { Icon: any, Title: string, Text: string }, i: number) => {
                     return (
                         <div key={i}>
                             <h2>Section</h2>
@@ -307,7 +321,7 @@ export const ProfileEdit = (props: RootPropsType) => {
                 })}
 
 
-                {Documents.map((y: {Title: string}, i: number) => {
+                {Documents.map((y: { Title: string }, i: number) => {
                     return (
                         <div key={i}>
                             <h2>Document</h2>
@@ -315,7 +329,7 @@ export const ProfileEdit = (props: RootPropsType) => {
                             <input className='form-control' placeholder="Title" name="Title" value={y.Title}
                                    onChange={e => DocumentedInputChange(e, i)}/>
 
-                            <Thumbs documents={props.documents} userID={props.userID} index={i}/>
+                            <Thumbs documents={documents} userID={userID} index={i}/>
 
                             <CustomDropZone name="Thumbnail" label="Thumbnail" AllowButton={0}
                                             onDrop={(acceptedFiles: any) => DocumenthandleInputFileThumbnail(acceptedFiles, i)}

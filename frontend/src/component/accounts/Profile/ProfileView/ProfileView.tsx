@@ -3,7 +3,7 @@ import defaultImage from "../../../../media/default.jpg";
 import clothesForCouples from '../../../../media/clothes.png'
 import mensClothing from '../../../../media/suit.svg'
 import Sportswear from '../../../../media/boots.svg'
-import womansClothes from '../../../../media/dress.svg'
+import womensClothes from '../../../../media/dress.svg'
 import s from './ProfileView.module.css'
 import {Link} from "react-router-dom";
 
@@ -59,7 +59,6 @@ export const ProfileView = (props: RootProps) => {
                     <div className={[s.button].join(' ')}><Link to={"/profileEdit"}>Edit</Link></div>
                     <p>{p.companyDescription}</p>
                     <div className={s.Sections}>
-                        {/*<p>{p.section}</p>*/}
                         {props.profiles[0] && JSON.parse(p.sections).map((e: {
                                 Text: string,
                                 Icon: string,
@@ -73,13 +72,12 @@ export const ProfileView = (props: RootProps) => {
                                             <img alt={"icon"} className={s.icon} src={mensClothing}/>)}
                                         {e.Icon === "Sportswear" && (
                                             <img alt={"icon"} className={s.icon} src={Sportswear}/>)}
-                                        {e.Icon === "Woman's Clothes" && (
-                                            <img alt={"icon"} className={s.icon} src={womansClothes}/>)}
+                                        {e.Icon === "Womens clothing" && (
+                                            <img alt={"icon"} className={s.icon} src={womensClothes}/>)}
 
                                         <h3>{e.Title}</h3>
                                     </div>
                                     <p>{e.Text}</p>
-
                                 </div>
                             )
                         )}
