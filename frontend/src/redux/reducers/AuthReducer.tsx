@@ -1,6 +1,5 @@
 import {GET_ERRORS} from './ErrorsReducer'
-import {CREATE_MESSAGE} from "./MessageReducer";
-import {createMessage} from './MessageReducer'
+import {CREATE_MESSAGE, createMessage} from "./MessageReducer";
 import {Dispatch} from "redux";
 import {AppStateType, InferActionsTypes} from "../redux_store";
 import {ThunkAction} from "redux-thunk";
@@ -120,9 +119,9 @@ export const login = (email: string, password: string) => {
     };
 }
 
-export const register = (email: string, first_name: string, last_name: string, password: string): ThunkAction<Promise<void>, AppStateType, any, AuthActionTypes> => async (dispatch) => {
+export const register = (dataR: { email: string, first_name: string, last_name: string, password: string }): ThunkAction<Promise<void>, AppStateType, any, AuthActionTypes> => async (dispatch) => {
 
-    const body = JSON.stringify({first_name, last_name, password, email})
+    const body = JSON.stringify(dataR)
     try {
 
         dispatch(actions.loadUserSuccess());
@@ -130,7 +129,8 @@ export const register = (email: string, first_name: string, last_name: string, p
         dispatch(actions.registerSuccess(response.data))
         dispatch({
             type: CREATE_MESSAGE,
-            payload: {registered: "Check your email!"}})
+            payload: {registered: "Check your email!"}
+        })
         await profileAPI.PostProfile(response.data.id)
         await profileAPI.PostDocuments(response.data.id)
         dispatch(actions.loadUserSuccess)

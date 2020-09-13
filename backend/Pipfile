@@ -16,6 +16,9 @@ mysqlclient = "*"
 django-phone-field = "*"
 graphene-django = "*"
 django-filter = "*"
+djangorestframework = "*"
+python-decouple = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.8"

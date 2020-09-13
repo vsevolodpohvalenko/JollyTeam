@@ -1,6 +1,6 @@
 import React from 'react'
 import {MainTemplate} from '../Templates/main_template'
-import {Route, Redirect} from 'react-router-dom'
+import {Redirect, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {AppStateType} from "../../redux/redux_store";
 import Preloader from "../Preloader/preloader";

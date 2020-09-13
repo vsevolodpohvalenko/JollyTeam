@@ -30,7 +30,7 @@ export const profileAPI = {
        debugger
        let form_data = new FormData();
        form_data.append('owner', String(id));
-       return instance.post<SingleProfile>('api/manufacturerProfilePage/', form_data, config2)
+       return instance.post<SingleProfile>('api/CompanyProfilePage/', form_data, config2)
    },
 
    PutProfile: (form_data: {
@@ -44,7 +44,7 @@ export const profileAPI = {
         sections: string
     }, id: number) => {
         debugger
-        return instance.patch<SingleProfile>(`api/manufacturerProfilePage/${id}/`, form_data, config2)
+       return instance.patch<SingleProfile>(`api/CompanyProfilePage/${id}/`, form_data, config2)
     },
     PatchDocuments: (form_data: {
         Download: string,
@@ -64,10 +64,11 @@ export const profileAPI = {
         return instance.delete<AxiosPromise>(`api/Document/${id + 1}`)
     },
     getCountries: () => {
+        debugger
         return axios.get('http://restcountries.eu/rest/v2/all')
     },
     getProfile: () => {
-        return instance.get<Array<SingleProfile>>('api/manufacturerProfilePage')
+        return instance.get<Array<SingleProfile>>('api/CompanyProfilePage/')
     },
     getDocuments: () => {
         debugger
@@ -78,9 +79,12 @@ export const profileAPI = {
     },
     getSearchedData: (search: string) => {
         debugger
-        return instance.get<Array<SingleProfile>>(`manufacturerProfilePage?search=${search}`)
+        return instance.get<Array<SingleProfile>>(`CompanyProfilePage?search=${search}`)
     },
     postRequestForQuotations: (request: any) => {
         return instance.post<Array<RequestForQuotation>>('api/RequestForQuotation/', request)
+    },
+    getPaymentMethods: () => {
+        return instance.get('api/PaymentMethods/')
     }
 }

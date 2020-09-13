@@ -1,17 +1,17 @@
-from django.shortcuts import render
-from rest_framework.filters import SearchFilter, OrderingFilter
-from .serializers import manufacturerProfilePageSerializer, LinksSerializer
-from .models import manufacturerProfilePage, Links
-from rest_framework.generics import ListAPIView
 from rest_framework import permissions
+from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.generics import ListAPIView
+
+from .models import CompanyProfilePage, Links
+from .serializers import CompanyProfilePageSerializer, LinksSerializer
 
 
-class ManufacturerProfilePageViewSet(ListAPIView):
+class CompanyProfilePageViewSet(ListAPIView):
     permission_classes = [
         permissions.AllowAny
     ]
-    queryset = manufacturerProfilePage.objects.all()
-    serializer_class = manufacturerProfilePageSerializer
+    queryset = CompanyProfilePage.objects.all()
+    serializer_class = CompanyProfilePageSerializer
 
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('country', 'companyName', 'companyDescription', 'owner__first_name', "sections")
@@ -25,4 +25,4 @@ class LinksViewSet(ListAPIView):
     serializer_class = LinksSerializer
 
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('find' , 'id')
+    search_fields = ('find', 'id')

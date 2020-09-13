@@ -1,10 +1,9 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {register} from '../../../redux/reducers/AuthReducer'
 import {createMessage} from '../../../redux/reducers/MessageReducer'
 import s from '../Login/login.module.css'
-
 
 
 class Register extends React.Component {
@@ -22,27 +21,36 @@ class Register extends React.Component {
         console.log('Submit!')
         const {last_name, first_name, email, password} = this.state
         const NewUser = {
-          email,
-          first_name,
-          last_name, 
-          password,
+            email,
+            first_name,
+            last_name,
+            password,
         }
         localStorage.setItem('password', NewUser.password)
         localStorage.setItem('email', NewUser.email)
-        this.props.register(NewUser)
+        this.props.register({
+            email: NewUser.email,
+            first_name: NewUser.first_name,
+            last_name: NewUser.last_name,
+            password: NewUser.password
+        })
     }
 
-    onChange = e => this.setState({ [e.target.name]: e.target.value })
-    render(){
-      if(this.props.isAuthenticated){
-        return <Redirect to="/"/>
-      }
+    onChange = e => {
+        debugger
+        this.setState({[e.target.name]: e.target.value})
+    }
 
-        const { first_name ,last_name, email, password} = this.state
+    render() {
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/"/>
+        }
+
+        const {first_name, last_name, email, password} = this.state
 
         return (
             <div className="col-md-12">
-            <div className={s.main}>
+                <div className={s.main}>
               <h2 className={s.text}>Register</h2>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">

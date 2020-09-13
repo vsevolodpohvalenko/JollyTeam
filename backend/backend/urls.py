@@ -13,20 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path, include, re_path
-from django.contrib import admin
+from FAQ.views import CompanyProfilePageViewSet, LinksViewSet
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
-from FAQ.views import ManufacturerProfilePageViewSet, LinksViewSet
 from graphene_django.views import GraphQLView
 
 urlpatterns = [
-    path('', include('FAQ.urls')),
-    path('admin/', admin.site.urls),
-    path('auth/', include('djoser.urls.authtoken')),
-    path('auth/', include('djoser.urls')),
-    path('links', LinksViewSet.as_view(), name="Links"),
-    path('manufacturerProfilePage', ManufacturerProfilePageViewSet.as_view(), name="manufacturerProfilePage"),
-    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('', include('FAQ.urls')),
+                  path('admin/', admin.site.urls),
+                  path('auth/', include('djoser.urls.authtoken')),
+                  path('auth/', include('djoser.urls')),
+                  path('links', LinksViewSet.as_view(), name="Links"),
+                  path('CompanyProfilePage', CompanyProfilePageViewSet.as_view(), name="CompanyProfilePage"),
+                  path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -67,3 +67,15 @@
     color: #adadad;
     margin-top: 5%;
 }
+
+@media (max-width: 786px) {
+    .main {
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: 14px;
+    }
+
+    .main input::placeholder {
+        font-size: 12px;
+    }
+}

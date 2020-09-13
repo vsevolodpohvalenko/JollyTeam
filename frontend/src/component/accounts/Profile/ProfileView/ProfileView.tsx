@@ -1,9 +1,15 @@
 import React from "react";
 import defaultImage from "../../../../media/default.jpg";
-import clothesForCouples from '../../../../media/clothes.png'
-import mensClothing from '../../../../media/suit.svg'
-import Sportswear from '../../../../media/boots.svg'
-import womansClothes from '../../../../media/dress.svg'
+import {
+    ApiOutlined,
+    BulbOutlined,
+    CarOutlined,
+    CoffeeOutlined,
+    FormatPainterOutlined,
+    SettingOutlined,
+    ShopOutlined,
+    SkinOutlined
+} from '@ant-design/icons'
 import s from './ProfileView.module.css'
 import {Link} from "react-router-dom";
 
@@ -59,7 +65,6 @@ export const ProfileView = (props: RootProps) => {
                     <div className={[s.button].join(' ')}><Link to={"/profileEdit"}>Edit</Link></div>
                     <p>{p.companyDescription}</p>
                     <div className={s.Sections}>
-                        {/*<p>{p.section}</p>*/}
                         {props.profiles[0] && JSON.parse(p.sections).map((e: {
                                 Text: string,
                                 Icon: string,
@@ -67,19 +72,27 @@ export const ProfileView = (props: RootProps) => {
                             }, index: number) => (
                                 <div key={index} className={s.section}>
                                     <div>
-                                        {e.Icon === "Clothes For Couples" && (
-                                            <img alt={"icon"} className={s.icon} src={clothesForCouples}/>)}
-                                        {e.Icon === "Men's clothing" && (
-                                            <img alt={"icon"} className={s.icon} src={mensClothing}/>)}
-                                        {e.Icon === "Sportswear" && (
-                                            <img alt={"icon"} className={s.icon} src={Sportswear}/>)}
-                                        {e.Icon === "Woman's Clothes" && (
-                                            <img alt={"icon"} className={s.icon} src={womansClothes}/>)}
+                                        {e.Icon === "Logistics companies" && (
+                                            <CarOutlined className={s.icon}/>)}
+                                        {e.Icon === "Restaurant business" && (
+                                            <CoffeeOutlined className={s.icon}/>)}
+                                        {e.Icon === "Grocery supplier" && (
+                                            <ShopOutlined className={s.icon}/>)}
+                                        {e.Icon === "Small manufacturers" && (
+                                            <BulbOutlined className={s.icon}/>)}
+                                        {e.Icon === "Fabric supplier" && (
+                                            <SkinOutlined className={s.icon}/>)}
+                                        {e.Icon === "Supplier of kitchen utensils" && (
+                                            <SettingOutlined className={s.icon}/>)}
+                                        {e.Icon === "Supplier of household appliances" && (
+                                            <ApiOutlined className={s.icon}/>)}
+                                        {e.Icon === "Interior designers" && (
+                                            <FormatPainterOutlined className={s.icon}/>)}
+
 
                                         <h3>{e.Title}</h3>
                                     </div>
                                     <p>{e.Text}</p>
-
                                 </div>
                             )
                         )}
@@ -89,9 +102,8 @@ export const ProfileView = (props: RootProps) => {
         ))}
         <div className={[s.Documents].join(' ')}>
             {props.my_documents.map(d => (<div key={d.id}>
-                    <a href={d.Download} download><img alt={"thumbnail"} src={d.Thumbnail}/></a>
+                    <a href={d.Download}><img className={s.docThumb} alt={"thumbnail"} src={d.Thumbnail}/></a>
                     <p>{d.Title}</p>
-                    <a href={d.Download} download>Download</a>
                 </div>
             ))}
         </div>

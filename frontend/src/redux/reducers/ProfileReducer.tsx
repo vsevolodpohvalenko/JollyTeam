@@ -9,10 +9,12 @@ const GET_PROFILES = "GET-PROFILES"
 const GET_DOCUMENTS = "GET-DOCUMENTS"
 const GET_CATEGORY = "GET-CATEGORY"
 const GET_SEARCHED_PROFILES = "GET_SEARCHED_PROFILES"
+const GET_PAYMENT_METHODS = 'GET_PAYMENT_METHODS'
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ProfileActionTypes>
 
-export type initialStateType =  {
+export type initialStateType = {
+    paymentMethods: Array<{ id: number, method: string }>,
     profiles: Array<{
         id: number,
         companyProfilePicture: string,
@@ -35,32 +37,35 @@ export type initialStateType =  {
 }
 
 export let initialState: initialStateType = {
-    profiles: [],
+    profiles: [{id: 0}],
     countries: [],
     documents: [],
-    category: []
+    category: [],
+    paymentMethods: [],
 };
 
 export const ProfileReducer = (state = initialState, action: ProfileActionTypes) => {
-    switch (action.type){
+    switch (action.type) {
         case GET_COUNTRIES:
-            return{...state, countries: action.payload}
+            return {...state, countries: action.payload}
         case GET_PROFILES:
-            return {...state, profiles:  action.payload}
+            return {...state, profiles: action.payload}
         case GET_DOCUMENTS:
-            return {...state, documents:  action.payload}
+            return {...state, documents: action.payload}
         case GET_CATEGORY:
             return {...state, category: action.payload}
         case GET_SEARCHED_PROFILES:
-            return {...state, profiles:  action.payload}
-        default: 
-            return state 
-         }
+            return {...state, profiles: action.payload}
+        case GET_PAYMENT_METHODS:
+            return {...state, paymentMethods: action.payload}
+        default:
+            return state
     }
+}
 export type ProfileActionTypes = InferActionsTypes<typeof actions>
 export const actions: { [key: string]: (...args: any) => any; } = {
-getCountriesSuccessful: (payload: any): ProfileActionTypes => ({type: GET_COUNTRIES, payload}),
-getProfilesSuccessful: (payload: Array<{
+    getCountriesSuccessful: (payload: any): ProfileActionTypes => ({type: GET_COUNTRIES, payload}),
+    getProfilesSuccessful: (payload: Array<{
         id: number,
         companyProfilePicture: string,
         companyName: string,
@@ -69,19 +74,19 @@ getProfilesSuccessful: (payload: Array<{
         companyLogo: string,
         sections: string,
         owner: number
-}>): ProfileActionTypes=> ({type: GET_PROFILES, payload}),
-getDocumentsSuccessful: (payload: Array<{
+    }>): ProfileActionTypes => ({type: GET_PROFILES, payload}),
+    getDocumentsSuccessful: (payload: Array<{
         id: number,
         Title: any,
         Thumbnail: any,
         Download: any,
         owner: number
     }>): ProfileActionTypes => ({type: GET_DOCUMENTS, payload}),
-getCategorySuccessful: (payload: Array<{
+    getCategorySuccessful: (payload: Array<{
         id: number,
         Name: string
-}>): ProfileActionTypes => ({type: GET_CATEGORY, payload}),
-getSearchedProfiles: (payload: Array<{
+    }>): ProfileActionTypes => ({type: GET_CATEGORY, payload}),
+    getSearchedProfiles: (payload: Array<{
         id: number,
         companyProfilePicture: string,
         companyName: string,
@@ -90,29 +95,37 @@ getSearchedProfiles: (payload: Array<{
         companyLogo: string,
         sections: string,
         owner: number
-}>): ProfileActionTypes => ({type: GET_SEARCHED_PROFILES, payload})}
+    }>): ProfileActionTypes => ({type: GET_SEARCHED_PROFILES, payload}),
+    getPaymentMethodsSuccessful: (payload: any) => ({type: GET_PAYMENT_METHODS, payload})
+}
 
-export const GetCountries = (): ThunkType => async(dispatch) => {
+export const GetCountries = (): ThunkType => async (dispatch) => {
     const response = await profileAPI.getCountries()
     dispatch(actions.getCountriesSuccessful(response.data))
 }
 
-export const GetProfiles = (): ThunkType => async(dispatch) => {
+export const GetProfiles = (): ThunkType => async (dispatch) => {
     const response = await profileAPI.getProfile()
     dispatch(actions.getProfilesSuccessful(response.data))
 }
-export const updateManufacturer = (data: any, id: number)=> async (dispatch: Dispatch<ProfileActionTypes>) => {
+export const GetPaymentMethods = (): ThunkType => async (dispatch) => {
+    const response = await profileAPI.getPaymentMethods()
+    dispatch(actions.getPaymentMethodsSuccessful(response.data))
+}
+export const updateManufacturer = (data: any, id: number) => async (dispatch: Dispatch<ProfileActionTypes>) => {
     await profileAPI.PutProfile(data, id)
     dispatch(
-            {
-                type: CREATE_MESSAGE,
-                payload: {registered: "Your Profile was Submitted!"}})
+        {
+            type: CREATE_MESSAGE,
+            payload: {registered: "Your Profile was Submitted!"}
+        })
 }
 export const updateDocument = (data: any, id: number) => async (dispatch: Dispatch<ProfileActionTypes>) => {
     await profileAPI.PatchDocuments(data, id)
     dispatch({
         type: CREATE_MESSAGE,
-        payload: {registered: "Documents for your Profile were Submitted!"}})
+        payload: {registered: "Documents for your Profile were Submitted!"}
+    })
 }
 export const postDocument = (id: number): ThunkAction<Promise<void>, AppStateType, unknown, ProfileActionTypes> => async (dispatch) => {
     await profileAPI.PostDocuments(id)
@@ -120,22 +133,24 @@ export const postDocument = (id: number): ThunkAction<Promise<void>, AppStateTyp
     dispatch(actions.getDocumentsSuccessful(response.data))
     dispatch({
         type: CREATE_MESSAGE,
-        payload: {registered: "One more document was added"}})
+        payload: {registered: "One more document was added"}
+    })
 
 }
-export const GetDocuments = (): ThunkType => async(dispatch) => {
+export const GetDocuments = (): ThunkType => async (dispatch) => {
     debugger
     const response = await profileAPI.getDocuments()
     dispatch({type: GET_DOCUMENTS, payload: response.data})
 }
 
-export const GetCategory = (): ThunkType => async(dispatch) => {
+export const GetCategory = (): ThunkType => async (dispatch) => {
     const response = await profileAPI.getCategory()
     dispatch(actions.getCategorySuccessful(response.data))
 }
 
-export const GetSearchedData = (search: string): ThunkType => async(dispatch) => {
+export const GetSearchedData = (search: string): ThunkType => async (dispatch) => {
     debugger
     const response = await profileAPI.getSearchedData(search)
     dispatch(actions.getSearchedProfiles(response.data))
+
 }

@@ -1,4 +1,4 @@
-.back{
+.back {
     color: white;
     background-repeat: no-repeat;
     background-size: cover;
@@ -8,12 +8,18 @@
     padding-top: 50px;
     padding-bottom: 40px;
 }
-body{
+
+.icon svg {
+    width: 50px;
+    height: 50px;
+}
+
+body {
     font-family: 'Mulish', sans-serif;
 }
-.section{
+.section {
     width: 50%;
-
+    display: inline-block;
 }
 
 .section div{
@@ -29,9 +35,9 @@ body{
     height: 50px;
 }
 
-.main p{
+.main p {
     color: #7F8177;
-    font-size: 18px;
+    font-size: 14px;
     font-style: italic;
 }
 .edit{

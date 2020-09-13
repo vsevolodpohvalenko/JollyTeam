@@ -11,7 +11,7 @@ export const Footer =() => {
   <div className="collapse navbar-collapse justify-content-end nav" id="navbar">
     <ul className="navbar-nav d-flex ">
       <li className="nav-item ">
-        <Link className="nav-link text-white" to="/manufacturers">Manufacture </Link>
+        <Link className="nav-link text-white" to="/companies">Companies</Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link text-danger " to={"/faq"}>FAQ</Link>

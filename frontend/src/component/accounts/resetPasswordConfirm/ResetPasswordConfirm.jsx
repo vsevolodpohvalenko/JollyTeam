@@ -1,8 +1,12 @@
 import React from 'react'
-import {Formik, Form, Field} from 'formik'
+import {Field, Form, Formik} from 'formik'
 import s from '../Login/login.module.css'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {authAPI} from "../../../api/AuthApi";
+import store from "../../../redux/redux_store";
+import {createMessage} from "../../../redux/reducers/MessageReducer";
+import {useHistory} from "react-router";
+
 const initialValues = {
     reset_password: ''
 }
@@ -10,15 +14,19 @@ const initialValues = {
 
 export const ResetPasswordConfirm = (props) => {
     debugger
+    const history = useHistory()
     const onSubmit = (body) => {
         debugger
-        const reset ={
-            
-            uid:props.uid,
+        const reset = {
+
+            uid: props.uid,
             token: props.token,
             new_password: body.new_password
         }
-        authAPI.reset_password(reset)
+        authAPI.reset_password(reset).then(() => {
+            store.dispatch(createMessage({log_in_ed: "Changed successful"}))
+            history.push('/login')
+        })
     }
     return( <div>
         <div className={s.main}>

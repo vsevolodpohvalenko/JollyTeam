@@ -1,10 +1,20 @@
-import React, {ChangeEvent, FormEvent, useState} from "react";
+import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import s from './requestForQuotation.module.css'
 import style from '../accounts/Profile/ProfileEdit/ProfileEdit.module.css'
 import Dropzone from "react-dropzone";
 import Select from 'react-select'
 import {CustomDropZoneType} from "../accounts/Profile/ProfileEdit/Document";
 import {profileAPI} from "../../api/profileApi";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    GetCategorySelector,
+    GetCurrencySelector,
+    GetPaymentMethodsS,
+} from "../../redux/reducers/RequestForQuotations-selectors";
+import {GetCategory, GetCountries, GetPaymentMethods} from "../../redux/reducers/ProfileReducer";
+import {useHistory} from "react-router-dom";
+import store from "../../redux/redux_store";
+import {createMessage} from "../../redux/reducers/MessageReducer";
 
 
 type TextPropsType = {
@@ -24,12 +34,12 @@ let InputText = (props: TextPropsType) => {
 }
 
 
-let CustomSelect = (props: { label: string, value: any, onChange: any, options: Array<{ label: string, value: string }> }) => {
+let CustomSelect = (props: { label: string, value: any, placeholder?: string, onChange: any, options: Array<{ label: string, value: string }> }) => {
     return (
         <div className={s.customSelect}>
             <label>{props.label}</label>
             <Select className={s.select} options={props.options}
-                    placeholder={`Choose your ${props.label.toLowerCase()} from list`} value={props.value}
+                    placeholder={props.placeholder} value={props.value}
                     onChange={props.onChange}/>
         </div>
     )
@@ -39,17 +49,19 @@ const img = {
     display: 'block',
     width: 'auto',
     height: '100%'
-
 };
 
-export const RequestForQuotation = (props: {
-    currency: Array<any>, category: Array<{
-        id: number,
-        Name: string
-    }>
-}) => {
+export const RequestForQuotation = () => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(GetCountries())
+        dispatch(GetCategory())
+        dispatch(GetPaymentMethods())
+    }, [])
+    const currency: Array<any> = useSelector(GetCurrencySelector)
+    const paymentM: Array<{ id: number, method: string }> = useSelector(GetPaymentMethodsS)
+    const categories: Array<{ id: number, Name: string }> = useSelector(GetCategorySelector)
     const CustomDropZone = (props: CustomDropZoneType) => {
-
         return (
             <div>
                 <label>{props.label}</label>
@@ -101,12 +113,16 @@ export const RequestForQuotation = (props: {
             </div>)
     }
 
-    const options = props.currency.map((c) => {
+    const options = currency.map((c) => {
         return {value: c.currencies[0].code, label: c.currencies[0].code}
     })
 
-    const categoryOptions = props.category.map(c => {
+    const categoryOptions = categories.map(c => {
         return {value: c.Name, label: c.Name}
+    })
+    const paymentMOptions = paymentM.map(c => {
+        debugger
+        return {value: c.method, label: c.method}
     })
 
     const [keywords, setKeywords] = useState<string>("")
@@ -119,7 +135,7 @@ export const RequestForQuotation = (props: {
     const [destinationPort, setDestinationPort] = useState<string>("")
     const [payment_method, setPayment_method] = useState<string>("")
     const [privacy_policy, setPrivacy_policy] = useState<boolean>(false)
-
+    const history = useHistory()
     const HandleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         let form_data = new FormData();
@@ -133,7 +149,10 @@ export const RequestForQuotation = (props: {
         form_data.append("destinationPort", destinationPort)
         form_data.append("paymentMethod", payment_method)
         form_data.append("iAgree", String(privacy_policy))
-        profileAPI.postRequestForQuotations(form_data)
+        profileAPI.postRequestForQuotations(form_data).then(() => {
+            history.push('/')
+            store.dispatch(createMessage({log_in_ed: "Request was submitted"}))
+        })
 
     }
 
@@ -144,8 +163,8 @@ export const RequestForQuotation = (props: {
             <div className={s.double}>
                 <InputText element="Keywords" value={keywords}
                            onChange={(e: ChangeEvent<HTMLInputElement>) => setKeywords(e.target.value)}/>
-                <CustomSelect label="Category" options={categoryOptions} value={category}
-                              onChange={(e: string) => setCategory(e)}/>
+                <CustomSelect label="Category" options={categoryOptions} value={{label: category, value: category}}
+                              onChange={(e: { label: string, value: string }) => setCategory(e.label)}/>
             </div>
             <div className={s.Descriptions}>
                 <label>Descriptions</label>
@@ -156,13 +175,15 @@ export const RequestForQuotation = (props: {
             <CustomDropZone label="Attachments" AllowButton={1} onDrop={handleDrop4}
                             p="Drag&Drop Your attachments here"/>
             <div className={s.double}>
-                <CustomSelect label="Preferred currency" options={options} value={preferred_currency}
-                              onChange={(e: string) => setPreferred_currency(e)}/>
+                <CustomSelect label="Preferred currency" options={options}
+                              placeholder={"Choose your preferred currency "}
+                              value={{value: preferred_currency, label: preferred_currency}}
+                              onChange={(e: { label: string, value: string }) => setPreferred_currency(e.label)}/>
                 <InputText element="Preferred unit price" value={preferred_unit_price}
                            onChange={(e: ChangeEvent<HTMLInputElement>) => setPreferred_unit_price(e.target.value)}/>
             </div>
             <div className={s.double}>
-                <InputText element="Preferred shipping aggreement" value={preferred_shipping_agreement}
+                <InputText element="Preferred shipping agreement" value={preferred_shipping_agreement}
                            onChange={(e: ChangeEvent<HTMLInputElement>) => setPreferred_shipping_agreement(e.target.value)}/>
                 <InputText element="Destination port" value={destinationPort}
                            onChange={(e: ChangeEvent<HTMLInputElement>) => setDestinationPort(e.target.value)}/>
@@ -170,7 +191,7 @@ export const RequestForQuotation = (props: {
             <div>
                 <label>Payment method</label>
 
-                <Select options={categoryOptions} onChange={(e: any) => setPayment_method(e)}/>
+                <Select options={paymentMOptions} onChange={(e: any) => setPayment_method(e.value)}/>
             </div>
             <div>
                 <input type={"checkbox"} onChange={() => setPrivacy_policy(!privacy_policy)}/>

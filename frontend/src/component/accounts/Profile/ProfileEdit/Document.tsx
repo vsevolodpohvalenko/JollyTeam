@@ -28,6 +28,7 @@ export type CustomDropZoneType = {
   label: string,
   onDrop: any,
   p: string,
+  stateElement?: any,
   h5?: string,
   AllowButton: number,
   name?: string

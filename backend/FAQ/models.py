@@ -1,12 +1,14 @@
-from django.db import models
-from phone_field import PhoneField
 from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
+from django.db import models
+from django.template.loader import render_to_string
+from phone_field import PhoneField
 
 User = settings.AUTH_USER_MODEL
 
 
 def upload_path(instance, filename):
-    return '/'.join(['manufacturerProfilePage', str(instance.companyName), filename])
+    return '/'.join(['CompanyProfilePage', str(instance.companyName), filename])
 
 
 class FAQ_Group(models.Model):
@@ -36,13 +38,13 @@ class FAQ_item(models.Model):
         ordering = ('Title',)
 
 
-class manufacturerProfilePage(models.Model):
+class CompanyProfilePage(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    companyProfilePicture = models.ImageField(default='defaultComProfPic.jpg', upload_to=upload_path)
+    companyProfilePicture = models.ImageField(default='defaultComProfilePic.jpg', upload_to=upload_path)
     companyName = models.CharField(max_length=60, blank=True, default="Company")
-    companyDescription = models.TextField(default="Company Descriptions")
-    country = models.CharField(max_length=200, blank=True, default="USA")
-    companyLogo = models.ImageField(default='defaultComLogo.jpeg', upload_to=upload_path)
+    companyDescription = models.TextField(default="This company doesn't have any description")
+    country = models.CharField(max_length=200, blank=True, default="Undefined")
+    companyLogo = models.ImageField(default='company-logo.jpg', upload_to=upload_path)
     sections = models.TextField(default="[{""}]")
 
 
@@ -91,6 +93,22 @@ class Contact(models.Model):
     subject = models.CharField(max_length=100)
     message = models.TextField(max_length=500)
 
+    @staticmethod
+    def create_email(phoneNumber_, subject_, message_, emailAddress_, companyName_, name_, instance):
+
+        html_content = render_to_string('contact.html', {"phoneNumber": phoneNumber_, "subject": subject_, "message": message_, "emailAddress": emailAddress_, "companyName": companyName_, "name": name_})
+        # Then we create an "EmailMessage" object as usual.
+        msg = EmailMultiAlternatives(
+            subject_,
+            message_,
+            settings.EMAIL_HOST_USER,
+            settings.ADMINS,
+        )
+        msg.attach_alternative(html_content, "text/html")
+        # Then we send message.
+        msg.send()
+        return instance
+
 
 class RequestForQuotation(models.Model):
     keywords = models.CharField(max_length=100)
@@ -106,5 +124,8 @@ class RequestForQuotation(models.Model):
 
 
 class Links(models.Model):
-    find = models.CharField(max_length=30)
+    find = models.CharField(max_length=64)
 
+
+class PaymentMethods(models.Model):
+    method = models.CharField(max_length=64)

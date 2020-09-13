@@ -19,7 +19,7 @@ export const authAPI = {
         return instance.post('auth/token/logout', "", tokenConfig)
     },
     register: (body: any) => {
-
+        debugger
         return instance.post('auth/users/', body, config)
     },
     forgot_password: (body: any) => {
