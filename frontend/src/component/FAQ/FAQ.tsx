@@ -1,11 +1,11 @@
 import React from 'react'
 import {gql} from "apollo-boost";
-import {useMutation, useQuery} from 'react-apollo';
-import s from "./FAQ.module.css";
+import {useQuery, useMutation} from 'react-apollo';
+import s from "./FAQ/FAQ.module.css";
 import cn from "classnames";
-import Preloader from "../Preloader/preloader";
-import {Header} from "../layout/Header/Header";
-import {Footer} from "../layout/Footer/Footer";
+import Preloader from "./Preloader/preloader";
+import {returnErrors} from "../redux/reducers/ErrorsReducer";
+import {initialStateType} from "../redux/reducers/ProfileReducer";
 
 const Query_Groups = gql`
   query {
@@ -78,14 +78,14 @@ export const FrequentlyAskedQuestions = () => {
     }
     const {data, loading}: any = useQuery(
         Query_Groups, {
-            pollInterval: 5000// refetch the result every 0.5 second
+            pollInterval: 500 // refetch the result every 0.5 second
         }
     );
 
     const SuitableItems = (props: any) => {
         const {data, loading}: any = useQuery(
             Query_Item, {
-                pollInterval: 5000// refetch the result every 0.5 second
+                pollInterval: 500 // refetch the result every 0.5 second
             }
         );
 
@@ -111,18 +111,15 @@ export const FrequentlyAskedQuestions = () => {
 
     if (loading) return <Preloader/>;
     return (
-        <div>
-            <Header/>
-            <div className={s.main}>
-                <h3 className="container text-center mt-3 mb-3">FAQ</h3>
-                <p className="middle text-center">Here you can find all the information you need</p>
-                {data.FAQGroups.map((group: any) =>
-                    <div key={group.id}>
-                        <div className="row border-bottom ml-3 mb-3"><h5 className={s.group}>{group.Title}</h5></div>
-                        <SuitableItems Id={group.id}/>
-                    </div>)}
-            </div>
-            <Footer/>
+        <div className={s.main}>
+            <h3 className="container text-center mt-3 mb-3">FAQ</h3>
+            <p className="middle text-center">In a professional context it often happens that private or
+                corporate</p>
+            {data.FAQGroups.map((group: any) =>
+                <div key={group.id}>
+                    <div className="row border-bottom ml-3 mb-3"><h5 className={s.group}>{group.Title}</h5></div>
+                    <SuitableItems Id={group.id}/>
+                </div>)}
         </div>
     )
 }

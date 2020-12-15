@@ -1,14 +1,13 @@
-from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
 from django.db import models
-from django.template.loader import render_to_string
 from phone_field import PhoneField
-
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
 User = settings.AUTH_USER_MODEL
 
 
 def upload_path(instance, filename):
-    return '/'.join(['CompanyProfilePage', str(instance.companyName), filename])
+    return '/'.join(['manufacturerProfilePage', str(instance.companyName), filename])
 
 
 class FAQ_Group(models.Model):
@@ -38,13 +37,13 @@ class FAQ_item(models.Model):
         ordering = ('Title',)
 
 
-class CompanyProfilePage(models.Model):
+class manufacturerProfilePage(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    companyProfilePicture = models.ImageField(default='defaultComProfilePic.jpg', upload_to=upload_path)
+    companyProfilePicture = models.ImageField(default='defaultComProfPic.jpg', upload_to=upload_path)
     companyName = models.CharField(max_length=60, blank=True, default="Company")
-    companyDescription = models.TextField(default="This company doesn't have any description")
-    country = models.CharField(max_length=200, blank=True, default="Undefined")
-    companyLogo = models.ImageField(default='company-logo.jpg', upload_to=upload_path)
+    companyDescription = models.TextField(default="Company Descriptions")
+    country = models.CharField(max_length=200, blank=True, default="USA")
+    companyLogo = models.ImageField(default='defaultComLogo.jpeg', upload_to=upload_path)
     sections = models.TextField(default="[{""}]")
 
 
@@ -124,8 +123,5 @@ class RequestForQuotation(models.Model):
 
 
 class Links(models.Model):
-    find = models.CharField(max_length=64)
+    find = models.CharField(max_length=30)
 
-
-class PaymentMethods(models.Model):
-    method = models.CharField(max_length=64)
