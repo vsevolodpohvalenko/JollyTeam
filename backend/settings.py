@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['jollyteam.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['jollyteam.herokuapp.com', '127.0.0.1', 'localhost', 'localhost:8000']
 
 # Application definition
 
@@ -217,7 +217,7 @@ GRAPHENE = {
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR,'build', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'build', 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",

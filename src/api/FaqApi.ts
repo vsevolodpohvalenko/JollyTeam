@@ -3,10 +3,10 @@ import {instance} from "./profileApi";
 
 export const faqAPI = {
     getFaq_Group: () => {
-        return instance.get<FaqGroup>('api/faq_group/')
+        return instance.get<FaqGroup>('faq_group/')
     },
     getFaq_Item: () => {
-        return instance.get<FaqItem>('api/faq_item')
+        return instance.get<FaqItem>('faq_item')
     },
     active_Item: (item: {
         id: number,
@@ -21,7 +21,7 @@ export const faqAPI = {
             Answer: string,
             Active: boolean,
             Group: string
-        }>(`api/faq_item/${item.id}/`, {
+        }>(`faq_item/${item.id}/`, {
             Group: item.Group,
             Title: item.Title,
             Answer: item.Answer,

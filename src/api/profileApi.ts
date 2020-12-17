@@ -30,7 +30,7 @@ export const profileAPI = {
        debugger
        let form_data = new FormData();
        form_data.append('owner', String(id));
-       return instance.post<SingleProfile>('api/CompanyProfilePage/', form_data, config2)
+       return instance.post<SingleProfile>('CompanyProfilePage/', form_data, config2)
    },
 
    PutProfile: (form_data: {
@@ -44,7 +44,7 @@ export const profileAPI = {
         sections: string
     }, id: number) => {
         debugger
-       return instance.patch<SingleProfile>(`api/CompanyProfilePage/${id}/`, form_data, config2)
+       return instance.patch<SingleProfile>(`CompanyProfilePage/${id}/`, form_data, config2)
     },
     PatchDocuments: (form_data: {
         Download: string,
@@ -53,38 +53,38 @@ export const profileAPI = {
         id: number,
         owner: number
     }, id: number) => {
-        return instance.patch<SingleDocument>(`api/Document/${id + 1}/`, form_data, config2)
+        return instance.patch<SingleDocument>(`Document/${id + 1}/`, form_data, config2)
     },
     PostDocuments: (id: any) => {
         let form_data = new FormData();
         form_data.append('owner', String(id));
-        return instance.post<SingleDocument>(`api/Document/`, form_data, config2)
+        return instance.post<SingleDocument>(`Document/`, form_data, config2)
     },
     DeleteDocuments: (id: number) => {
-        return instance.delete<AxiosPromise>(`api/Document/${id + 1}`)
+        return instance.delete<AxiosPromise>(`Document/${id + 1}`)
     },
     getCountries: () => {
         debugger
         return axios.get('http://restcountries.eu/rest/v2/all')
     },
     getProfile: () => {
-        return instance.get<Array<SingleProfile>>('api/CompanyProfilePage/')
+        return instance.get<Array<SingleProfile>>('CompanyProfilePage/')
     },
     getDocuments: () => {
         debugger
-        return instance.get<Array<SingleDocument>>('api/Document/')
+        return instance.get<Array<SingleDocument>>('Document/')
     },
     getCategory: () => {
-        return instance.get<CategoriesType>("api/Category/")
+        return instance.get<CategoriesType>("Category/")
     },
     getSearchedData: (search: string) => {
         debugger
         return instance.get<Array<SingleProfile>>(`CompanyProfilePage?search=${search}`)
     },
     postRequestForQuotations: (request: any) => {
-        return instance.post<Array<RequestForQuotation>>('api/RequestForQuotation/', request)
+        return instance.post<Array<RequestForQuotation>>('RequestForQuotation/', request)
     },
     getPaymentMethods: () => {
-        return instance.get('api/PaymentMethods/')
+        return instance.get('PaymentMethods/')
     }
 }

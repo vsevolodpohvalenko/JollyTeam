@@ -9,6 +9,6 @@ export const contentAPI = {
             MetaDescription: string,
             UrlSlug: string,
             Content: string
-        }>>('api/ContentPage/')
+        }>>('ContentPage/')
     }
 }
