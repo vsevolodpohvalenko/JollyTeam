@@ -38,7 +38,53 @@ export type initialStateType = {
 
 export let initialState: initialStateType = {
     profiles: [{id: 0}],
-    countries: [],
+    countries: [{
+        name: "Afghanistan",
+        alpha2Code: "AF",
+        alpha3Code: "AFG",
+        capital: "Kabul",
+        region: "Asia",
+        subregion: "Southern Asia",
+        population: 27657145,
+        demonym: "Afghan",
+        area: 652230,
+        gini: 27.8,
+        nativeName: "افغانستان",
+        numericCode: "004",
+        flag: "https://restcountries.eu/data/afg.svg",
+        cioc: "AFG"
+    }, {
+        name: "Ukraine",
+        alpha2Code: "UA",
+        alpha3Code: "UKR",
+        capital: "Kiev",
+        region: "Europe",
+        subregion: "Eastern Europe",
+        population: 42692393,
+        demonym: "Ukrainian",
+        area: 603700,
+        gini: 26.4,
+        nativeName: "Україна",
+        numericCode: "804",
+        flag: "https://restcountries.eu/data/ukr.svg",
+        cioc: "UKR"
+    },
+        {
+            name: "United Kingdom of Great Britain and Northern Ireland",
+            alpha2Code: "GB",
+            alpha3Code: "GBR",
+            capital: "London",
+            region: "Europe",
+            subregion: "Northern Europe",
+            population: 65110000,
+            demonym: "British",
+            area: 242900,
+            gini: 34,
+            nativeName: "United Kingdom",
+            numericCode: "826",
+            flag: "https://restcountries.eu/data/gbr.svg",
+            cioc: "GBR"
+        }],
     documents: [],
     category: [],
     paymentMethods: [],
@@ -100,6 +146,7 @@ export const actions: { [key: string]: (...args: any) => any; } = {
 }
 
 export const GetCountries = (): ThunkType => async (dispatch) => {
+    debugger
     const response = await profileAPI.getCountries()
     dispatch(actions.getCountriesSuccessful(response.data))
 }

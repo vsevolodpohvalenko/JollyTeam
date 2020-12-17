@@ -90,13 +90,13 @@ export const Logout = () =>  async (dispatch: Dispatch<AuthActionTypes>, getStat
     }
 
 
-export const login = (email: string, password: string) => {
+export const login = (email: string, password: string, csrftoken: string) => {
     return async (dispatch: Dispatch<any>, getState: GetStateType) => {
 
         const body = JSON.stringify({email, password})
         try {
             dispatch(actions.loadUserSuccess());
-            let response: any = await authAPI.login(body)
+            let response: any = await authAPI.login(body, csrftoken)
             dispatch(actions.loginSuccess(response.data))
             dispatch(createMessage({log_in_ed: "Logged successful"}))
             const res = await authAPI.getUser(tokenConfig(getState))
@@ -146,7 +146,7 @@ export const register = (dataR: {csrf_token: string, email: string, first_name: 
     }
     dispatch(actions.loadUserSuccess)
 }
-export const ActivateUser = (body: any): ThunkAction<Promise<void>, AppStateType, unknown, AuthActionTypes> => async (dispatch, getState) => {
+export const ActivateUser = (body: any, csrftoken: string): ThunkAction<Promise<void>, AppStateType, unknown, AuthActionTypes> => async (dispatch, getState) => {
     debugger
     const body1 = {
         email: localStorage.getItem('email'),
@@ -156,7 +156,7 @@ export const ActivateUser = (body: any): ThunkAction<Promise<void>, AppStateType
         dispatch(actions.activatedSuccessful(response1.data))
         dispatch(actions.loadUserSuccess());
         debugger
-        let response = await authAPI.login(body1)
+        let response = await authAPI.login(body1, csrftoken)
         debugger
         dispatch(actions.loginSuccess(response.data))
         dispatch({

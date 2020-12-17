@@ -10,9 +10,14 @@ export const authAPI = {
             email: string
         }>('auth/users/me/', tokenConfig)
     },
-    login: (body: any) => {
+    login: (body: any, csrf_token: string) => {
 
-        return instance.post('auth/token/login', body, config)
+        return instance.post('auth/token/login', body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrf_token,
+
+            }})
     },
     logout: (tokenConfig: any) => {
 
