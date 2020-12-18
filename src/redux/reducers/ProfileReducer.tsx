@@ -70,7 +70,7 @@ export let initialState: initialStateType = {
         cioc: "UKR"
     },
         {
-            name: "United Kingdom of Great Britain and Northern Ireland",
+            name: "United Kingdom ",
             alpha2Code: "GB",
             alpha3Code: "GBR",
             capital: "London",

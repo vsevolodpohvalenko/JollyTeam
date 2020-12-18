@@ -29,7 +29,7 @@ import ProfileEditContainer from "./component/accounts/Profile/ProfileEdit/Profi
 
 
 const client = new ApolloClient({
-    uri: 'http://localhost:8000/graphql/', // your GraphQL Server
+    uri: 'https://jollyteam.herokuapp.com/graphql/', // your GraphQL Server
 });
 
 

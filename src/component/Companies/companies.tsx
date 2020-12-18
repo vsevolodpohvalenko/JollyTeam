@@ -3,7 +3,7 @@ import s from './companies.module.css'
 import cn from "classnames";
 import {ProfileType} from "../accounts/Profile/ProfileView/ProfileView";
 import {CategoriesType} from "../accounts/Profile/ProfileEdit/ProfileEditContainer";
-import {GetProfiles} from "../../redux/reducers/ProfileReducer";
+import {GetCountries, GetProfiles} from "../../redux/reducers/ProfileReducer";
 import store from "../../redux/redux_store";
 import {Typography} from "antd";
 
@@ -34,10 +34,12 @@ type RootProps = {
 }
 export const Companies = (props: RootProps) => {
     useEffect(() => {
+
         debugger
+        store.dispatch(GetCountries())
         props.profiles[0] != undefined && (props.profiles[0].id == 0 && (store.dispatch(GetProfiles())))
 
-    })
+    }, [])
 
     const [activeCountries, setActiveCountries] = useState<boolean>(false)
     const [activeCategories, setActiveCategories] = useState<boolean>(false)
