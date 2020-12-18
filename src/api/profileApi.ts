@@ -61,7 +61,7 @@ export const profileAPI = {
         return instance.post<SingleDocument>(`Document/`, form_data, config2)
     },
     DeleteDocuments: (id: number) => {
-        return instance.delete<AxiosPromise>(`Document/${id + 1}`)
+        return instance.delete<AxiosPromise>(`Document/${id + 1}/`)
     },
     getCountries: () => {
         debugger
