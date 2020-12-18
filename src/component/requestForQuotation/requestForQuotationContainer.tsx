@@ -11,7 +11,7 @@ class RequestForQuotationContainer extends Component<PropsReduxType>{
     }
 
     render() {
-        return <RequestForQuotation  />
+        return <RequestForQuotation currency = {this.props.currency}  />
     }
 
 }

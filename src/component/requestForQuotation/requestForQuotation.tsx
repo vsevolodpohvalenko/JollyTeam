@@ -51,14 +51,14 @@ const img = {
     height: '100%'
 };
 
-export const RequestForQuotation = () => {
+export const RequestForQuotation = (Currency: any) => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(GetCountries())
         dispatch(GetCategory())
         dispatch(GetPaymentMethods())
     }, [])
-    const currency: Array<any> = useSelector(GetCurrencySelector)
+    const currency = useSelector(GetCurrencySelector)
     const paymentM: Array<{ id: number, method: string }> = useSelector(GetPaymentMethodsS)
     const categories: Array<{ id: number, Name: string }> = useSelector(GetCategorySelector)
     const CustomDropZone = (props: CustomDropZoneType) => {
@@ -113,7 +113,7 @@ export const RequestForQuotation = () => {
             </div>)
     }
 
-    const options = currency.map((c) => {
+    const options = currency.map((c:any) => {
         return {value: c.currencies[0].code, label: c.currencies[0].code}
     })
 

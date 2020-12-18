@@ -30,7 +30,7 @@ export const Footer =() => {
   <ul className="navbar-nav">
     <Link className="navbar-brand navl navl" to={"/"}>Textile<span className="text-danger">S</span>pot<span className="text-danger">.</span></Link>
     <li className="nav-item ">
-        <Link className="nav-link text-white" to="/manufacturers">Manufacture </Link>
+        <Link className="nav-link text-white" to="/manufacturers">Companies </Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link text-danger " to={"/faq"}>FAQ</Link>

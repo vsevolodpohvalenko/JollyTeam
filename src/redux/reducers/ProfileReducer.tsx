@@ -47,6 +47,14 @@ export let initialState: initialStateType = {
         subregion: "Southern Asia",
         population: 27657145,
         demonym: "Afghan",
+
+        currencies: [
+            {
+                "code": "AFN",
+                "name": "Afghan afghani",
+                "symbol": "؋"
+            }
+        ],
         area: 652230,
         gini: 27.8,
         nativeName: "افغانستان",
@@ -59,6 +67,13 @@ export let initialState: initialStateType = {
         alpha3Code: "UKR",
         capital: "Kiev",
         region: "Europe",
+        currencies: [
+            {
+                "code": "UAH",
+                "name": "Ukrainian hryvnia",
+                "symbol": "₴"
+            }
+        ],
         subregion: "Eastern Europe",
         population: 42692393,
         demonym: "Ukrainian",
@@ -80,6 +95,13 @@ export let initialState: initialStateType = {
             demonym: "British",
             area: 242900,
             gini: 34,
+            currencies: [
+                {
+                    "code": "GBP",
+                    "name": "British pound",
+                    "symbol": "£"
+                }
+            ],
             nativeName: "United Kingdom",
             numericCode: "826",
             flag: "https://restcountries.eu/data/gbr.svg",
