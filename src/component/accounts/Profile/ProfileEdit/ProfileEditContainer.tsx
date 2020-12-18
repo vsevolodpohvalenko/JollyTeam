@@ -30,7 +30,7 @@ class ProfileEditContainer extends React.PureComponent<PropsFromRedux> {
         return this.props.profile.length !== 0 ?
             <ProfileEdit category={this.props.category} postDocument={this.props.postDocument}
                           updateDocument={this.props.updateDocument}
-                         updateManufacturer={this.props.updateManufacturer} documents={this.props.documents}
+                         updateManufacturer={this.props.updateManufacturer} documents={this.props.my_documents}
                          userID={this.props.userID} previousProfile={this.props.profile}
                          countries={this.props.countries}/> : <div>Loading</div>
     }
@@ -43,7 +43,11 @@ let mapStateToProps = (state: AppStateType) => {
 
         userID: state.auth.user.id ,
         profile: state.profile.profiles,
-        documents: state.profile.documents,
+        my_documents: state.profile.documents.filter((e:{        id: number,
+        Title: string,
+        Thumbnail: string,
+        Download: string,
+        owner: number}) => e.owner === state.auth.user.id),
         category: state.profile.category
     }
 }

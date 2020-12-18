@@ -182,7 +182,7 @@ export const ProfileEdit = (props: RootPropsType) => {
         list[index][name] = value;
         setSection(list);
     };
-
+    const MyDocuments = Documents.filter((d: any) => d.owner === String(props.userID))
 
     const DocumentedInputChange = (e: {target: {name: string, value: string}}, index: number) => {
         const {name, value} = e.target;
@@ -307,7 +307,7 @@ export const ProfileEdit = (props: RootPropsType) => {
                 })}
 
 
-                {Documents.map((y: {Title: string}, i: number) => {
+                {Documents && Documents.map((y: {Title: string}, i: number) => {
                     return (
                         <div key={i}>
                             <h2>Document</h2>

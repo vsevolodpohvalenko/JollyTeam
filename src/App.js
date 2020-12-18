@@ -27,6 +27,7 @@ import {Profile} from "./component/User/Profile";
 import {RequestForQuotation} from "./component/requestForQuotation/requestForQuotation";
 import ProfileEditContainer from "./component/accounts/Profile/ProfileEdit/ProfileEditContainer";
 import RequestForQuotationContainer from "./component/requestForQuotation/requestForQuotationContainer";
+import ProfileContainer from "./component/User/ProfileContainer";
 
 
 const client = new ApolloClient({
@@ -74,7 +75,7 @@ class App extends React.Component {
                             <PrivateRoute exact path='/profileView' component={ProfileViewContainer}/>
                             <PrivateRoute exact path='/request_for_quotation' component={RequestForQuotationContainer}/>
                             <Route exact path='/companies' component={CompaniesContainer}/>
-                            <PrivateRoute exact path='/profile/:id' component={Profile}/>
+                            <PrivateRoute exact path='/profile/:id' component={ProfileContainer}/>
                             <Route component={() => <PageNotFound/>} />
                         </Switch>
                     </AlertProvider>

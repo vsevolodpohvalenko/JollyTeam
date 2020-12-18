@@ -15,6 +15,7 @@ import {
     ShopOutlined,
     SkinOutlined
 } from "@ant-design/icons";
+import store from "../../redux/redux_store";
 
 type PropsType = {
 
@@ -39,13 +40,13 @@ export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof 
         sections: string,
         owner: number
     }> = useSelector(GetSuitableProfile)
-    const my_documents: Array<{
-        id: number,
+
+    const my_documents =  store.getState().profile.documents.filter((e:{        id: number,
         Title: string,
         Thumbnail: string,
         Download: string,
-        owner: number
-    }> = useSelector(GetDocumentsSelector)
+        owner: number}) => e.owner === store.getState().auth.user.id)
+
     debugger
     const profile = profiles.filter(p => p.id === Number(props.match.params.id))
     return <div className={s.main}>
@@ -99,7 +100,7 @@ export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof 
                 </div>
             </div>
         ))}
-        {my_documents.map(d => (<div className={s.box_size}>
+        {my_documents && my_documents.map((d:any) => (<div className={s.box_size}>
                 <a href={d.Download} download><img alt={"thumbnail"} src={d.Thumbnail}/></a>
                 <small>{d.Title}</small>
                 <a href={d.Download} download>Download</a>

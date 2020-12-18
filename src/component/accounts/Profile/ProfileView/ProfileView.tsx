@@ -88,7 +88,7 @@ export const ProfileView = (props: RootProps) => {
             </div>
         ))}
         <div className={[s.Documents].join(' ')}>
-            {props.my_documents.map(d => (<div key={d.id}>
+            {props.my_documents && props.my_documents.map(d => (<div key={d.id}>
                     <a href={d.Download} download><img alt={"thumbnail"} src={d.Thumbnail}/></a>
                     <p>{d.Title}</p>
                     <a href={d.Download} download>Download</a>
