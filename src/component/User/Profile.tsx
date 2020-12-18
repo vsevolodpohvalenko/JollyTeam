@@ -41,14 +41,17 @@ export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof 
         owner: number
     }> = useSelector(GetSuitableProfile)
 
-    const my_documents =  store.getState().profile.documents.filter((e:{        id: number,
+
+    debugger
+    const profile = profiles.filter(p => p.owner === Number(props.match.params.id))
+
+    const my_documents = store.getState().profile.documents.filter((e: {
+        id: number,
         Title: string,
         Thumbnail: string,
         Download: string,
-        owner: number}) => e.owner === store.getState().auth.user.id)
-
-    debugger
-    const profile = profiles.filter(p => p.id === Number(props.match.params.id))
+        owner: number
+    }) => e.owner == profile[0].owner)
     return <div className={s.main}>
         {profile.map(p => (
             <div>
@@ -100,7 +103,7 @@ export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof 
                 </div>
             </div>
         ))}
-        {my_documents && my_documents.map((d:any) => (<div className={s.box_size}>
+        {my_documents && my_documents.map((d: any) => (<div className={s.box_size}>
                 <a href={d.Download} download><img alt={"thumbnail"} src={d.Thumbnail}/></a>
                 <small>{d.Title}</small>
                 <a href={d.Download} download>Download</a>
