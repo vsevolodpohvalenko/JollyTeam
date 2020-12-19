@@ -24,13 +24,13 @@ export const Footer =() => {
 
   </div>
 </nav>
-<small className="nav-link text-white " >TextileSpot. 2019</small>
+<small className="nav-link text-white " >TextileSpot. 2020</small>
 </div>
 <nav className="navbar db navbar-light d-md-none justify-content-center ">
   <ul className="navbar-nav">
     <Link className="navbar-brand navl navl" to={"/"}>Jolly<span className="text-danger">T</span>eam<span className="text-danger">.</span></Link>
     <li className="nav-item ">
-        <Link className="nav-link text-white" to="/manufacturers">Companies </Link>
+        <Link className="nav-link text-white" to="/companies">Companies </Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link text-danger " to={"/faq"}>FAQ</Link>
@@ -39,7 +39,7 @@ export const Footer =() => {
         <Link className="nav-link text-white" to={"/contact"}>Contact</Link>
       </li>
       <li className="nav-item">
-        <small className="nav-link text-white " >JollyTeam. 2019</small>
+        <small className="nav-link text-white " >JollyTeam. 2020</small>
       </li>
     </ul>
 </nav>

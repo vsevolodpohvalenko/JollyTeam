@@ -86,15 +86,15 @@ class ContactSerializer(serializers.ModelSerializer):
     def create(self, validate_data):
         instance = super(ContactSerializer, self).create(validate_data)
 
-        html_content = render_to_string('contact.html', {'data': instance})
+        # html_content = render_to_string('contact.html', {'data': instance})
         # Then we create an "EmailMessage" object as usual.
         msg = EmailMultiAlternatives(
             instance.subject,
-            instance.message,
+            "Hi! My name is {}, I am working for {}, I'll be really glad if you text me {} or call {}, and the main {}".format(instance.name, instance.companyName, instance.emailAddress, instance.phoneNumber, instance.message),
             settings.EMAIL_HOST_USER,
             settings.ADMINS,
         )
-        msg.attach_alternative(html_content, "text/html")
+        # msg.attach_alternative(html_content, "text/html")
         # Then we send message.
         msg.send()
         return instance
@@ -119,16 +119,20 @@ class RequestForQuotationSerializer(serializers.ModelSerializer):
                     print(j)
                     if j['Icon'] == instance.category:
                         emails.append(i.owner)
-        html_content = render_to_string('request_for_quotation.html', {'data': instance})
+        # html_content = render_to_string('request_for_quotation.html', {'data': instance})
         image = instance.attachments
         msg = EmailMultiAlternatives(
             'Request For Quotation',
-            'Good day',
+            'KEY WORDS: {:<8}, Category: {:<8}, Descriptions: {:<8}, Preferred Currency: {:<8}, Preferred Until '
+            'Price: {:<8}, Preferred Shipping Agreement: {:<8}, Payment Method: {:<8}'.format(instance.keywords,
+                                                                                              instance.category,
+                                                                                              instance.descriptions,
+                                                                                              instance.preferredCurrency, instance.preferredUntilPrice, instance.preferredShippingAgreement, instance.paymentMethod),
             settings.EMAIL_HOST_USER,
             emails,
             headers={'Message-ID': 'foo'},
         )
-        msg.attach_alternative(html_content, "text/html")
+        # msg.attach_alternative(html_content, "text/html")
         if image:
             mime_image = MIMEImage(image.read(), _subtype="jpeg")
             mime_image.add_header('Content-ID', '<{}>'.format(image.name))

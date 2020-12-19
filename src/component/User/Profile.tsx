@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import defaultImage from "../../media/default.jpg";
 import s from './Profile.module.css'
+import { Link } from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux";
 import {GetDocumentsSelector, GetSuitableProfile} from "../../redux/reducers/Profile-selectors";
 import {GetDocuments, GetProfiles} from "../../redux/reducers/ProfileReducer";
@@ -52,6 +53,7 @@ export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof 
         Download: string,
         owner: number
     }) => e.owner == profile[0].owner)
+    const onclick:any = (link: string) => {window.open(link, '_blank')}
     return <div className={s.main}>
         {profile.map(p => (
             <div>
@@ -106,7 +108,7 @@ export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof 
         {my_documents && my_documents.map((d: any) => (<div className={s.box_size}>
                 <a href={d.Download} download><img alt={"thumbnail"} src={d.Thumbnail}/></a>
                 <small>{d.Title}</small>
-                <a href={d.Download} download>Download</a>
+                <Link  to={d.Download}  download>Download</Link>
             </div>
         ))}
 

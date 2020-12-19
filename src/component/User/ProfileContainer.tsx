@@ -6,7 +6,7 @@ import {GetDocuments, GetProfiles} from '../../redux/reducers/ProfileReducer'
 import {RouteComponentProps, withRouter} from "react-router";
 import {AppStateType} from "../../redux/redux_store";
 import {GetDocumentsSelector, GetSuitableProfile} from "../../redux/reducers/Profile-selectors";
-
+import store from '../../redux/redux_store'
 
 type PropsType = {
     profiles: Array<{
@@ -32,16 +32,15 @@ type PropsType = {
 
 }
 
-class ProfileContainer extends React.Component<PropsType & RouteComponentProps> {
+class ProfileContainer extends React.Component<PropsType & RouteComponentProps | any> {
     componentDidMount() {
         this.props.GetDocuments()
         this.props.GetProfiles()
     }
 
     render() {
-        // @ts-ignore
         return (
-            <Profile/>
+            this.props.profileS.length >= 1 && this.props.my_documents  && <Profile/>
         )
     }
 }
@@ -49,7 +48,8 @@ class ProfileContainer extends React.Component<PropsType & RouteComponentProps> 
 const mapStateToProps = (state: AppStateType) => {
     debugger
     return {
-        my_documents: GetDocumentsSelector(state)
+        my_documents: GetDocumentsSelector(state),
+        profileS: state.profile.profiles
     }
 }
 

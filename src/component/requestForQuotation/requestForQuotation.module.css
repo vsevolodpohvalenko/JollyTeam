@@ -72,10 +72,21 @@
     .main {
         margin-left: 10%;
         margin-right: 10%;
-        font-size: 14px;
+        font-size: 10px;
     }
 
     .main input::placeholder {
         font-size: 12px;
+    }
+}
+@media (max-width: 360px) {
+    .main {
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: 8px;
+    }
+
+    .main input::placeholder {
+        font-size: 10px;
     }
 }

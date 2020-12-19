@@ -66,20 +66,21 @@ input::placeholder{
 }
 .main{
 
-  margin-left: 10%;
-  margin-top: 10%;
-  padding-bottom: 12%;
+  margin-left: 10vw;
+  margin-top: 20vh;
+  padding-bottom: 12vh;
 }
 
 .homeh3{
   color: white;
   max-width: 50%;
+    margin-top: 2%;
   text-align: left;
 }
 .header{
     align-items: center;
     position: relative;
-    max-width: 1200px;
+    max-width: 90vw;
 
     padding: 10px;
     background-color: none;

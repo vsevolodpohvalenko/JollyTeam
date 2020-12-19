@@ -81,6 +81,8 @@ body {
 .Documents img{
     width: 150px;
     height: 150px;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .box_size img{
     width: 40px;

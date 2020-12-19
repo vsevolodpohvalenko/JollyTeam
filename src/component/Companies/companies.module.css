@@ -15,20 +15,23 @@
 .select h6:hover {
     color: #f1105b;
 }
-.profiles{
+
+.profiles {
     grid-area: profiles;
 
 }
 
-.filter{
+.filter {
     grid-area: filter;
 
 }
-.select.active{
+
+.select.active {
     display: flex;
     align-items: center;
 }
-.select{
+
+.select {
     display: none;
     color: #797979;
     border-top: solid 1px #797979;
@@ -37,24 +40,27 @@
 }
 
 
-.title{
+.title {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
-.skip{
+
+.skip {
     width: 20px;
     height: 20px;
     margin: 10px;
     cursor: pointer;
     display: inline-block;
 }
-.skip:before{
+
+.skip:before {
     content: '\f067';
     font-family: fontAwesome;
     line-height: 20px;
 }
-.input{
+
+.input {
     display: block;
     width: 100%;
     height: 40px;
@@ -69,35 +75,42 @@
     transition: border-color .15s
 }
 
-.input::placeholder{
+.input::placeholder {
     color: #797979;
 }
-.skip.active:before{
+
+.skip.active:before {
     content: '\f068';
 }
 
 .manufacturer img {
     width: 80%;
     height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+
 
 }
 
-.manufacturer{
+.manufacturer {
     float: left;
     width: 30%;
+    cursor: pointer;
 }
 
-.manufacturer p{
+.manufacturer p {
     color: #797979;
 }
 
-.sort{
+.sort {
     display: none;
     grid-area: sort;
 }
-.buttons{
+
+.buttons {
     display: none;
 }
+
 .checkbox {
     width: 20px;
     height: 20px;
@@ -106,7 +119,7 @@
 
 }
 
-.checkIt{
+.checkIt {
     width: 20px;
     height: 20px;
     margin: 10px;
@@ -114,16 +127,17 @@
     display: inline-block;
 }
 
-@media (max-width:786px){
-    .main{
-        grid-template-rows: 7% 46.5% 46.5% ;
+@media (max-width: 786px) {
+    .main {
+        grid-template-rows: 7% 46.5% 46.5%;
         grid-template-columns: auto;
         grid-template-areas:
         "sort"
         "profiles"
         "filter"
     }
-    .sort{
+
+    .sort {
         display: block;
         background: white;
         border: #824fc4 solid 2px;
@@ -136,10 +150,12 @@
         width: 98%;
         transition-duration: 0.5s
     }
-    .filter{
+
+    .filter {
         display: none;
     }
-    .filter.active{
+
+    .filter.active {
         z-index: 1;
         position: absolute;
         top: 0;
@@ -151,19 +167,22 @@
         padding-top: 30rem;
         min-height: 100vh;
     }
-    .filter_inner{
+
+    .filter_inner {
         position: relative;
-        padding-bottom: 4rem ;
+        padding-bottom: 4rem;
         border-radius: 5px;
         background: white;
         min-height: 120vh;
     }
-    .sort:hover{
+
+    .sort:hover {
         background: #824fc4;
         border: white solid 2px;
         color: white;
         transform: scale(1.03);
     }
+
     .manufacturer {
         text-align: -webkit-center;
         display: inline-block;
