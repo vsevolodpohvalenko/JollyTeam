@@ -96,15 +96,15 @@ class Contact(models.Model):
     @staticmethod
     def create_email(phoneNumber_, subject_, message_, emailAddress_, companyName_, name_, instance):
 
-        html_content = render_to_string('contact.html', {"phoneNumber": phoneNumber_, "subject": subject_, "message": message_, "emailAddress": emailAddress_, "companyName": companyName_, "name": name_})
+        # html_content = render_to_string('contact.html', {"phoneNumber": phoneNumber_, "subject": subject_, "message": message_, "emailAddress": emailAddress_, "companyName": companyName_, "name": name_})
         # Then we create an "EmailMessage" object as usual.
         msg = EmailMultiAlternatives(
             subject_,
-            message_,
+            "Hi! My name is {}, I am working for {}, I'll be really glad if you text me {} or call {}, and the main {}".format(name_, companyName_, emailAddress_, phoneNumber_, message_),
             settings.EMAIL_HOST_USER,
             settings.ADMINS,
         )
-        msg.attach_alternative(html_content, "text/html")
+        # msg.attach_alternative(html_content, "text/html")
         # Then we send message.
         msg.send()
         return instance

@@ -113,7 +113,7 @@ class RequestForQuotationSerializer(serializers.ModelSerializer):
             parsedSection = json.loads(section)
 
             for j in parsedSection:
-                if not j:
+                if not j or j["Icon"] is None:
                     continue
                 else:
                     print(j)
