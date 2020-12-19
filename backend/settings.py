@@ -233,3 +233,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'build', 'static', 'media')
 AWS_ACCESS_KEY_ID = 'AKIAVZYOXE5E47QUZKXM'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'vsevolod-jolly-bucket'
+AWS_S3_REGION_NAME = 'eu-central-1'
+S3_USE_SIGV4 = True
