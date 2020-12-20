@@ -83,6 +83,7 @@ body {
     height: 150px;
     background-position: center;
     background-repeat: no-repeat;
+    border-radius: 10px;
 }
 .box_size img{
     width: 40px;
@@ -131,7 +132,7 @@ body {
     .button{
         display: block;
     }
-    section{
+    .section{
         width: 100%;
     }
 }

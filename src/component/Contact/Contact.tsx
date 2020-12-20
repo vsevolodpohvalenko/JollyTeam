@@ -43,8 +43,9 @@ const initialValues = {
 type PropsType = {
     userID: string | null
 }
-const history = useHistory()
 export const Contact = (props: PropsType) => {
+
+    const history = useHistory()
     const [createContact, {data}] = useMutation(Create_Contact);
     const onSubmit = (body: {
         name: string,

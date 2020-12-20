@@ -69,7 +69,7 @@ export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof 
                 </div>
                 <div className={s.box_size}>
                     <p>{p.companyDescription}</p>
-                    {profile && JSON.parse(p.sections).map((e: {
+                    {props.profile && JSON.parse(p.sections).map((e: {
                             Text: string,
                             Icon: string,
                             Title: string,
@@ -105,8 +105,8 @@ export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof 
                 </div>
             </div>
         ))}
-        {my_documents && my_documents.map((d: any) => (<div className={s.box_size}>
-                <a href={d.Download} download><img alt={"thumbnail"} src={d.Thumbnail}/></a>
+        {props.my_documents && my_documents.map((d: any) => (<div className={s.box_size}>
+                <a href={d.Download} download><img alt={"thumbnail"} style={{borderRadius: '10px'}} src={d.Thumbnail}/></a>
                 <small>{d.Title}</small>
                 <Link  to={d.Download}  download>Download</Link>
             </div>

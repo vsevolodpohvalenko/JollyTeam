@@ -1,11 +1,16 @@
 import React from "react";
 import defaultImage from "../../../../media/default.jpg";
-import clothesForCouples from '../../../../media/clothes.png'
-import mensClothing from '../../../../media/suit.svg'
-import Sportswear from '../../../../media/boots.svg'
-import womansClothes from '../../../../media/dress.svg'
 import s from './ProfileView.module.css'
 import {Link} from "react-router-dom";
+import {
+    ApiOutlined,
+    BulbOutlined,
+    CarOutlined,
+    CoffeeOutlined, FormatPainterOutlined,
+    SettingOutlined,
+    ShopOutlined,
+    SkinOutlined
+} from "@ant-design/icons";
 
 export type SectionType = Array<{
     Text: string,
@@ -66,18 +71,27 @@ export const ProfileView = (props: RootProps) => {
                                 Title: string
                             }, index: number) => (
                                 <div key={index} className={s.section}>
-                                    <div>
-                                        {e.Icon === "Clothes For Couples" && (
-                                            <img alt={"icon"} className={s.icon} src={clothesForCouples}/>)}
-                                        {e.Icon === "Men's clothing" && (
-                                            <img alt={"icon"} className={s.icon} src={mensClothing}/>)}
-                                        {e.Icon === "Sportswear" && (
-                                            <img alt={"icon"} className={s.icon} src={Sportswear}/>)}
-                                        {e.Icon === "Woman's Clothes" && (
-                                            <img alt={"icon"} className={s.icon} src={womansClothes}/>)}
+                               <div>
+                                    {e.Icon === "Logistics companies" && (
+                                        <CarOutlined className={s.icon}/>)}
+                                    {e.Icon === "Restaurant business" && (
+                                        <CoffeeOutlined className={s.icon}/>)}
+                                    {e.Icon === "Grocery supplier" && (
+                                        <ShopOutlined className={s.icon}/>)}
+                                    {e.Icon === "Small manufacturers" && (
+                                        <BulbOutlined className={s.icon}/>)}
+                                    {e.Icon === "Fabric supplier" && (
+                                        <SkinOutlined className={s.icon}/>)}
+                                    {e.Icon === "Supplier of kitchen utensils" && (
+                                        <SettingOutlined className={s.icon}/>)}
+                                    {e.Icon === "Supplier of household appliances" && (
+                                        <ApiOutlined className={s.icon}/>)}
+                                    {e.Icon === "Interior designers" && (
+                                        <FormatPainterOutlined className={s.icon}/>)}
 
-                                        <h3>{e.Title}</h3>
-                                    </div>
+
+                                    <h3>{e.Title}</h3>
+                                </div>
                                     <p>{e.Text}</p>
 
                                 </div>
