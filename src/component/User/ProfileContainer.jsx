@@ -7,6 +7,7 @@ import {RouteComponentProps, withRouter} from "react-router";
 import {AppStateType} from "../../redux/redux_store";
 import {GetDocumentsSelector, GetSuitableProfile} from "../../redux/reducers/Profile-selectors";
 import store from '../../redux/redux_store'
+import Preloader from "../Preloader/preloader";
 
 // type PropsType = {
 //     profiles: Array<{
@@ -40,7 +41,7 @@ class ProfileContainer extends React.Component {
 
     render() {
         return (
-            this.props.profileS.length >= 1 && this.props.my_documents.length >=1  && <Profile profiles={this.props.profileS} my_documents={this.props.my_documents}/>
+            (this.props.profileS.length >= 1)  ? <Profile profiles={this.props.profileS} my_documents={this.props.my_documents}/> : <Preloader/>
         )
     }
 }
@@ -48,7 +49,7 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => {
     debugger
     return {
-        my_documents: GetDocumentsSelector(state),
+        my_documents: state.profile.documents,
         profileS: state.profile.profiles
     }
 }

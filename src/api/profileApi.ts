@@ -71,7 +71,7 @@ export const profileAPI = {
         return instance.get<Array<SingleProfile>>('CompanyProfilePage/')
     },
     getDocuments: () => {
-        debugger
+
         return instance.get<Array<SingleDocument>>('Document/')
     },
     getCategory: () => {

@@ -43,16 +43,17 @@ export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof 
     }> = props.profiles
 
 
-    debugger
-    const profile = profiles.filter(p => p.owner === Number(props.match.params.id))
 
-    const my_documents = props.my_documents.filter((e: {
+    const profile = profiles.filter(p => p.owner === Number(props.match.params.id))
+    console.log(props.my_documents)
+
+    const my_documents =(props.my_documents && profile[0]) ? props.my_documents.filter((e: {
         id: number,
         Title: string,
         Thumbnail: string,
         Download: string,
         owner: number
-    }) => e.owner && (e.owner == profile[0].owner))
+    }) => e.owner && (e.owner == profile[0].owner) ): []
     const onclick:any = (link: string) => {window.open(link, '_blank')}
     return <div className={s.main}>
         {profile.map(p => (
