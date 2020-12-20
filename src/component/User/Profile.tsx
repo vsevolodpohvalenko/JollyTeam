@@ -24,7 +24,7 @@ type PropsType = {
 
 }
 
-export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof RouteComponentProps<any>> & WithRouterProps<(props: number) => JSX.Element>> & WithRouterStatics<(props: any) => JSX.Element> = withRouter((props) => {
+export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof RouteComponentProps<any>> & WithRouterProps<(props: number) => JSX.Element>> & WithRouterStatics<(props: any) => JSX.Element> = withRouter((props:any) => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(GetDocuments())
@@ -40,19 +40,19 @@ export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof 
         companyLogo: string,
         sections: string,
         owner: number
-    }> = useSelector(GetSuitableProfile)
+    }> = props.profiles
 
 
     debugger
     const profile = profiles.filter(p => p.owner === Number(props.match.params.id))
 
-    const my_documents = store.getState().profile.documents.filter((e: {
+    const my_documents = props.my_documents.filter((e: {
         id: number,
         Title: string,
         Thumbnail: string,
         Download: string,
         owner: number
-    }) => e.owner == profile[0].owner)
+    }) => e.owner && (e.owner == profile[0].owner))
     const onclick:any = (link: string) => {window.open(link, '_blank')}
     return <div className={s.main}>
         {profile.map(p => (

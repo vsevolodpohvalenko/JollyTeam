@@ -4,6 +4,9 @@ import s from './Contact.module.css'
 import {contactAPI} from "../../api/ContactApi";
 import {gql} from "apollo-boost";
 import {useMutation} from "react-apollo";
+import store from "../../redux/redux_store";
+import {createMessage} from "../../redux/reducers/MessageReducer";
+import {useHistory} from "react-router-dom";
 
 
 const Create_Contact = gql`
@@ -40,7 +43,7 @@ const initialValues = {
 type PropsType = {
     userID: string | null
 }
-
+const history = useHistory()
 export const Contact = (props: PropsType) => {
     const [createContact, {data}] = useMutation(Create_Contact);
     const onSubmit = (body: {
@@ -66,7 +69,10 @@ export const Contact = (props: PropsType) => {
                 companyName_: body.companyName,
                 phoneNumber_: body.phoneNumber,
             }
-        })
+        }).then(r =>
+        {history.push('/')
+            store.dispatch(createMessage({log_in_ed: "Contact form was delivered"}))
+            store.dispatch(createMessage({log_in_ed: "Wait for the answer"}))})
     }
 
     const FormikElement = (props: {
