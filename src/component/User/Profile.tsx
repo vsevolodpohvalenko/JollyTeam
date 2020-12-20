@@ -69,7 +69,7 @@ export const Profile: React.ComponentClass<Omit<RouteComponentProps<any>, keyof 
                 </div>
                 <div className={s.box_size}>
                     <p>{p.companyDescription}</p>
-                    {props.profile && JSON.parse(p.sections).map((e: {
+                    {profile && JSON.parse(p.sections).map((e: {
                             Text: string,
                             Icon: string,
                             Title: string,

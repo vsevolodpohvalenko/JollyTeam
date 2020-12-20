@@ -40,7 +40,7 @@ class ProfileContainer extends React.Component {
 
     render() {
         return (
-            this.props.profileS.length >= 1 && this.props.my_documents  && <Profile profiles={this.props.profileS} my_documents={this.props.my_documents}/>
+            this.props.profileS.length >= 1 && this.props.my_documents.length >=1  && <Profile profiles={this.props.profileS} my_documents={this.props.my_documents}/>
         )
     }
 }
