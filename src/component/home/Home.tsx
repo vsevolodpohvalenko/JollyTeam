@@ -72,8 +72,8 @@ export const Home: React.FC<PropsType> = ({logout, GetSearchedData, isAuthentica
             <Link to="/request_for_proposals" type="submit" className={s.button}>
                 Request For Proposals
             </Link>
-            <Link to="/companies" type="submit" className={s.button}>
-                Companies Overview
+            <Link to="/contact" type="submit" className={s.button}>
+                Creat A Connection
             </Link>
             <div className={s.inputWrapper}>
                 <div className={s.icon} onClick={() => Search(search)}/>

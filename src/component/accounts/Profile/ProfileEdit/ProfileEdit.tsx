@@ -6,7 +6,7 @@ import defaultThumbnail from '../../../../media/thumbnail.jpg'
 import Select from 'react-select'
 import {CustomDropZoneType} from "./Document";
 import {profileAPI} from "../../../../api/profileApi";
-import {Button, Input} from "antd"
+import { Input} from "antd"
 import Preloader from "../../../Preloader/preloader";
 
 type InputProps = {
@@ -337,17 +337,17 @@ export const ProfileEdit = (props: RootPropsType) => {
                             <CustomDropZone name="Download" label="Download" AllowButton={1}
                                             onDrop={(acceptedFiles: any) => DocumenthandleInputDownload(acceptedFiles, i)}
                                             p="Drag&Drop Your attachments here"/>
-                            <div>
+                            <div className={s.tools}>
                                 {Documents.length !== 1 &&
-                                <div className="text-danger" onClick={() => handleRemoveClick2(i)}>Remove</div>}
-                                {Documents.length - 1 === i && <div className="text-danger" onClick={() => {
+                                <button type="button" className="btn btn-outline-danger" onClick={() => handleRemoveClick2(i)}>Remove</button>}
+                                {Documents.length - 1 === i && <button type="button" className="btn btn-outline-primary" onClick={() => {
                                     handleAddClick2()
-                                }}>Add 1 Document</div>}
+                                }}>Add 1 Document</button>}
                             </div>
                         </div>
                     )
                 })}
-                <button className={s.button} type={"submit"}>Send Form</button>
+                <button className={s.button} type={"submit"}>Submit</button>
             </div>
         </form>
     )

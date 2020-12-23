@@ -1,7 +1,7 @@
 .footer{
     align-items: center;
     position: relative;
-    background-color: rgb(51, 54, 82);
+    background-color: rgb(21, 23, 34);
     box-sizing: border-box;
     border-radius: 4px;
     box-shadow:  0 2px 5px rgba(0, 0, 0, 0.2);
@@ -14,7 +14,7 @@
 .db{
     align-items: center;
     position: relative;
-    background-color: rgb(51, 54, 82);
+    background-color: rgb(21, 23, 34);
     box-sizing: border-box;
     border-radius: 4px;
     box-shadow:  0 2px 5px rgba(0, 0, 0, 0.2);

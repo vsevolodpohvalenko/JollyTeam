@@ -100,7 +100,7 @@ class Contact(models.Model):
         # Then we create an "EmailMessage" object as usual.
         msg = EmailMultiAlternatives(
             subject_,
-            "Hi! My name is {}, I am working for {}, I'll be really glad if you text me {} or call {}, and the main {}".format(name_, companyName_, emailAddress_, phoneNumber_, message_),
+            "Hi! My name is {}, I am working for {}, I'll be really glad if you text me {} or call {}, and the main \n{}".format(name_, companyName_, emailAddress_, phoneNumber_, message_),
             settings.EMAIL_HOST_USER,
             settings.ADMINS,
         )

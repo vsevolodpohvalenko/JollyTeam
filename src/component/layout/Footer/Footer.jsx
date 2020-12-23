@@ -6,7 +6,7 @@ export const Footer =() => {
     return <Fragment >
         <div className= "d-none footer  db d-md-block">
 <nav className="navbar  navbar-expand-md  ">
-  <Link className="navbar-brand navl text-white" to="/">Textile<span className="text-danger">S</span>pot<span className="text-danger">.</span></Link>
+  <Link className="navbar-brand navl text-white" to="/">Jolly<span className="text-danger">T</span>eam<span className="text-danger">.</span></Link>
   
   <div className="collapse navbar-collapse justify-content-end nav" id="navbar">
     <ul className="navbar-nav d-flex ">
@@ -24,7 +24,7 @@ export const Footer =() => {
 
   </div>
 </nav>
-<small className="nav-link text-white " >TextileSpot. 2020</small>
+<small className="nav-link text-white " >JollyTeam. 2020</small>
 </div>
 <nav className="navbar db navbar-light d-md-none justify-content-center ">
   <ul className="navbar-nav">

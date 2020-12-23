@@ -90,7 +90,8 @@ class ContactSerializer(serializers.ModelSerializer):
         # Then we create an "EmailMessage" object as usual.
         msg = EmailMultiAlternatives(
             instance.subject,
-            "Hi! My name is {}, I am working for {}, I'll be really glad if you text me {} or call {}, and the main {}".format(instance.name, instance.companyName, instance.emailAddress, instance.phoneNumber, instance.message),
+            "Hi! My name is {}, \nI am working for {}, \nI'll be really glad if you text me {} \nor call {}, \nand the main {}".format(
+                instance.name, instance.companyName, instance.emailAddress, instance.phoneNumber, instance.message),
             settings.EMAIL_HOST_USER,
             settings.ADMINS,
         )
@@ -123,11 +124,14 @@ class RequestForProposalsSerializer(serializers.ModelSerializer):
         image = instance.attachments
         msg = EmailMultiAlternatives(
             'Request For Quotation',
-            'KEY WORDS: {:<8}, Category: {:<8}, Descriptions: {:<8}, Preferred Currency: {:<8}, Preferred Until '
-            'Price: {:<8}, Preferred Shipping Agreement: {:<8}, Payment Method: {:<8}'.format(instance.keywords,
-                                                                                              instance.category,
-                                                                                              instance.descriptions,
-                                                                                              instance.preferredCurrency, instance.preferredUntilPrice, instance.preferredShippingAgreement, instance.paymentMethod),
+            'KEY WORDS: {:<8}, \nCategory: {:<8}, \nDescriptions: {:<8}, \nPreferred Currency: {:<8}, \nPreferred Until '
+            '\nPrice: {:<8}, \nPreferred Shipping Agreement: {:<8}, \nPayment Method: {:<8}'.format(instance.keywords,
+                                                                                                    instance.category,
+                                                                                                    instance.descriptions,
+                                                                                                    instance.preferredCurrency,
+                                                                                                    instance.preferredUntilPrice,
+                                                                                                    instance.preferredShippingAgreement,
+                                                                                                    instance.paymentMethod),
             settings.EMAIL_HOST_USER,
             emails,
             headers={'Message-ID': 'foo'},

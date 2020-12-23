@@ -100,7 +100,7 @@ export const Contact = (props: PropsType) => {
                 </div>
                 <FormikElement label="Subject" name="subject" placeholder="Subject"/>
                 <FormikElement label="Message" name="message" placeholder="Message"/>
-                <button className={s.button} type="submit">Put Contact</button>
+                <button className={s.button} type="submit">Submit</button>
             </Form>
         </Formik>
     </div>

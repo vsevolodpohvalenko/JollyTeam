@@ -157,8 +157,8 @@ export const RequestForProposals = (Currency: any) => {
     }
 
     return (<div className={s.main}>
-        <h2>Tell suppliers what you need</h2>
-        <p>The more specific your information, the more accurately we can match your request to the right suppliers</p>
+        <h2>Find the right business partner</h2>
+        <p>With this function you can leave the information you need to select a partner or supplier and we will send it to the right companies.</p>
         <form className="form-group" onSubmit={HandleSubmit}>
             <div className={s.double}>
                 <InputText element="Keywords" value={keywords}
@@ -193,12 +193,12 @@ export const RequestForProposals = (Currency: any) => {
 
                 <Select options={paymentMOptions} onChange={(e: any) => setPayment_method(e.value)}/>
             </div>
-            <div>
+            <div style={{display: "flex", margin: "10px"}}>
                 <input type={"checkbox"} onChange={() => setPrivacy_policy(!privacy_policy)}/>
                 <small>I agree with privacy policy</small>
             </div>
             <button className={s.button} type={"submit"}>
-                SUBMIT
+                Submit
             </button>
         </form>
     </div>)}
