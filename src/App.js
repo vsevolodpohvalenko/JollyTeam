@@ -24,9 +24,9 @@ import Preloader from "./component/Preloader/preloader";
 import {PageNotFound} from "./component/layout/PageNotFound";
 import {FrequentlyAskedQuestions} from "./component/FAQ/FAQ";
 import {Profile} from "./component/User/Profile";
-import {RequestForQuotation} from "./component/requestForQuotation/requestForQuotation";
+import {RequestForProposals} from "./component/requestForProposals/requestForProposals";
 import ProfileEditContainer from "./component/accounts/Profile/ProfileEdit/ProfileEditContainer";
-import RequestForQuotationContainer from "./component/requestForQuotation/requestForQuotationContainer";
+import RequestForQuotationContainer from "./component/requestForProposals/requestForProposalsContainer";
 import ProfileContainer from "./component/User/ProfileContainer";
 
 
@@ -73,7 +73,7 @@ class App extends React.Component {
                             <PrivateRoute exact path='/contact' component={ContactContainer}/>
                             <PrivateRoute exact path='/profileEdit' component={ProfileEditContainer}/>
                             <PrivateRoute exact path='/profileView' component={ProfileViewContainer}/>
-                            <PrivateRoute exact path='/request_for_quotation' component={RequestForQuotationContainer}/>
+                            <PrivateRoute exact path='/request_for_proposals' component={RequestForQuotationContainer}/>
                             <Route exact path='/companies' component={CompaniesContainer}/>
                             <PrivateRoute exact path='/profile/:id' component={ProfileContainer}/>
                             <Route component={() => <PageNotFound/>} />

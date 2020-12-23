@@ -110,7 +110,7 @@ class Contact(models.Model):
         return instance
 
 
-class RequestForQuotation(models.Model):
+class RequestForProposals(models.Model):
     keywords = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
     descriptions = models.TextField(max_length=500)

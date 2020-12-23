@@ -1,6 +1,6 @@
 import axios, {AxiosPromise} from "axios";
 import {CategoriesType} from "../component/accounts/Profile/ProfileEdit/ProfileEditContainer";
-import {RequestForQuotation} from "../Frequently_used_types";
+import {RequestForProposals} from "../Frequently_used_types";
 import {config2} from "../api";
 
 type SingleDocument = {
@@ -81,8 +81,8 @@ export const profileAPI = {
         debugger
         return instance.get<Array<SingleProfile>>(`CompanyProfilePage?search=${search}`)
     },
-    postRequestForQuotations: (request: any) => {
-        return instance.post<Array<RequestForQuotation>>('RequestForQuotation/', request)
+    postRequestForProposals: (request: any) => {
+        return instance.post<Array<RequestForProposals>>('RequestForProposals/', request)
     },
     getPaymentMethods: () => {
         return instance.get('PaymentMethods/')

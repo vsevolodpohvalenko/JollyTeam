@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import s from './requestForQuotation.module.css'
+import s from './requestForProposals.module.css'
 import style from '../accounts/Profile/ProfileEdit/ProfileEdit.module.css'
 import Dropzone from "react-dropzone";
 import Select from 'react-select'
@@ -10,7 +10,7 @@ import {
     GetCategorySelector,
     GetCurrencySelector,
     GetPaymentMethodsS,
-} from "../../redux/reducers/RequestForQuotations-selectors";
+} from "../../redux/reducers/RequestForProposals-selectors";
 import {GetCategory, GetCountries, GetPaymentMethods} from "../../redux/reducers/ProfileReducer";
 import {useHistory} from "react-router-dom";
 import store from "../../redux/redux_store";
@@ -51,7 +51,7 @@ const img = {
     height: '100%'
 };
 
-export const RequestForQuotation = (Currency: any) => {
+export const RequestForProposals = (Currency: any) => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(GetCountries())
@@ -149,7 +149,7 @@ export const RequestForQuotation = (Currency: any) => {
         form_data.append("destinationPort", destinationPort)
         form_data.append("paymentMethod", payment_method)
         form_data.append("iAgree", String(privacy_policy))
-        profileAPI.postRequestForQuotations(form_data).then(() => {
+        profileAPI.postRequestForProposals(form_data).then(() => {
             history.push('/')
             store.dispatch(createMessage({log_in_ed: "Request was submitted"}))
         })

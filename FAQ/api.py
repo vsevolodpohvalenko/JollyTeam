@@ -1,10 +1,10 @@
 from rest_framework import viewsets, permissions
 
 from .models import FAQ_Group, FAQ_item, Document, Section, Category, Home_Page, MenuItem, \
-    ContentPage, Contact, RequestForQuotation, Links, PaymentMethods, CompanyProfilePage
+    ContentPage, Contact, RequestForProposals, Links, PaymentMethods, CompanyProfilePage
 from .serializers import FAQGroupSerializer, FAQItemSerializer, DocumentSerializer, \
     SectionSerializer, CategorySerializer, HomePageSerializer, MenuItemSerializer, ContactSerializer, \
-    ContentPageSerializer, RequestForQuotationSerializer, LinksSerializer, PaymentMethodsSerializer, \
+    ContentPageSerializer, RequestForProposalsSerializer, LinksSerializer, PaymentMethodsSerializer, \
     CompanyProfilePageSerializer
 
 
@@ -96,12 +96,12 @@ class ContactViewSet(viewsets.ModelViewSet):
     serializer_class = ContactSerializer
 
 
-class RequestForQuotationViewSet(viewsets.ModelViewSet):
-    queryset = RequestForQuotation.objects.all()
+class RequestForProposalsViewSet(viewsets.ModelViewSet):
+    queryset = RequestForProposals.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
-    serializer_class = RequestForQuotationSerializer
+    serializer_class = RequestForProposalsSerializer
 
 
 class LinkViewSet(viewsets.ModelViewSet):

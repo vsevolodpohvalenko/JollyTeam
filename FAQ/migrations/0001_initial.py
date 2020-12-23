@@ -72,7 +72,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='RequestForQuotation',
+            name='RequestForProposals',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('keywords', models.CharField(max_length=100)),

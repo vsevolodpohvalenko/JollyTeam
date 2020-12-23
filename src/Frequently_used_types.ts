@@ -1,4 +1,4 @@
-export type RequestForQuotation = {
+export type RequestForProposals = {
     id: number,
     keywords: string,
     category: string,

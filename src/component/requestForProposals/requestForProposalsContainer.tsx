@@ -1,17 +1,17 @@
 import React, {Component} from "react";
 import {connect, ConnectedProps} from "react-redux";
-import {RequestForQuotation} from "./requestForQuotation";
+import {RequestForProposals} from "./requestForProposals";
 import {GetCountries, GetCategory} from "../../redux/reducers/ProfileReducer";
 import {AppStateType} from "../../redux/redux_store";
 
-class RequestForQuotationContainer extends Component<PropsReduxType>{
+class RequestForProposalsContainer extends Component<PropsReduxType>{
     componentDidMount() {
         this.props.GetCountries()
         this.props.GetCategory()
     }
 
     render() {
-        return <RequestForQuotation currency = {this.props.currency}  />
+        return <RequestForProposals currency = {this.props.currency}  />
     }
 
 }
@@ -27,4 +27,4 @@ const mapStateToProps = (state: AppStateType) => {
 const connector = connect(mapStateToProps, {GetCountries, GetCategory})
 type PropsReduxType = ConnectedProps<typeof connector>
 
-export default connector(RequestForQuotationContainer)
+export default connector(RequestForProposalsContainer)

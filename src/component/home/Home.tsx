@@ -68,9 +68,9 @@ export const Home: React.FC<PropsType> = ({logout, GetSearchedData, isAuthentica
             <div className={s.clearfix}></div>
         </header>
         <div className={s.main}>
-            <h3 className={s.homeh3}>Finding the right supplier is complicated. JollyTeam makes it easier</h3>
-            <Link to="/request_for_quotation" type="submit" className={s.button}>
-                Request For Quotation
+            <h3 className={s.homeh3}>On our portal you can find suppliers and partners for small businesses</h3>
+            <Link to="/request_for_proposals" type="submit" className={s.button}>
+                Request For Proposals
             </Link>
             <Link to="/companies" type="submit" className={s.button}>
                 Companies Overview

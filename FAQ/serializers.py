@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from rest_framework import serializers
 
 from .models import FAQ_Group, FAQ_item, Links, CompanyProfilePage, Document, Section, Category, Home_Page, \
-    MenuItem, ContentPage, Contact, RequestForQuotation, PaymentMethods
+    MenuItem, ContentPage, Contact, RequestForProposals, PaymentMethods
 
 User = settings.AUTH_USER_MODEL
 
@@ -100,13 +100,13 @@ class ContactSerializer(serializers.ModelSerializer):
         return instance
 
 
-class RequestForQuotationSerializer(serializers.ModelSerializer):
+class RequestForProposalsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = RequestForQuotation
+        model = RequestForProposals
         fields = '__all__'
 
     def create(self, validate_data):
-        instance = super(RequestForQuotationSerializer, self).create(validate_data)
+        instance = super(RequestForProposalsSerializer, self).create(validate_data)
         emails = ["vsevolod.pohvalenko@gmail.com"]
         for i in CompanyProfilePage.objects.all():
             section = i.sections

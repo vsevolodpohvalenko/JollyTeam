@@ -116,7 +116,7 @@ export const FrequentlyAskedQuestions = () => {
             <div className={s.main}>
                 <h3 className="container text-center mt-3 mb-3">FAQ</h3>
                 <p className="middle text-center">Here you can find all the information you need</p>
-                {data.FAQGroups.map((group: any) =>
+                {data && data.FAQGroups.map((group: any) =>
                     <div key={group.id}>
                         <div className="row border-bottom ml-3 mb-3"><h5 className={s.group}>{group.Title}</h5></div>
                         <SuitableItems Id={group.id}/>
