@@ -7,6 +7,7 @@ import Select from 'react-select'
 import {CustomDropZoneType} from "./Document";
 import {profileAPI} from "../../../../api/profileApi";
 import {Button, Input} from "antd"
+import Preloader from "../../../Preloader/preloader";
 
 type InputProps = {
     element: string,
@@ -33,6 +34,7 @@ let TextAreaText = (props: InputProps) => {
 const img = {
     display: 'block',
     width: '150px',
+    margin: "10px",
     borderRadius: '10px',
     height: 'auto'
 
@@ -69,6 +71,7 @@ type RootPropsType = {
 }
 
 export const ProfileEdit = (props: RootPropsType) => {
+
     const options = props.countries.map(c => {
         return {value: c.name, label: c.name}
     })
@@ -77,7 +80,7 @@ export const ProfileEdit = (props: RootPropsType) => {
     })
 
     const [companyProfilePicture, setCompanyProfilePicture] = useState<any>();
-    const [companyLogo, setCompanyLogo] = useState<any>();
+    const [companyLogo, setCompanyLogo] = useState<any>(props.previousProfile[(props.userID) - 1].companyLogo);
     const [background, setBackground] = useState<string| Array<any>>(props.previousProfile[(props.userID) - 1].companyProfilePicture)
     const [companyName, setCompanyName] = useState<string>(props.previousProfile[(props.userID) - 1].companyName)
     const [country, setCountry] = useState<string | {value: string, label: string}>(props.previousProfile[(props.userID) - 1].country)
@@ -88,10 +91,10 @@ export const ProfileEdit = (props: RootPropsType) => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        debugger
+
         let form_data = new FormData();
         companyProfilePicture !== undefined && (form_data.append('companyProfilePicture', companyProfilePicture[0], companyProfilePicture[0].name))
-        companyLogo !== undefined && (form_data.append('companyLogo', companyLogo[0], companyLogo[0].name));
+        companyLogo[0].preview !== undefined && (form_data.append('companyLogo', companyLogo[0], companyLogo[0].name));
         form_data.append("sections", JSON.stringify(section))
         form_data.append('companyName', companyName);
         form_data.append('companyDescription', companyDescription);
@@ -139,7 +142,7 @@ export const ProfileEdit = (props: RootPropsType) => {
         const index = props.index
         const file = Documents[index]
         return (
-            <div className={s.preview} key={file.name}>
+            <div  key={file.name}>
                 <div >
                     <img
                         alt="thumbnail"
@@ -246,8 +249,8 @@ export const ProfileEdit = (props: RootPropsType) => {
     };
 
 
-    return (
-        <form style={{margin: "5px"}} className="form-group" onSubmit={handleSubmit}>
+     return  (props.category && props.previousProfile) ?  (
+        <form  className={["form-group", s.form].join(" ")} onSubmit={handleSubmit}>
             <section style={
                 {backgroundImage: `linear-gradient( rgba(56, 56, 56, 0.596), rgba(56, 56, 56, 0.596) ), url(${background || defaultImage})`}}
                      className={s.pic}>
@@ -280,7 +283,7 @@ export const ProfileEdit = (props: RootPropsType) => {
                 </div>
                 <TextAreaText label={"Company Description"} element="companyDescription" value={companyDescription}
                            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setCompanyDescription(e.target.value)}/>
-                {companyLogo && ( companyLogo[0] ? <img style={img} src={companyLogo[0].preview}/> : <img style={img} src={companyLogo}/>)}
+                {companyLogo && ( companyLogo[0].preview ? <img style={img} src={companyLogo[0].preview}/> : <img style={img} src={companyLogo}/>)}
                 <CustomDropZone label="Company Logo" AllowButton={1} onDrop={handleDrop4}
                     p="Drag&Drop Your attachments here"/>
 
@@ -348,7 +351,7 @@ export const ProfileEdit = (props: RootPropsType) => {
             </div>
         </form>
     )
-}
+ :  <Preloader/>}
 
 
 

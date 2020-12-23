@@ -83,7 +83,7 @@
     content: '\f068';
 }
 
-.manufacturer img {
+.company img {
     width: 80%;
     height: 200px;
     background-position: center;
@@ -92,13 +92,13 @@
 
 }
 
-.manufacturer {
+.company {
     float: left;
     width: 30%;
     cursor: pointer;
 }
 
-.manufacturer p {
+.company p {
     color: #797979;
 }
 
@@ -183,7 +183,7 @@
         transform: scale(1.03);
     }
 
-    .manufacturer {
+    .company {
         text-align: -webkit-center;
         display: inline-block;
         justify-content: space-around;
@@ -191,13 +191,13 @@
         width: 40%;
     }
 
-    .manufacturer h5,
-    .manufacturer h6,
-    .manufacturer p {
+    .company h5,
+    .company h6,
+    .company p {
         text-align: start;
     }
 
-    .manufacturer img {
+    .company img {
         height: 140px;
     }
 

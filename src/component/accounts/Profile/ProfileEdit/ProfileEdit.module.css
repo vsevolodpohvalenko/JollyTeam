@@ -50,17 +50,7 @@ svg {
     height: 45%;
 }
 
-.preview {
-    display: inline-flex;
-    border-radius: 2px;
-    border: 1px solid #eaeaea;
-    margin-bottom: 8px;
-    margin-right: 8px;
-    width: 100px;
-    height: 100px;
-    padding: 4px;
-    box-sizing: border-box
-}
+
 
 
 .pic {
@@ -151,7 +141,9 @@ img {
         width: 100%;
         margin-top: 10%;
     }
-
+    .form{
+        margin: 0 10px;
+    }
     .double div#doubleInput {
         width: 100%;
         height: 38px;

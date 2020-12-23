@@ -16,7 +16,7 @@ const OnClick = (props: string) => {
 const Profile = (props: { id: number, companyLogo: string, companyName: string, country: string, companyDescription: string }) => {
 
     return (
-        <div onClick={() => OnClick(String(props.id))} className={s.manufacturer}>
+        <div onClick={() => OnClick(String(props.id))} className={s.company}>
             <img alt={"Logo"} className={s.logo} src={props.companyLogo}/>
             <h5>{props.companyName}</h5>
             <h6>{props.country}</h6>

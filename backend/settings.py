@@ -227,7 +227,8 @@ AWS_DEFAULT_ACL = None
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
-    "http://127.0.0.1:9000"
+    "http://127.0.0.1:9000",
+    'http://localhost:3000'
 ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'build', 'static', 'media')
 AWS_ACCESS_KEY_ID = 'AKIAVZYOXE5E47QUZKXM'

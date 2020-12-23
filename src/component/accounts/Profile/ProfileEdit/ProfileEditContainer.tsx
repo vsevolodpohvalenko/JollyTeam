@@ -27,7 +27,7 @@ class ProfileEditContainer extends React.PureComponent<PropsFromRedux> {
     }
 
     render() {
-        return this.props.profile.length !== 0 ?
+        return this.props.profile[0].id !== 0 ?
             <ProfileEdit category={this.props.category} postDocument={this.props.postDocument}
                           updateDocument={this.props.updateDocument}
                          updateManufacturer={this.props.updateManufacturer} documents={this.props.my_documents}
