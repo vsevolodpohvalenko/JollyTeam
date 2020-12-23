@@ -88,7 +88,7 @@ class Contact(models.Model):
     owner = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     name = models.CharField(max_length=75)
     companyName = models.CharField(max_length=100)
-    emailAddress = models.EmailField(unique=True)
+    emailAddress = models.EmailField()
     phoneNumber = PhoneField(blank=True, help_text='Contact phone number')
     subject = models.CharField(max_length=100)
     message = models.TextField(max_length=500)

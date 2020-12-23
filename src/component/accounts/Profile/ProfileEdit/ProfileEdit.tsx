@@ -6,16 +6,25 @@ import defaultThumbnail from '../../../../media/thumbnail.jpg'
 import Select from 'react-select'
 import {CustomDropZoneType} from "./Document";
 import {profileAPI} from "../../../../api/profileApi";
+import {Button, Input} from "antd"
 
 type InputProps = {
     element: string,
     value: any,
-    onChange: any
+    onChange: any,
+    label: string
 }
 
 let InputText = (props: InputProps) => {
-    return (<div id={s.doubleInput}><label>{props.element}</label>
-            <input className='form-control' type="text" placeholder={props.element} id={props.element}
+    return (<div id={s.doubleInput}><label>{props.label}</label>
+            <Input className='form-control' type="text" placeholder={props.element} id={props.element}
+                   value={props.value} onChange={props.onChange}/>
+        </div>
+    )
+}
+let TextAreaText = (props: InputProps) => {
+    return (<div id={s.doubleInput}><label>{props.label}</label>
+            <Input.TextArea className='form-control' placeholder={props.element} id={props.element}
                    value={props.value} onChange={props.onChange}/>
         </div>
     )
@@ -23,8 +32,9 @@ let InputText = (props: InputProps) => {
 
 const img = {
     display: 'block',
-    width: 'auto',
-    height: '100%'
+    width: '150px',
+    borderRadius: '10px',
+    height: 'auto'
 
 };
 
@@ -67,7 +77,7 @@ export const ProfileEdit = (props: RootPropsType) => {
     })
 
     const [companyProfilePicture, setCompanyProfilePicture] = useState<any>();
-    const [companyLogo, setCompanyLogo] = useState<Array<any>>();
+    const [companyLogo, setCompanyLogo] = useState<any>();
     const [background, setBackground] = useState<string| Array<any>>(props.previousProfile[(props.userID) - 1].companyProfilePicture)
     const [companyName, setCompanyName] = useState<string>(props.previousProfile[(props.userID) - 1].companyName)
     const [country, setCountry] = useState<string | {value: string, label: string}>(props.previousProfile[(props.userID) - 1].country)
@@ -130,7 +140,7 @@ export const ProfileEdit = (props: RootPropsType) => {
         const file = Documents[index]
         return (
             <div className={s.preview} key={file.name}>
-                <div className={s.thumbInner}>
+                <div >
                     <img
                         alt="thumbnail"
                         src={(file.Thumbnail.preview ? file.Thumbnail.preview : file.Thumbnail) || defaultThumbnail}
@@ -182,7 +192,7 @@ export const ProfileEdit = (props: RootPropsType) => {
         list[index][name] = value;
         setSection(list);
     };
-    const MyDocuments = Documents.filter((d: any) => d.owner === String(props.userID))
+
 
     const DocumentedInputChange = (e: {target: {name: string, value: string}}, index: number) => {
         const {name, value} = e.target;
@@ -237,7 +247,7 @@ export const ProfileEdit = (props: RootPropsType) => {
 
 
     return (
-        <form className="form-group" onSubmit={handleSubmit}>
+        <form style={{margin: "5px"}} className="form-group" onSubmit={handleSubmit}>
             <section style={
                 {backgroundImage: `linear-gradient( rgba(56, 56, 56, 0.596), rgba(56, 56, 56, 0.596) ), url(${background || defaultImage})`}}
                      className={s.pic}>
@@ -260,7 +270,7 @@ export const ProfileEdit = (props: RootPropsType) => {
             </section>
             <div id={s.main}>
                 <div className={s.double}>
-                    <InputText element="companyName" value={companyName}
+                    <InputText label = "Company Name" element="companyName" value={companyName}
                                onChange={(e: ChangeEvent<HTMLInputElement>) => setCompanyName(e.target.value)}/>
                     <div className={s.select}>
                         <label>Country</label>
@@ -268,10 +278,11 @@ export const ProfileEdit = (props: RootPropsType) => {
                                 placeholder={"Choose your country"} onChange={(e: any) => setCountry(e)}/>
                     </div>
                 </div>
-                <InputText element="companyDescription" value={companyDescription}
-                           onChange={(e: ChangeEvent<HTMLInputElement>) => setCompanyDescription(e.target.value)}/>
+                <TextAreaText label={"Company Description"} element="companyDescription" value={companyDescription}
+                           onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setCompanyDescription(e.target.value)}/>
+                {companyLogo && ( companyLogo[0] ? <img style={img} src={companyLogo[0].preview}/> : <img style={img} src={companyLogo}/>)}
                 <CustomDropZone label="Company Logo" AllowButton={1} onDrop={handleDrop4}
-                                p="Drag&Drop Your attachments here"/>
+                    p="Drag&Drop Your attachments here"/>
 
                 {section.map((x: {Icon: any, Title: string, Text: string}, i: number) => {
                     return (
@@ -293,14 +304,14 @@ export const ProfileEdit = (props: RootPropsType) => {
                                 </div>
                             </div>
                             <label>Text</label>
-                            <input className='form-control' placeholder="Text" name="Text" value={x.Text}
+                            <Input.TextArea className='form-control' placeholder="Text" name="Text" value={x.Text}
                                    onChange={e => SectionhandleInputChange(e.target, i)}/>
-                            <div>
+                            <div className={s.tools}>
                                 {section.length !== 1 &&
-                                <div className="text-danger" onClick={() => handleRemoveClick(i)}>Remove</div>}
-                                {section.length - 1 === i && <div className="text-danger" onClick={() => {
+                                <button type="button" className="btn btn-outline-danger" onClick={() => handleRemoveClick(i)}>Remove</button>}
+                                {section.length - 1 === i && <button type="button" className="btn btn-outline-primary"  onClick={() => {
                                     handleAddClick()
-                                }}>Add 1 Section</div>}
+                                }}>Add 1 Section</button>}
                             </div>
                         </div>
                     )

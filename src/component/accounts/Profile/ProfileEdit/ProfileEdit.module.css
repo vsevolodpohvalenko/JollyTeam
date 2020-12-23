@@ -6,7 +6,11 @@
 #main {
     margin: 0 10%;
 }
-
+.tools{
+    justify-content: space-evenly;
+    display: flex;
+    margin: 5px;
+}
 .select {
     width: 49%;
 }
