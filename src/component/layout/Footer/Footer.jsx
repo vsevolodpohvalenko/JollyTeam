@@ -28,7 +28,7 @@ export const Footer =() => {
 </div>
 <nav className="navbar db navbar-light d-md-none justify-content-center ">
   <ul className="navbar-nav">
-    <Link className="navbar-brand navl navl" to={"/"}>Jolly<span className="text-danger">T</span>eam<span className="text-danger">.</span></Link>
+    <Link className="navbar-brand navl text-white" to={"/"}>Jolly<span className="text-danger">T</span>eam<span className="text-danger">.</span></Link>
     <li className="nav-item ">
         <Link className="nav-link text-white" to="/companies">Companies </Link>
       </li>
