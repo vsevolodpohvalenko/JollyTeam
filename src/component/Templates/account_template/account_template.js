@@ -15,9 +15,9 @@ export const AccountTemplate = (props) => {
             <div className={s.homepage}><Link className={s.link} to="/"> Back to home page<div className={s.toggle}></div></Link></div>
             <h4>For Brands</h4>
             <p>If you are a brand and want to request a quote from a manufacturer, use the request a quotation form instead</p>
-            <button type="submit" className={s.button}>
-                    Request For Quotation
-                  </button>
+
+                <Link to="/request_for_proposals" type="submit" className={s.button}> Request For Proposals</Link>
+
             </div>
         </div>
         )
