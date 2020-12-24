@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {gql} from "apollo-boost";
 import {useMutation, useQuery} from 'react-apollo';
 import s from "./FAQ.module.css";
@@ -6,6 +6,10 @@ import cn from "classnames";
 import Preloader from "../Preloader/preloader";
 import {Header} from "../layout/Header/Header";
 import {Footer} from "../layout/Footer/Footer";
+import {faqAPI} from "../../api/FaqApi";
+import 'antd/dist/antd.css';
+import {Skeleton} from "antd";
+
 
 const Query_Groups = gql`
   query {
@@ -66,40 +70,58 @@ export const FrequentlyAskedQuestions = () => {
 
         const id = Number(item.id)
 
-        updateItem({
-            variables: {
-                id: id,
-                Title: item.Title,
-                Group: Number(item.Group.id),
-                Answer: item.Answer,
-                Active: !item.Active
-            }
-        });
+        faqAPI.active_Item({
+                 id: id,
+                 Title: item.Title,
+                 Group: Number(item.Group.id),
+                 Answer: item.Answer,
+                 Active: !item.Active
+             })
+        // updateItem({
+        //     variables: {
+        //         id: id,
+        //         Title: item.Title,
+        //         Group: Number(item.Group.id),
+        //         Answer: item.Answer,
+        //         Active: item.Active ? false : true
+        //     }
+        // });
     }
     const {data, loading}: any = useQuery(
         Query_Groups, {
-            pollInterval: 5000// refetch the result every 0.5 second
+            pollInterval: 500000// refetch the result every 0.5 second
         }
     );
+    const [items, setItem] = useState<Array<string> | any>()
+    const MakeActive = (Id: number) => {
+        debugger
+        const NewItem = [...items]
 
+        NewItem.filter(e => e.id === Id)[0].Active = !NewItem.filter(e => e.id === Id)[0].Active
+        setItem(NewItem)
+
+    }
     const SuitableItems = (props: any) => {
         const {data, loading}: any = useQuery(
             Query_Item, {
-                pollInterval: 5000// refetch the result every 0.5 second
+                pollInterval: 500// refetch the result every 0.5 second
             }
         );
 
-        if (loading) return <Preloader/>;
+
+        if (loading) return <Skeleton active />;
         // if (!data.items.edges.node) return <Preloader/>
-        const suitableItems = data.FAQItems.filter((i: any) => Number(i.Group.id) === Number(props.Id))
+        setItem(data.FAQItems)
+
+        const suitableItems = items && items.filter((i: any) => Number(i.Group.id) === Number(props.Id))
         return (
             <div key={props.Id}>
-                {suitableItems.map((item: any) => <div key={item.id}>
+                {suitableItems && suitableItems.map((item: any, i:number) => <div key={item.id}>
                     <h6 className={[s.item, "d-flex justify-content-between d-flex align-items-center"].join(' ')}><span
                         className="text-danger">{item.Title}</span>
                         <div
                             className={cn({[s.active]: item.Active}, s.menu_toogle)}
-                            onClick={() => OnClick(item)}
+                            onClick={() => MakeActive(item.id)}
                         >
                         </div>
                     </h6>

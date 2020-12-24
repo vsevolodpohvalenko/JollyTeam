@@ -13,7 +13,7 @@ export const faqAPI = {
         Title: string,
         Answer: string,
         Active: boolean,
-        Group: string
+        Group: number
     }) => {
         return instance.put<{
             id: number,
