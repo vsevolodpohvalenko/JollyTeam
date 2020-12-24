@@ -40,19 +40,19 @@ class FAQ_item(models.Model):
 
 class CompanyProfilePage(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    companyProfilePicture = models.ImageField(default='defaultComProfilePic.jpg', upload_to=upload_path)
+    companyProfilePicture = models.ImageField(default='https://vsevolod-jolly-bucket.s3.eu-central-1.amazonaws.com/24original1431380543.jpg', upload_to=upload_path)
     companyName = models.CharField(max_length=60, blank=True, default="Company")
     companyDescription = models.TextField(default="This company doesn't have any description")
     country = models.CharField(max_length=200, blank=True, default="Undefined")
-    companyLogo = models.ImageField(default='company-logo.jpg', upload_to=upload_path)
+    companyLogo = models.ImageField(default='https://vsevolod-jolly-bucket.s3.eu-central-1.amazonaws.com/logo-social.png', upload_to=upload_path)
     sections = models.TextField(default="[{""}]")
 
 
 class Document(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     Title = models.CharField(max_length=75, default= "")
-    Thumbnail = models.ImageField(default='/images/thumbnail.jpg')
-    Download = models.FileField(default='/images/thumbnail.jpg')
+    Thumbnail = models.ImageField(default='https://vsevolod-jolly-bucket.s3.eu-central-1.amazonaws.com/dot-com.jpg')
+    Download = models.FileField(default='https://vsevolod-jolly-bucket.s3.eu-central-1.amazonaws.com/dot-com.jpg')
 
 
 class Section(models.Model):
