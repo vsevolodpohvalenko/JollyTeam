@@ -73,7 +73,7 @@ class App extends React.Component {
                             <PrivateRoute exact path='/contact' component={ContactContainer}/>
                             <PrivateRoute exact path='/profileEdit' component={ProfileEditContainer}/>
                             <PrivateRoute exact path='/profileView' component={ProfileViewContainer}/>
-                            <PrivateRoute exact path='/request_for_proposals' component={RequestForQuotationContainer}/>
+                            <Route exact path='/request_for_proposals' component={RequestForQuotationContainer}/>
                             <Route exact path='/companies' component={CompaniesContainer}/>
                             <PrivateRoute exact path='/profile/:id' component={ProfileContainer}/>
                             <Route component={() => <PageNotFound/>} />

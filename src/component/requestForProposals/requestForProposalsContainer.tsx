@@ -3,6 +3,8 @@ import {connect, ConnectedProps} from "react-redux";
 import {RequestForProposals} from "./requestForProposals";
 import {GetCountries, GetCategory} from "../../redux/reducers/ProfileReducer";
 import {AppStateType} from "../../redux/redux_store";
+import {Header} from "../layout/Header/Header";
+import {Footer} from "../layout/Footer/Footer";
 
 class RequestForProposalsContainer extends Component<PropsReduxType>{
     componentDidMount() {
@@ -11,7 +13,7 @@ class RequestForProposalsContainer extends Component<PropsReduxType>{
     }
 
     render() {
-        return <RequestForProposals currency = {this.props.currency}  />
+        return <div><Header/><RequestForProposals currency = {this.props.currency}  /><Footer/></div>
     }
 
 }
