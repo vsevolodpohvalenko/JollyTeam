@@ -63,6 +63,7 @@
 h4{
     color: #ff585d;
 }
+.button:hover,
 .button{
   background-color: #ff585d;
   width: 40%;
@@ -70,6 +71,7 @@ h4{
   border: none;
   padding: 9px;
   color: white;
+    text-align: center;
   font-size: 13px;
   margin-bottom: 20px;
   margin-top: 15px;
