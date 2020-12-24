@@ -77,7 +77,7 @@ export const Home: React.FC<PropsType> = ({logout, GetSearchedData, isAuthentica
             </Link>
             <div className={s.inputWrapper}>
                 <div className={s.icon} onClick={() => Search(search)}/>
-                <Input placeholder="Search Companies" onKeyDown={handleKeyDown}
+                <input placeholder="Search Companies" onKeyDown={handleKeyDown}
                        onChange={(e) => setSearch(e.target.value)} value={search} type="text"/>
             </div>
         </div>
