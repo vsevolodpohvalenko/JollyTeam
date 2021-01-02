@@ -23,6 +23,8 @@ python-dotenv = "*"
 gunicorn = "*"
 django-storages = "*"
 boto3 = "*"
+django-templated-mail = "*"
+graphene = "*"
 
 [requires]
 python_version = "3.8"

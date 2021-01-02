@@ -1,4 +1,4 @@
-#!/home/seva/textilespot/venv/bin/python3
+#!/home/seva/JollyTeam/venv/bin/python3
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
