@@ -57,25 +57,25 @@ class App extends React.Component {
                     <AlertProvider template={AlertTemplate}{...options}>
                         <Alerts/>
                         <Switch>
-                            <Route exact path='/register'
+                            <Route exact path='/JollyTeam/register'
                                    render={() => <AccountTemplate> <Register/></AccountTemplate>}/>
-                            <Route exact path='/password/reset/confirm/:uid/:token'
+                            <Route exact path='/JollyTeam/password/reset/confirm/:uid/:token'
                                    render={() => <AccountTemplate><ResetPasswordConfirmContainer/></AccountTemplate>}/>
-                            <Route exact path='/reset_password'
+                            <Route exact path='/JollyTeam/reset_password'
                                    render={() => <AccountTemplate> <ResetPasswordContainer/></AccountTemplate>}/>
-                            <Route exact path='/activate/:uid/:token'
+                            <Route exact path='/JollyTeam/activate/:uid/:token'
                                    render={() => <AccountTemplate> <ActivateContainer/></AccountTemplate>}/>
-                            <Route exact path='/faq_group'
+                            <Route exact path='/JollyTeam/faq_group'
                                    render={() => <AccountTemplate> <FrequentlyAskedQuestions/></AccountTemplate>}/>
-                            <Route exact path='/login' render={() => <AccountTemplate> <Login/></AccountTemplate>}/>
-                            <Route exact path='/faq' component={FrequentlyAskedQuestions}/>
-                            <Route exact path='/' component={HomeContainer}/>
-                            <PrivateRoute exact path='/contact' component={ContactContainer}/>
-                            <PrivateRoute exact path='/profileEdit' component={ProfileEditContainer}/>
-                            <PrivateRoute exact path='/profileView' component={ProfileViewContainer}/>
-                            <Route exact path='/request_for_proposals' component={RequestForQuotationContainer}/>
-                            <Route exact path='/companies' component={CompaniesContainer}/>
-                            <PrivateRoute exact path='/profile/:id' component={ProfileContainer}/>
+                            <Route exact path='/JollyTeam/login' render={() => <AccountTemplate> <Login/></AccountTemplate>}/>
+                            <Route exact path='/JollyTeam/faq' component={FrequentlyAskedQuestions}/>
+                            <Route exact path='/JollyTeam/' component={HomeContainer}/>
+                            <PrivateRoute exact path='/JollyTeam/contact' component={ContactContainer}/>
+                            <PrivateRoute exact path='/JollyTeam/profileEdit' component={ProfileEditContainer}/>
+                            <PrivateRoute exact path='/JollyTeam/profileView' component={ProfileViewContainer}/>
+                            <Route exact path='/JollyTeam/request_for_proposals' component={RequestForQuotationContainer}/>
+                            <Route exact path='/JollyTeam/companies' component={CompaniesContainer}/>
+                            <PrivateRoute exact path='/JollyTeam/profile/:id' component={ProfileContainer}/>
                             <Route component={() => <PageNotFound/>} />
                         </Switch>
                     </AlertProvider>
