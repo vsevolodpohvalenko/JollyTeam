@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/JollyTeam/static/css/main.50a90be2.chunk.css",
+    "main.js": "/JollyTeam/static/js/main.ebe9520f.chunk.js",
+    "main.js.map": "/JollyTeam/static/js/main.ebe9520f.chunk.js.map",
+    "runtime-main.js": "/JollyTeam/static/js/runtime-main.0d81f496.js",
+    "runtime-main.js.map": "/JollyTeam/static/js/runtime-main.0d81f496.js.map",
+    "static/css/2.ef440c72.chunk.css": "/JollyTeam/static/css/2.ef440c72.chunk.css",
+    "static/js/2.e8a66f68.chunk.js": "/JollyTeam/static/js/2.e8a66f68.chunk.js",
+    "static/js/2.e8a66f68.chunk.js.map": "/JollyTeam/static/js/2.e8a66f68.chunk.js.map",
+    "index.html": "/JollyTeam/index.html",
+    "precache-manifest.c264f867935223edcc2ecd7197d1d07c.js": "/JollyTeam/precache-manifest.c264f867935223edcc2ecd7197d1d07c.js",
+    "service-worker.js": "/JollyTeam/service-worker.js",
+    "static/css/2.ef440c72.chunk.css.map": "/JollyTeam/static/css/2.ef440c72.chunk.css.map",
+    "static/css/main.50a90be2.chunk.css.map": "/JollyTeam/static/css/main.50a90be2.chunk.css.map",
+    "static/js/2.e8a66f68.chunk.js.LICENSE.txt": "/JollyTeam/static/js/2.e8a66f68.chunk.js.LICENSE.txt",
+    "static/media/Home.module.css": "/JollyTeam/static/media/background.f9de2f38.jpeg",
+    "static/media/default.jpg": "/JollyTeam/static/media/default.b9a79b60.jpg",
+    "static/media/dot-com.jpg": "/JollyTeam/static/media/dot-com.562b53e7.jpg",
+    "static/media/loading_animation.gif": "/JollyTeam/static/media/loading_animation.1628b9d9.gif",
+    "static/media/account_template.module.css": "/JollyTeam/static/media/login.d19fdd8a.jpg",
+    "static/media/PageNotFound.module.css": "/JollyTeam/static/media/p404.9db9d742.png",
+    "static/media/thumbnail.jpg": "/JollyTeam/static/media/thumbnail.72d8a823.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0d81f496.js",
+    "static/css/2.ef440c72.chunk.css",
+    "static/js/2.e8a66f68.chunk.js",
+    "static/css/main.50a90be2.chunk.css",
+    "static/js/main.ebe9520f.chunk.js"
+  ]
+}
