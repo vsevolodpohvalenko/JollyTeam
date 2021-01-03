@@ -1,5 +1,6 @@
 {
-  "name": "JollyTime",
+  "homepage": "http://Pokhvalenko.gitlab.io/Textilespot",
+  "name": "JollyTeam",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -44,28 +45,31 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-sw": "http-server ./build"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "engines": {
-    "node": "10.19.0",
-    "npm": "6.14.4"
-  },
-  "devDependencies": {
-    "http-server": "^0.12.3"
-  }
+    "start-sw": "http-server ./build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+},
+"eslintConfig": {
+"extends": "react-app"
+},
+"browserslist": {
+"production": [
+">0.2%",
+"not dead",
+"not op_mini all"
+],
+"development": [
+"last 1 chrome version",
+"last 1 firefox version",
+"last 1 safari version"
+]
+},
+"engines": {
+"node": "10.19.0",
+"npm": "6.14.4"
+},
+"devDependencies": {
+"gh-pages": "^3.1.0",
+"http-server": "^0.12.3"
+}
 }
