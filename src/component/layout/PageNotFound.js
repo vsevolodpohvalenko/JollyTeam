@@ -18,7 +18,7 @@ export const PageNotFound = () => {
                 <h2>404</h2>
                 <h4>Opps! Page not found</h4>
                 <p>This page you were looking for doesn't exist. You may have mistyped the address or the page may have moved:)</p>
-                <Link to={"/"}>Back to Home</Link>
+                <Link to={"/JollyTeam/"}>Back to Home</Link>
             </div>
         </div>
         </div>
