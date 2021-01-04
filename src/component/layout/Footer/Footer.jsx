@@ -11,13 +11,13 @@ export const Footer =() => {
   <div className="collapse navbar-collapse justify-content-end nav" id="navbar">
     <ul className="navbar-nav d-flex ">
       <li className="nav-item ">
-        <Link className="nav-link text-white" to="/companies">Companies</Link>
+        <Link className="nav-link text-white" to="/JollyTeam/companies">Companies</Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link text-danger " to={"/faq"}>FAQ</Link>
+        <Link className="nav-link text-danger " to={"/JollyTeam/faq"}>FAQ</Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link text-white" to={"/contact"}>Contact</Link>
+        <Link className="nav-link text-white" to={"/JollyTeam/contact"}>Contact</Link>
       </li>
     </ul>
     
@@ -28,15 +28,15 @@ export const Footer =() => {
 </div>
 <nav className="navbar db navbar-light d-md-none justify-content-center ">
   <ul className="navbar-nav">
-    <Link className="navbar-brand navl text-white" to={"/"}>Jolly<span className="text-danger">T</span>eam<span className="text-danger">.</span></Link>
+    <Link className="navbar-brand navl text-white" to={"/JollyTeam/"}>Jolly<span className="text-danger">T</span>eam<span className="text-danger">.</span></Link>
     <li className="nav-item ">
-        <Link className="nav-link text-white" to="/companies">Companies </Link>
+        <Link className="nav-link text-white" to="/JollyTeam/companies">Companies </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link text-danger " to={"/faq"}>FAQ</Link>
+        <Link className="nav-link text-danger " to={"/JollyTeam/faq"}>FAQ</Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link text-white" to={"/contact"}>Contact</Link>
+        <Link className="nav-link text-white" to={"/JollyTeam/contact"}>Contact</Link>
       </li>
       <li className="nav-item">
         <small className="nav-link text-white " >JollyTeam. 2020</small>

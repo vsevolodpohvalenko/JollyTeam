@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d5115415-a259-4235-b5f1-8de4f5639f87" name="Default Changelist" comment="" />
+    <list default="true" id="d5115415-a259-4235-b5f1-8de4f5639f87" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/Templates/account_template/account_template.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/Templates/account_template/account_template.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/home/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/home/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/layout/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/layout/Footer/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/layout/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/layout/Header/Header.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,7 +111,7 @@
       <workItem from="1608725428993" duration="257000" />
       <workItem from="1608725747418" duration="30932000" />
       <workItem from="1608802501099" duration="5969000" />
-      <workItem from="1609610042130" duration="32714000" />
+      <workItem from="1609610042130" duration="33755000" />
     </task>
     <task id="LOCAL-00001" summary="Extra update">
       <created>1608062295835</created>

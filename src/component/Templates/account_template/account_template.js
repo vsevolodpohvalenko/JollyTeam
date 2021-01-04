@@ -16,7 +16,7 @@ export const AccountTemplate = (props) => {
             <h4>For Brands</h4>
             <p>If you are a brand and want to request a proposal from a company, use the request a proposal</p>
 
-                <Link to="/request_for_proposals" type="submit" className={s.button}> Request For Proposals</Link>
+                <Link to="/JollyTeam/request_for_proposals" type="submit" className={s.button}> Request For Proposals</Link>
 
             </div>
         </div>
