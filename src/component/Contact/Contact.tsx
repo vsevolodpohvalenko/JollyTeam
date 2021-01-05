@@ -71,7 +71,7 @@ export const Contact = (props: PropsType) => {
                 phoneNumber_: body.phoneNumber,
             }
         }).then(r =>
-        {history.push('/')
+        {history.push('/JollyTeam/')
             store.dispatch(createMessage({log_in_ed: "Contact form was delivered"}))
             store.dispatch(createMessage({log_in_ed: "Wait for the answer"}))})
     }

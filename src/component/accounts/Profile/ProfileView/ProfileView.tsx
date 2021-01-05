@@ -57,11 +57,11 @@ export const ProfileView = (props: RootProps) => {
                             <h5>{p.country}</h5>
                         </div>
                     </div>
-                    <div className={[s.edit_button, s.edit].join(' ')}><Link to={"/profileEdit"}>Edit</Link></div>
+                    <div className={[s.edit_button, s.edit].join(' ')}><Link to={"/JollyTeam/profileEdit"}>Edit</Link></div>
                 </div>
 
                 <div className={s.box_size}>
-                    <div className={[s.button].join(' ')}><Link to={"/profileEdit"}>Edit</Link></div>
+                    <div className={[s.button].join(' ')}><Link to={"/JollyTeam/profileEdit"}>Edit</Link></div>
                     <p>{p.companyDescription}</p>
                     <div className={s.Sections}>
                         {/*<p>{p.section}</p>*/}

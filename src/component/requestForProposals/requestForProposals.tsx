@@ -150,7 +150,7 @@ export const RequestForProposals = (Currency: any) => {
         form_data.append("paymentMethod", payment_method)
         form_data.append("iAgree", String(privacy_policy))
         profileAPI.postRequestForProposals(form_data).then(() => {
-            history.push('/')
+            history.push('/JollyTeam/')
             store.dispatch(createMessage({log_in_ed: "Request was submitted"}))
         })
 
