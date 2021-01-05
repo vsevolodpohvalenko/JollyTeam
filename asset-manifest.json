@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/JollyTeam/static/css/main.50a90be2.chunk.css",
-    "main.js": "/JollyTeam/static/js/main.7ae443d4.chunk.js",
-    "main.js.map": "/JollyTeam/static/js/main.7ae443d4.chunk.js.map",
+    "main.js": "/JollyTeam/static/js/main.f2c446ca.chunk.js",
+    "main.js.map": "/JollyTeam/static/js/main.f2c446ca.chunk.js.map",
     "runtime-main.js": "/JollyTeam/static/js/runtime-main.0d81f496.js",
     "runtime-main.js.map": "/JollyTeam/static/js/runtime-main.0d81f496.js.map",
     "static/css/2.ef440c72.chunk.css": "/JollyTeam/static/css/2.ef440c72.chunk.css",
     "static/js/2.e8a66f68.chunk.js": "/JollyTeam/static/js/2.e8a66f68.chunk.js",
     "static/js/2.e8a66f68.chunk.js.map": "/JollyTeam/static/js/2.e8a66f68.chunk.js.map",
     "index.html": "/JollyTeam/index.html",
-    "precache-manifest.7dab00981033f5adeab7d24487626a1e.js": "/JollyTeam/precache-manifest.7dab00981033f5adeab7d24487626a1e.js",
+    "precache-manifest.c564473ddeaa6d0a69d1d108937c855d.js": "/JollyTeam/precache-manifest.c564473ddeaa6d0a69d1d108937c855d.js",
     "service-worker.js": "/JollyTeam/service-worker.js",
     "static/css/2.ef440c72.chunk.css.map": "/JollyTeam/static/css/2.ef440c72.chunk.css.map",
     "static/css/main.50a90be2.chunk.css.map": "/JollyTeam/static/css/main.50a90be2.chunk.css.map",
@@ -27,6 +27,6 @@
     "static/css/2.ef440c72.chunk.css",
     "static/js/2.e8a66f68.chunk.js",
     "static/css/main.50a90be2.chunk.css",
-    "static/js/main.7ae443d4.chunk.js"
+    "static/js/main.f2c446ca.chunk.js"
   ]
 }
