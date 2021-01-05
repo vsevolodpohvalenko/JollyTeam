@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d5115415-a259-4235-b5f1-8de4f5639f87" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/android-icon-192x192.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/logo1922.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/layout/PageNotFound.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/layout/PageNotFound.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +21,14 @@
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SIGN_OFF_COMMIT" value="true" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1lLFGg3c6oQ6weUivuLWg8hFDbm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -109,7 +115,7 @@
       <workItem from="1608725428993" duration="257000" />
       <workItem from="1608725747418" duration="30932000" />
       <workItem from="1608802501099" duration="5969000" />
-      <workItem from="1609610042130" duration="34718000" />
+      <workItem from="1609610042130" duration="36073000" />
     </task>
     <task id="LOCAL-00001" summary="Extra update">
       <created>1608062295835</created>

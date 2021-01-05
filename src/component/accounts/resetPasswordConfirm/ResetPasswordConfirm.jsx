@@ -25,7 +25,7 @@ export const ResetPasswordConfirm = (props) => {
         }
         authAPI.reset_password(reset).then(() => {
             store.dispatch(createMessage({log_in_ed: "Changed successful"}))
-            history.push('/login')
+            history.push('/JollyTeam/login')
         })
     }
     return( <div>
@@ -40,7 +40,7 @@ export const ResetPasswordConfirm = (props) => {
                 </button>
             </Form>
         </Formik>
-        <p>Don't have an account? <Link to="/register">Sing up!</Link></p>
+        <p>Don't have an account? <Link to="/JollyTeam/register">Sing up!</Link></p>
 
         </div>
     </div>

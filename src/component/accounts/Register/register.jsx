@@ -63,7 +63,7 @@ class Register extends React.Component {
         }
 
         if (this.props.isAuthenticated) {
-            return <Redirect to="/"/>
+            return <Redirect to="/JollyTeam/"/>
         }
 
         const {first_name, last_name, email, password} = this.state
@@ -119,7 +119,7 @@ class Register extends React.Component {
                             </button>
                         </div>
                         <p>
-                            Already have an account? <Link to="/login" className={s.link}>Login</Link>
+                            Already have an account? <Link to="/JollyTeam/login" className={s.link}>Login</Link>
                         </p>
                     </form>
                 </div>

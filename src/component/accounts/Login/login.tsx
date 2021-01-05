@@ -26,7 +26,7 @@ class Login extends React.Component<RootPropsType> {
     render() {
         const csrftoken = getCookie('csrftoken');
         if (this.props.isAuthenticated) {
-            return <Redirect to="/"/>
+            return <Redirect to="/JollyTeam/"/>
         }
         const {email, password} = this.state
         const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -69,10 +69,10 @@ class Login extends React.Component<RootPropsType> {
                             </button>
                         </div>
                         <p>
-                            Don't have an account? <Link to="/register" className={s.link}>Sing up</Link>
+                            Don't have an account? <Link to="/JollyTeam/register" className={s.link}>Sing up</Link>
                         </p>
                         <p>
-                            If your password is forgotten click it.<Link to="/reset_password" className={s.link}>Forgot
+                            If your password is forgotten click it.<Link to="/JollyTeam/reset_password" className={s.link}>Forgot
                             password</Link>
                         </p>
                     </form>
