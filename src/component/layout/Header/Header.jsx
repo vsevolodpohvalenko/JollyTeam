@@ -40,7 +40,7 @@ export const Header = (props) => {
             <ul>
                 <li><NavLink to="/JollyTeam/companies">Companies</NavLink></li>
                 <li><NavLink to="/JollyTeam/faq">FAQ</NavLink></li>
-          <li><NavLink to="/contact">Contact</NavLink></li></ul>
+          <li><NavLink to="/JollyTeam/contact">Contact</NavLink></li></ul>
             {isAuthenticated ? authLinks : guestLinks}
 
 
