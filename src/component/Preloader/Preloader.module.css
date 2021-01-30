@@ -1,0 +1,14 @@
+.Preloader {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.Nav {
+    text-align: center;
+    display: block;
+    margin: 10px auto;
+    color: #111111;
+    text-decoration: none;
+}

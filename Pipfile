@@ -1,0 +1,30 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+djoser = "*"
+pillow = "*"
+django = "*"
+django-cors-headers = "*"
+django-rest-framework = "*"
+django-inlinecss = "*"
+mysqlclient = "*"
+django-phone-field = "*"
+graphene-django = "*"
+django-filter = "*"
+djangorestframework = "*"
+python-decouple = "*"
+whitenoise = "*"
+python-dotenv = "*"
+gunicorn = "*"
+django-storages = "*"
+boto3 = "*"
+django-templated-mail = "*"
+graphene = "*"
+
+[requires]
+python_version = "3.8"

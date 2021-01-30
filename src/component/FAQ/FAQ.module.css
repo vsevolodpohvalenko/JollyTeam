@@ -1,0 +1,41 @@
+.main{
+    margin: 0 10%;
+    min-height: 100vh;
+}
+.group{
+    text-align: start;
+    padding: 5px;
+    
+}
+.item{
+    color: #f1105b; 
+    text-align: start;
+    padding: 5px;
+}
+.menu_toogle{
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+.menu_toogle:before{
+    content: '\f078';
+    font-family: fontAwesome;
+    line-height: 20px;
+
+}
+.menu_toogle.active:before{
+    content: '\f077';
+    color: #f1105b;
+}
+.dropdown{
+    display: none;
+}
+.dropdown.active{
+    display: block;
+    
+}
+.groupCont{
+    border-bottom: solid rgb(197, 197, 197) 1px;
+}

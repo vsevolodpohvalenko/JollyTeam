@@ -1,0 +1,29 @@
+.footer{
+    align-items: center;
+    position: relative;
+    background-color: rgb(21, 23, 34);
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow:  0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.navr{
+    margin-right: 4%;
+    text-decoration: none;
+    list-style: none;
+}
+.db{
+    align-items: center;
+    position: relative;
+    background-color: rgb(21, 23, 34);
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow:  0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navl{
+    margin-left: 4%;
+}
+small{
+    text-align: center;
+}
+

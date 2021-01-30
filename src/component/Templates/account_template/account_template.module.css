@@ -1,0 +1,117 @@
+
+.main{
+    display: grid;
+    grid-template-columns: 20% 30% 50%;
+    min-height: 100vh;
+    grid-template-areas: 
+      "photo auth brand"
+
+  }
+
+.header {
+    grid-area: header;
+    display: none;
+}
+.photo {
+    grid-area: photo;
+    background-image: url(../../../media/login.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.auth {
+    grid-area: auth;
+}
+
+.brand {
+    grid-area: brand;
+    padding-left: 70px;
+    border-left: lightgray;
+}
+.brand p{
+    width: 300px;
+    font-size: 16px;
+}
+.brand h3{
+    margin-top:10px;
+}
+.toggle{
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    color: #ff585d;;
+    cursor: pointer;
+    display: inline-block;
+}
+.toggle::before{
+    content: '\f054';
+    font-family: fontAwesome;
+    line-height: 20px;
+}
+.link:hover,
+.link{
+    text-decoration: none;
+    color: #848484;
+}
+.homepage {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+h4{
+    color: #ff585d;
+}
+.button:hover,
+.button{
+  background-color: #ff585d;
+  width: 40%;
+  border-radius: 5px;
+  border: none;
+  padding: 9px;
+  color: white;
+    text-align: center;
+  font-size: 13px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  font-weight: 500;
+}
+.hidden{
+    display: none;
+}
+
+@media (max-width:900px){
+    .main{
+        grid-template-columns: auto;
+        grid-template-rows: 0px 600px 500px;
+        height: auto;
+        grid-template-areas: 
+          "header"
+          "photo"
+          "auth"
+      }
+    .brand{
+        display: none;
+        
+    }
+    .header{
+        display: block;
+        margin-bottom: 0;
+    }
+    .hidden{
+        display: block;
+        text-align: center;
+        margin-top: 50%;
+        color: white;
+        font-weight: bold;
+    }
+    .photo{
+        background-position: bottom;
+    }
+}
+
+
+
+
+

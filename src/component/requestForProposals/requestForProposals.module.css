@@ -1,0 +1,92 @@
+
+.main {
+    margin-left: 20%;
+    margin-right: 20%;
+    font-size: 20px;
+}
+
+.main input::placeholder{
+    font-size: 16px;
+}
+
+.main input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+}
+
+.Descriptions input::placeholder{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.customSelect,
+.inputText
+{
+    width: 50%;
+    margin-right: 10px;
+}
+
+.preview {
+    display: inline-flex;
+    border-radius: 2px;
+    border: 1px solid #eaeaea;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    width: 100px;
+    height: 100px;
+    padding: 4px;
+    box-sizing: border-box
+}
+
+.button {
+    width: 100%;
+    background-color: rgb(21, 23, 34);
+    border-radius: 5px;
+    border: none;
+    padding: 9px;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    font-weight: 500;
+}
+.select{
+    font-size: 16px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+}
+.double{
+    display: flex;
+    height:39px;
+    margin-bottom: 50px;
+}
+.main p {
+    color: #adadad;
+    margin-top: 5%;
+}
+
+@media (max-width: 786px) {
+    .main {
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: 10px;
+    }
+
+    .main input::placeholder {
+        font-size: 12px;
+    }
+}
+@media (max-width: 360px) {
+    .main {
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: 8px;
+    }
+
+    .main input::placeholder {
+        font-size: 10px;
+    }
+}

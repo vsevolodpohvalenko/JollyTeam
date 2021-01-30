@@ -1,0 +1,138 @@
+.back{
+    color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 45vh;
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 40px;
+}
+body {
+    font-family: 'Mulish', sans-serif;
+}
+
+.docThumb {
+    border-radius: 20px;
+}
+
+.section {
+    width: 50%;
+
+}
+
+.section div{
+    display: flex;
+    align-items: center;
+}
+
+.section div h3 {
+    margin-left: 15px;
+}
+
+.icon svg {
+    width: 50px;
+    height: 50px;
+}
+
+
+.main p{
+    color: #7F8177;
+    font-size: 14px;
+    font-style: italic;
+}
+.edit{
+    position: absolute;
+    bottom: 0;
+    left: 70%;
+}
+.main a,
+.main a:hover{
+    color: white;
+    text-decoration: none;
+}
+.name_country{
+    position: absolute;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-left: 10%;
+    margin-bottom: 20px;
+    bottom: 0;
+    left: 0;
+
+}
+.box_size {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.Documents{
+    display: flex;
+    margin: 0 10%;
+}
+.Sections{
+    display: flex;
+    margin-right: 3%;
+}
+.Documents div{
+    text-align: center;
+    margin-right: 1%;
+}
+.Documents img{
+    width: 150px;
+    height: 150px;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
+.box_size img{
+    width: 40px;
+    height: 40px;
+}
+.logo{
+    border-radius: 50%;
+    width: 70px;
+    margin-right: 20px;
+    height: 70px;
+}
+
+.edit_button  {
+    width: 15%;
+    text-align: center;
+    background-color: rgb(21, 23, 34);
+    border-radius: 5px;
+    border: none;
+    padding: 9px;
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+.button  {
+    width: 100%;
+    text-align: center;
+    background-color: rgb(21, 23, 34);
+    border-radius: 5px;
+    border: none;
+    padding: 9px;
+    color: white;
+    font-size: 24px;
+    display: none;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+@media (max-width:786px){
+    .edit{
+        display: none;
+    }
+    .button{
+        display: block;
+    }
+    .section{
+        width: 100%;
+    }
+}
